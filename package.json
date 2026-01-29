@@ -1,18 +1,16 @@
 {
   "name": "telegram-group-master-bot",
   "version": "1.0.0",
-  "description": "A feature-rich Telegram group management bot",
+  "description": "Advanced Telegram Group Management Bot by MAR-PD",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "node-telegram-bot-api": "^0.66.0",
-    "canvas": "^2.11.2",
-    "axios": "^1.6.2",
     "moment": "^2.29.4"
   },
-  "author": "MAR-PD",
-  "license": "ISC"
+  "keywords": ["telegram", "bot", "bangla", "group-management"],
+  "author": "MAR-PD <https://t.me/master_spamming>",
+  "license": "MIT"
 }
