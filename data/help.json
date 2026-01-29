@@ -1,0 +1,16 @@
+{
+    "basic": [
+        {"command": "/start", "description": "Start the bot"},
+        {"command": "/help", "description": "Show all commands"},
+        {"command": "/admin", "description": "Show group admins"}
+    ],
+    "welcome": [
+        {"command": "Auto Welcome", "description": "Automatic welcome messages"},
+        {"command": "Welcome Image", "description": "Image with user details"}
+    ],
+    "moderation": [
+        {"command": "Auto Spam Filter", "description": "Detect and mute spammers"},
+        {"command": "Bad Word Filter", "description": "Auto delete bad words"},
+        {"command": "URL Protection", "description": "Only admins can post links"}
+    ]
+}
