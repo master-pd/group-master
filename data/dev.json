@@ -1,0 +1,12 @@
+{
+    "/broadcast": {
+        "usage": "/broadcast [message]",
+        "description": "Broadcast message to all groups",
+        "admin_only": true
+    },
+    "/stats": {
+        "usage": "/stats",
+        "description": "Show bot statistics",
+        "admin_only": true
+    }
+}
