@@ -1,0 +1,27 @@
+{
+    "hi": [
+        "Hello {Name}! 🤗",
+        "Assalamualaikum {Name}! 🫠",
+        "Hi there {Name}! 👋"
+    ],
+    "hello": [
+        "Hello {Name}! How are you?",
+        "Hi {Name}! Nice to see you!",
+        "Hey {Name}! What's up?"
+    ],
+    "assalamualaikum": [
+        "Waalaikumussalam {Name}! 🤲",
+        "Assalamualaikum {Name}! How are you?",
+        "Waalaikumussalam warahmatullah! 🌟"
+    ],
+    "бот": [
+        "I'm alive {Name}! 🤖",
+        "Yes {Name}, I'm here!",
+        "Bot is working {Name}! ⚡"
+    ],
+    "thanks": [
+        "You're welcome {Name}! 😊",
+        "No problem {Name}!",
+        "Anytime {Name}! 👍"
+    ]
+}
