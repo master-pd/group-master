@@ -1,48 +1,153 @@
-name: Run Telegram Bot 24/7
+name: Run Telegram Bot on GitHub Actions
 
 on:
+  # ম্যানুয়ালি চালাতে
   workflow_dispatch:
+  
+  # নির্দিষ্ট সময়ে চালাতে (cron job)
+  schedule:
+    # প্রতি ঘন্টায় চেক করবে
+    - cron: '0 * * * *'
+    
+  # কোড পুশ হলে চালাতে
   push:
     branches: [ main ]
-  schedule:
-    - cron: '0 */6 * * *'
+    
+  # পুল রিকোয়েস্টে চালাতে
+  pull_request:
+    branches: [ main ]
 
 jobs:
   run-bot:
+    name: Run Telegram Bot
     runs-on: ubuntu-latest
+    timeout-minutes: 60  # সর্বোচ্চ ১ ঘন্টা চলবে
     
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
         
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          
-      - name: Install dependencies
-        run: |
-          npm install
-          sudo apt-get update
-          sudo apt-get install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
-          
-      - name: Create config file with secrets
-        run: |
-          cat > config.json << EOF
+    - name: Install dependencies
+      run: |
+        npm ci
+        echo "✅ Dependencies installed"
+        
+    - name: Create config.json from secret
+      run: |
+        echo "🔧 Creating config.json..."
+        cat > config.json << EOF
+        {
+          "bot": {
+            "token": "${{ secrets.BOT_TOKEN }}",
+            "username": "group_master_bot",
+            "name": "Group Master",
+            "version": "3.0.0",
+            "mode": "polling"
+          },
+          "developers": [${{ secrets.DEVELOPER_ID }}],
+          "owners": [${{ secrets.OWNER_ID }}],
+          "features": {
+            "welcome_system": true,
+            "auto_reply": true,
+            "moderation": true,
+            "broadcast": true,
+            "games": true,
+            "ai_chat": false,
+            "image_generation": false
+          },
+          "security": {
+            "blocked_users": [],
+            "blocked_groups": []
+          },
+          "limits": {
+            "messages_per_minute": 30,
+            "welcome_messages_limit": 10
+          },
+          "auto_reply": {
+            "typing_delay_ms": 1000,
+            "reply_delay_ms": 2000
+          }
+        }
+        EOF
+        echo "✅ Config file created"
+        
+    - name: Create data directories
+      run: |
+        echo "📁 Creating data structure..."
+        mkdir -p data/responses data/moderation data/welcome data/system
+        mkdir -p assets/backgrounds
+        
+        # Create default files if they don't exist
+        if [ ! -f "data/responses/auto-reply.json" ]; then
+          cat > data/responses/auto-reply.json << EOF
           {
-            "botToken": "${{ secrets.BOT_TOKEN }}",
-            "developerId": [${{ secrets.DEVELOPER_ID }}],
-            "botName": "Group Master 🤖",
-            "maxWelcomeMessages": 10,
-            "spamThreshold": {
-              "messages": 10,
-              "seconds": 5,
-              "muteDuration": 120
-            },
-            "contact": "https://t.me/master_spamming",
-            "watermark": "Group Master Bot"
+            "hi": ["Hello! 👋", "Hi there! 😊", "Assalamualaikum! 🤲"],
+            "how are you": ["I'm fine, thank you! 😊", "Alhamdulillah, I'm good! 🌟"],
+            "thank you": ["You're welcome! 😊", "My pleasure! 🌟"],
+            "bye": ["Goodbye! 👋", "Take care! 😊"]
           }
           EOF
-          
-      - name: Run Telegram Bot
-        run: node setup.js
+        fi
+        
+        if [ ! -f "data/moderation/bad-words.json" ]; then
+          echo '["badword", "curse", "অপশব্দ"]' > data/moderation/bad-words.json
+        fi
+        
+        if [ ! -f "data/welcome/templates.json" ]; then
+          cat > data/welcome/templates.json << EOF
+          {
+            "group": ["🎉 Welcome {name} to {group}! 🌟"],
+            "private": ["👋 Hello {name}! I'm Group Master Bot! 🤖"]
+          }
+          EOF
+        fi
+        
+        echo "✅ Data structure created"
+        
+    - name: Run the bot
+      env:
+        BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+      run: |
+        echo "🚀 Starting Telegram Bot..."
+        echo "🤖 Bot will run for maximum 55 minutes"
+        echo "📱 Mode: Polling"
+        echo "⏰ Started at: $(date)"
+        
+        # Start the bot in background with timeout
+        timeout 55m npm start &
+        BOT_PID=$!
+        
+        # Wait for bot process
+        wait $BOT_PID
+        EXIT_CODE=$?
+        
+        if [ $EXIT_CODE -eq 124 ]; then
+          echo "🕒 Bot stopped after 55 minutes (GitHub Actions timeout)"
+        elif [ $EXIT_CODE -eq 0 ]; then
+          echo "✅ Bot stopped normally"
+        else
+          echo "❌ Bot stopped with error code: $EXIT_CODE"
+        fi
+        
+    - name: Send notification on failure
+      if: failure()
+      run: |
+        echo "❌ Bot run failed!"
+        # এখানে আপনি টেলিগ্রাম নোটিফিকেশন যোগ করতে পারেন
+        # curl ব্যবহার করে আপনার অন্য একটি বট দিয়ে মেসেজ পাঠাতে পারেন
+        
+    - name: Upload logs (if any)
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: bot-logs
+        path: |
+          logs/
+          *.log
+        retention-days: 7
