@@ -1,20 +1,13 @@
 {
-    "botToken": "YOUR_BOT_TOKEN_HERE",
-    "developerId": [6454347745],
-    "botName": "Group Master 🤖",
-    "maxWelcomeMessages": 10,
-    "spamThreshold": {
-        "messages": 10,
-        "seconds": 5,
-        "muteDuration": 120
-    },
-    "contact": "https://t.me/master_spamming",
-    "watermark": "Group Master Bot",
-    "features": {
-        "autoWelcome": true,
-        "autoReply": true,
-        "spamProtection": true,
-        "urlProtection": true,
-        "badWordFilter": true
-    }
+  "botToken": "YOUR_BOT_TOKEN_HERE",
+  "developerId": [6454347745],
+  "ownerId": 6454347745,
+  "botUsername": "group_master_bot",
+  "maxWelcomeMessages": 10,
+  "spamThreshold": 10,
+  "spamTimeWindow": 5000,
+  "muteDuration": 120,
+  "urlWhitelist": ["t.me", "telegram.org", "github.com"],
+  "typingDelay": 1000,
+  "replyDelay": 2000
 }
