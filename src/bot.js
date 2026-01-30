@@ -9,9 +9,9 @@ const __dirname = path.dirname(__filename);
 // Load config
 const config = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'config.json'), 'utf8'));
 
-// Get bot token from environment variable - Render.com Environment Variables
-const BOT_TOKEN = process.env.BOT_TOKEN;
-if (!BOT_TOKEN) throw new Error("❌ BOT_TOKEN missing! Set BOT_TOKEN in Render Environment Variables");
+// 🔥 Render.com এর জন্য পরিবর্তন ১: Environment Variable থেকে টোকেন নেওয়া
+const BOT_TOKEN = process.env.BOT_TOKEN || config.bot.token;
+if (!BOT_TOKEN) throw new Error("❌ BOT_TOKEN missing! Set BOT_TOKEN in Render.com Environment Variables");
 
 class GroupMasterBot {
     constructor() {
@@ -33,21 +33,36 @@ class GroupMasterBot {
         console.log('🤖 Initializing Group Master Pro Bot...');
         console.log('🚀 Render.com Deployment Ready');
         
-        // Create bot instance - Render.com supports both polling and webhook
-        if (this.config.webhook?.enabled && process.env.RENDER) {
-            // Render.com এ ওয়েবহুক স্বয়ংক্রিয়ভাবে ম্যানেজ করে
+        // 🔥 Render.com এর জন্য পরিবর্তন ২: Webhook সেটআপ
+        if (process.env.RENDER) {
+            // Render.com এ auto webhook সেটআপ
+            const port = process.env.PORT || 3000;
             const webhookUrl = process.env.RENDER_EXTERNAL_URL || `https://${process.env.RENDER_SERVICE_NAME}.onrender.com`;
-            this.bot = new TelegramBot(BOT_TOKEN, { 
+            
+            this.bot = new TelegramBot(BOT_TOKEN, {
                 webHook: {
-                    host: '0.0.0.0',
-                    port: process.env.PORT || 3000
+                    port: port,
+                    host: '0.0.0.0'
                 }
             });
-            const webhookPath = `/bot${BOT_TOKEN}`;
-            this.bot.setWebHook(`${webhookUrl}${webhookPath}`);
-            console.log(`🌐 Render Webhook configured: ${webhookUrl}${webhookPath}`);
+            
+            // Render.com এর জন্য webhook সেট করা
+            this.bot.setWebHook(`${webhookUrl}/bot${BOT_TOKEN}`);
+            console.log(`🌐 Render Webhook URL: ${webhookUrl}/bot${BOT_TOKEN}`);
+            console.log(`🔧 Port: ${port}`);
+        } else if (this.config.webhook?.enabled) {
+            // Local webhook (যদি কনফিগে থাকে)
+            this.bot = new TelegramBot(BOT_TOKEN, {
+                webHook: {
+                    port: this.config.webhook.port,
+                    key: this.config.webhook.key,
+                    cert: this.config.webhook.cert
+                }
+            });
+            this.bot.setWebHook(this.config.webhook.url);
+            console.log(`🌐 Local Webhook: ${this.config.webhook.url}`);
         } else {
-            // Fallback to polling mode (for local development or if webhook fails)
+            // Polling mode (local development)
             this.bot = new TelegramBot(BOT_TOKEN, {
                 polling: {
                     timeout: this.config.bot.polling_timeout || 60,
@@ -55,7 +70,7 @@ class GroupMasterBot {
                     autoStart: false
                 }
             });
-            console.log('🔄 Polling mode enabled');
+            console.log('🔄 Polling mode enabled (Local Development)');
         }
         
         this.bot.username = this.config.bot.username;
@@ -131,6 +146,7 @@ class GroupMasterBot {
         
         features.forEach(feature => {
             try {
+                // In real implementation, load from separate files
                 this.features.set(feature, { enabled: true });
                 console.log(`   ✅ ${feature}`);
             } catch (error) {
@@ -653,9 +669,7 @@ class GroupMasterBot {
         if (await this.isDeveloper(msg.from.id)) {
             message += `*System Status:* ✅ Operational\n`;
             message += `*Memory Usage:* ${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)}MB\n`;
-            message += `*Node Version:* ${process.version}\n`;
-            message += `*Platform:* ${process.platform}\n`;
-            message += `*Architecture:* ${process.arch}`;
+            message += `*Node Version:* ${process.version}`;
         }
         
         await this.bot.sendMessage(msg.chat.id, message, {
@@ -663,7 +677,7 @@ class GroupMasterBot {
         });
     }
     
-    // Admin command handler
+    // 🔥 নতুন যোগ করা মেথডগুলো (যেগুলো আগের ফাইলে ছিল না)
     async handleAdminCommand(msg, command, args) {
         switch (command) {
             case '/warn':
@@ -701,9 +715,7 @@ class GroupMasterBot {
         }
     }
     
-    // Media handlers
     async handlePhoto(msg) {
-        // Handle photo messages
         if (this.config.features.auto_reply && msg.chat.type === 'private') {
             await this.bot.sendMessage(msg.chat.id, "📸 Nice photo!", {
                 reply_to_message_id: msg.message_id
@@ -712,7 +724,6 @@ class GroupMasterBot {
     }
     
     async handleVideo(msg) {
-        // Handle video messages
         if (this.config.features.auto_reply && msg.chat.type === 'private') {
             await this.bot.sendMessage(msg.chat.id, "🎥 Great video!", {
                 reply_to_message_id: msg.message_id
@@ -721,7 +732,6 @@ class GroupMasterBot {
     }
     
     async handleDocument(msg) {
-        // Handle document messages
         if (msg.chat.type === 'private') {
             const fileName = msg.document.file_name;
             await this.bot.sendMessage(msg.chat.id, `📄 Document: ${fileName}`, {
@@ -731,7 +741,6 @@ class GroupMasterBot {
     }
     
     async handleVoice(msg) {
-        // Handle voice messages
         if (msg.chat.type === 'private') {
             await this.bot.sendMessage(msg.chat.id, "🎤 Voice message received!", {
                 reply_to_message_id: msg.message_id
@@ -740,7 +749,6 @@ class GroupMasterBot {
     }
     
     async handleSticker(msg) {
-        // Handle sticker messages
         if (this.config.features.auto_reply && msg.chat.type === 'private') {
             await this.bot.sendMessage(msg.chat.id, "😄 Nice sticker!", {
                 reply_to_message_id: msg.message_id
@@ -749,7 +757,6 @@ class GroupMasterBot {
     }
     
     async handleAnimation(msg) {
-        // Handle animation (GIF) messages
         if (msg.chat.type === 'private') {
             await this.bot.sendMessage(msg.chat.id, "🎬 Cool animation!", {
                 reply_to_message_id: msg.message_id
@@ -758,7 +765,6 @@ class GroupMasterBot {
     }
     
     async handlePoll(msg) {
-        // Handle poll messages
         if (msg.chat.type === 'private') {
             await this.bot.sendMessage(msg.chat.id, "📊 Interesting poll!", {
                 reply_to_message_id: msg.message_id
@@ -766,14 +772,11 @@ class GroupMasterBot {
         }
     }
     
-    // Event handlers
     async handleEditedMessage(msg) {
-        // Handle edited messages
         console.log(`Message edited by ${msg.from.first_name}`);
     }
     
     async handleCallbackQuery(callbackQuery) {
-        // Handle callback queries from inline keyboards
         const { data, message, from } = callbackQuery;
         
         console.log(`Callback query: ${data} from ${from.first_name}`);
@@ -791,7 +794,6 @@ class GroupMasterBot {
     }
     
     async handleInlineQuery(inlineQuery) {
-        // Handle inline queries
         const results = [];
         
         if (inlineQuery.query === 'help') {
@@ -813,18 +815,15 @@ class GroupMasterBot {
     }
     
     async handlePollAnswer(pollAnswer) {
-        // Handle poll answers
         console.log(`User ${pollAnswer.user.first_name} answered poll`);
     }
     
     async handleChatMemberUpdate(update) {
-        // Handle chat member updates
         const { old_chat_member, new_chat_member, chat } = update;
         console.log(`Chat member update in ${chat.title}`);
     }
     
     async handleMyChatMemberUpdate(update) {
-        // Handle bot's own chat member updates
         const { old_chat_member, new_chat_member, chat } = update;
         
         if (new_chat_member.status === 'administrator') {
@@ -835,7 +834,6 @@ class GroupMasterBot {
     }
     
     async handleBotAdded(chat) {
-        // Handle when bot is added to a group
         const message = `🤖 *Bot Added Successfully!*\n\n` +
                        `Thank you for adding me to *${chat.title}*!\n\n` +
                        `To get started:\n` +
@@ -850,7 +848,6 @@ class GroupMasterBot {
     }
     
     async handleBotRemoved(chat) {
-        // Handle when bot is removed from a group
         console.log(`Bot removed from ${chat.title}`);
     }
     
@@ -911,13 +908,27 @@ class GroupMasterBot {
         );
     }
     
+    // 🔥 নতুন যোগ করা ইউটিলিটি মেথড
+    getUptime() {
+        const uptime = new Date() - this.stats.startTime;
+        const days = Math.floor(uptime / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((uptime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((uptime % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((uptime % (1000 * 60)) / 1000);
+        
+        if (days > 0) return `${days}d ${hours}h ${minutes}m`;
+        if (hours > 0) return `${hours}h ${minutes}m`;
+        return `${minutes}m ${seconds}s`;
+    }
+    
     // Utility methods
     isUserBlocked(userId) {
-        return this.config.security?.blocked_users?.includes(userId) || false;
+        return this.config.security.blocked_users.includes(userId);
     }
     
     async isRateLimited(userId, chatId) {
-        // Simple rate limiting
+        // Simple rate limiting implementation
+        // In production, use a proper rate limiting library
         return false;
     }
     
@@ -931,11 +942,11 @@ class GroupMasterBot {
     }
     
     isDeveloper(userId) {
-        return this.config.developers?.includes(userId) || false;
+        return this.config.developers.includes(userId);
     }
     
     isOwner(userId) {
-        return this.config.owners?.includes(userId) || false;
+        return this.config.owners.includes(userId);
     }
     
     containsUrl(text) {
@@ -943,29 +954,21 @@ class GroupMasterBot {
         return urlRegex.test(text);
     }
     
-    getUptime() {
-        const uptime = new Date() - this.stats.startTime;
-        const days = Math.floor(uptime / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((uptime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((uptime % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((uptime % (1000 * 60)) / 1000);
-        
-        if (days > 0) return `${days}d ${hours}h ${minutes}m`;
-        if (hours > 0) return `${hours}h ${minutes}m`;
-        return `${minutes}m ${seconds}s`;
-    }
-    
     async start() {
         console.log('🚀 Starting bot...');
-        if (!this.config.webhook?.enabled || !process.env.RENDER) {
+        // Render.com এ webhook auto-start হয়, polling করতে হবে না
+        if (!process.env.RENDER && !this.config.webhook?.enabled) {
             await this.bot.startPolling();
         }
-        console.log('✅ Bot is now running on Render.com!');
+        console.log('✅ Bot is now running!');
+        console.log('📍 Hosted on: Render.com');
     }
     
     async stop() {
         console.log('🛑 Stopping bot...');
-        await this.bot.stopPolling();
+        if (!process.env.RENDER) {
+            await this.bot.stopPolling();
+        }
         console.log('✅ Bot stopped.');
     }
 }
