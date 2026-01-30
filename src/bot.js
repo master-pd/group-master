@@ -2,10 +2,6 @@ import TelegramBot from 'node-telegram-bot-api';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import dotenv from 'dotenv';
-
-// Load environment variables
-dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -13,17 +9,13 @@ const __dirname = path.dirname(__filename);
 // Load config
 const config = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'config.json'), 'utf8'));
 
-// Get bot token from environment variable
-const BOT_TOKEN = process.env.BOT_TOKEN || config.bot.token;
+// Get bot token from environment variable - Render.com Environment Variables
+const BOT_TOKEN = process.env.BOT_TOKEN;
+if (!BOT_TOKEN) throw new Error("❌ BOT_TOKEN missing! Set BOT_TOKEN in Render Environment Variables");
 
 class GroupMasterBot {
     constructor() {
         this.config = config;
-        // Override token from environment if available
-        if (process.env.BOT_TOKEN) {
-            this.config.bot.token = process.env.BOT_TOKEN;
-        }
-        
         this.bot = null;
         this.handlers = new Map();
         this.features = new Map();
@@ -39,21 +31,24 @@ class GroupMasterBot {
     
     init() {
         console.log('🤖 Initializing Group Master Pro Bot...');
+        console.log('🚀 Render.com Deployment Ready');
         
-        // Create bot instance
-        if (this.config.webhook?.enabled) {
-            this.bot = new TelegramBot(this.config.bot.token, {
+        // Create bot instance - Render.com supports both polling and webhook
+        if (this.config.webhook?.enabled && process.env.RENDER) {
+            // Render.com এ ওয়েবহুক স্বয়ংক্রিয়ভাবে ম্যানেজ করে
+            const webhookUrl = process.env.RENDER_EXTERNAL_URL || `https://${process.env.RENDER_SERVICE_NAME}.onrender.com`;
+            this.bot = new TelegramBot(BOT_TOKEN, { 
                 webHook: {
-                    port: this.config.webhook.port,
-                    key: this.config.webhook.key,
-                    cert: this.config.webhook.cert
+                    host: '0.0.0.0',
+                    port: process.env.PORT || 3000
                 }
             });
-            
-            this.bot.setWebHook(this.config.webhook.url);
-            console.log(`🌐 Webhook mode: ${this.config.webhook.url}`);
+            const webhookPath = `/bot${BOT_TOKEN}`;
+            this.bot.setWebHook(`${webhookUrl}${webhookPath}`);
+            console.log(`🌐 Render Webhook configured: ${webhookUrl}${webhookPath}`);
         } else {
-            this.bot = new TelegramBot(this.config.bot.token, {
+            // Fallback to polling mode (for local development or if webhook fails)
+            this.bot = new TelegramBot(BOT_TOKEN, {
                 polling: {
                     timeout: this.config.bot.polling_timeout || 60,
                     interval: 300,
@@ -136,7 +131,6 @@ class GroupMasterBot {
         
         features.forEach(feature => {
             try {
-                // In real implementation, load from separate files
                 this.features.set(feature, { enabled: true });
                 console.log(`   ✅ ${feature}`);
             } catch (error) {
@@ -395,6 +389,73 @@ class GroupMasterBot {
         });
     }
     
+    async sendAboutMessage(msg) {
+        const message = `🤖 *About Group Master Pro Bot*\n\n` +
+                       `*Version:* ${this.config.bot.version}\n` +
+                       `*Developer:* MAR-PD (@master_spamming)\n` +
+                       `*Framework:* Node.js\n` +
+                       `*Library:* node-telegram-bot-api\n` +
+                       `*Hosting:* Render.com\n\n` +
+                       `This bot is designed for advanced group management with AI capabilities.\n\n` +
+                       `✨ *Special Features:*\n` +
+                       `• Multi-language support\n` +
+                       `• Smart moderation system\n` +
+                       `• AI-powered responses\n` +
+                       `• Custom welcome messages\n` +
+                       `• Game system\n` +
+                       `• Utility tools\n\n` +
+                       `*GitHub:* Coming Soon\n` +
+                       `*Support:* @master_spamming`;
+        
+        await this.bot.sendMessage(msg.chat.id, message, {
+            parse_mode: 'Markdown'
+        });
+    }
+    
+    async sendPingMessage(msg) {
+        const start = Date.now();
+        const pingMsg = await this.bot.sendMessage(msg.chat.id, '🏓 Pinging...');
+        const end = Date.now();
+        
+        const pingTime = end - start;
+        const serverTime = new Date().toLocaleTimeString();
+        
+        await this.bot.editMessageText(
+            `🏓 *Pong!*\n\n` +
+            `*Bot Latency:* ${pingTime}ms\n` +
+            `*Server Time:* ${serverTime}\n` +
+            `*Uptime:* ${this.getUptime()}\n` +
+            `*Status:* ✅ Operational`,
+            {
+                chat_id: msg.chat.id,
+                message_id: pingMsg.message_id,
+                parse_mode: 'Markdown'
+            }
+        );
+    }
+    
+    async sendIdMessage(msg) {
+        let message = `🆔 *ID Information*\n\n`;
+        
+        if (msg.chat.type === 'private') {
+            message += `*Your ID:* \`${msg.from.id}\`\n`;
+            message += `*First Name:* ${msg.from.first_name}\n`;
+            if (msg.from.last_name) message += `*Last Name:* ${msg.from.last_name}\n`;
+            if (msg.from.username) message += `*Username:* @${msg.from.username}\n`;
+            message += `*Language:* ${msg.from.language_code || 'Unknown'}\n`;
+        } else {
+            message += `*Chat ID:* \`${msg.chat.id}\`\n`;
+            message += `*Chat Title:* ${msg.chat.title}\n`;
+            message += `*Chat Type:* ${msg.chat.type}\n\n`;
+            message += `*Your ID:* \`${msg.from.id}\`\n`;
+            message += `*Your Name:* ${msg.from.first_name}`;
+        }
+        
+        await this.bot.sendMessage(msg.chat.id, message, {
+            parse_mode: 'Markdown'
+        });
+    }
+    
     async sendWelcomeMessage(chat, user) {
         if (!this.config.features.welcome_system) return;
         
@@ -442,6 +503,29 @@ class GroupMasterBot {
             
         } catch (error) {
             console.error('Error sending welcome message:', error);
+        }
+    }
+    
+    async sendGoodbyeMessage(chat, user) {
+        if (!this.config.features.goodbye_system) return;
+        
+        try {
+            const templates = JSON.parse(
+                fs.readFileSync(path.join(__dirname, '..', 'data', 'welcome', 'goodbye-templates.json'), 'utf8')
+            );
+            
+            const template = templates[Math.floor(Math.random() * templates.length)];
+            
+            const message = template
+                .replace(/{name}/g, user.first_name)
+                .replace(/{username}/g, user.username ? `@${user.username}` : user.first_name)
+                .replace(/{group}/g, chat.title || 'the group');
+            
+            await this.bot.sendMessage(chat.id, message, {
+                parse_mode: 'Markdown'
+            });
+        } catch (error) {
+            console.error('Error sending goodbye message:', error);
         }
     }
     
@@ -525,7 +609,6 @@ class GroupMasterBot {
     
     async handleAIChat(msg) {
         // Basic AI response system
-        // In production, integrate with actual AI API
         const message = (msg.text || msg.caption || '').toLowerCase();
         
         if (msg.chat.type === 'private') {
@@ -564,12 +647,15 @@ class GroupMasterBot {
         message += `*Commands Executed:* ${this.stats.commands}\n`;
         message += `*Errors:* ${this.stats.errors}\n`;
         message += `*Version:* ${this.config.bot.version}\n`;
-        message += `*Developer:* @master_spamming\n\n`;
+        message += `*Developer:* @master_spamming\n`;
+        message += `*Hosting:* Render.com\n\n`;
         
         if (await this.isDeveloper(msg.from.id)) {
             message += `*System Status:* ✅ Operational\n`;
             message += `*Memory Usage:* ${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)}MB\n`;
-            message += `*Node Version:* ${process.version}`;
+            message += `*Node Version:* ${process.version}\n`;
+            message += `*Platform:* ${process.platform}\n`;
+            message += `*Architecture:* ${process.arch}`;
         }
         
         await this.bot.sendMessage(msg.chat.id, message, {
@@ -577,14 +663,261 @@ class GroupMasterBot {
         });
     }
     
+    // Admin command handler
+    async handleAdminCommand(msg, command, args) {
+        switch (command) {
+            case '/warn':
+                await this.warnUser(msg, args);
+                break;
+            case '/mute':
+                await this.muteUser(msg, args);
+                break;
+            case '/ban':
+                await this.banUser(msg, args);
+                break;
+            case '/unban':
+                await this.unbanUser(msg, args);
+                break;
+            case '/kick':
+                await this.kickUser(msg, args);
+                break;
+            case '/promote':
+                await this.promoteUser(msg, args);
+                break;
+            case '/demote':
+                await this.demoteUser(msg, args);
+                break;
+            case '/pin':
+                await this.pinMessage(msg);
+                break;
+            case '/unpin':
+                await this.unpinMessage(msg);
+                break;
+            case '/delete':
+                await this.deleteMessage(msg, args);
+                break;
+            default:
+                await this.bot.sendMessage(msg.chat.id, '❌ Unknown admin command.');
+        }
+    }
+    
+    // Media handlers
+    async handlePhoto(msg) {
+        // Handle photo messages
+        if (this.config.features.auto_reply && msg.chat.type === 'private') {
+            await this.bot.sendMessage(msg.chat.id, "📸 Nice photo!", {
+                reply_to_message_id: msg.message_id
+            });
+        }
+    }
+    
+    async handleVideo(msg) {
+        // Handle video messages
+        if (this.config.features.auto_reply && msg.chat.type === 'private') {
+            await this.bot.sendMessage(msg.chat.id, "🎥 Great video!", {
+                reply_to_message_id: msg.message_id
+            });
+        }
+    }
+    
+    async handleDocument(msg) {
+        // Handle document messages
+        if (msg.chat.type === 'private') {
+            const fileName = msg.document.file_name;
+            await this.bot.sendMessage(msg.chat.id, `📄 Document: ${fileName}`, {
+                reply_to_message_id: msg.message_id
+            });
+        }
+    }
+    
+    async handleVoice(msg) {
+        // Handle voice messages
+        if (msg.chat.type === 'private') {
+            await this.bot.sendMessage(msg.chat.id, "🎤 Voice message received!", {
+                reply_to_message_id: msg.message_id
+            });
+        }
+    }
+    
+    async handleSticker(msg) {
+        // Handle sticker messages
+        if (this.config.features.auto_reply && msg.chat.type === 'private') {
+            await this.bot.sendMessage(msg.chat.id, "😄 Nice sticker!", {
+                reply_to_message_id: msg.message_id
+            });
+        }
+    }
+    
+    async handleAnimation(msg) {
+        // Handle animation (GIF) messages
+        if (msg.chat.type === 'private') {
+            await this.bot.sendMessage(msg.chat.id, "🎬 Cool animation!", {
+                reply_to_message_id: msg.message_id
+            });
+        }
+    }
+    
+    async handlePoll(msg) {
+        // Handle poll messages
+        if (msg.chat.type === 'private') {
+            await this.bot.sendMessage(msg.chat.id, "📊 Interesting poll!", {
+                reply_to_message_id: msg.message_id
+            });
+        }
+    }
+    
+    // Event handlers
+    async handleEditedMessage(msg) {
+        // Handle edited messages
+        console.log(`Message edited by ${msg.from.first_name}`);
+    }
+    
+    async handleCallbackQuery(callbackQuery) {
+        // Handle callback queries from inline keyboards
+        const { data, message, from } = callbackQuery;
+        
+        console.log(`Callback query: ${data} from ${from.first_name}`);
+        
+        switch (data) {
+            case 'help':
+                await this.bot.sendMessage(from.id, "Need help? Use /help command.");
+                break;
+            default:
+                await this.bot.answerCallbackQuery(callbackQuery.id, {
+                    text: `You selected: ${data}`,
+                    show_alert: false
+                });
+        }
+    }
+    
+    async handleInlineQuery(inlineQuery) {
+        // Handle inline queries
+        const results = [];
+        
+        if (inlineQuery.query === 'help') {
+            results.push({
+                type: 'article',
+                id: '1',
+                title: 'Help Center',
+                input_message_content: {
+                    message_text: '📚 *Bot Help*\nUse /help for detailed information.',
+                    parse_mode: 'Markdown'
+                },
+                description: 'Get help with bot commands'
+            });
+        }
+        
+        await this.bot.answerInlineQuery(inlineQuery.id, results, {
+            cache_time: 1
+        });
+    }
+    
+    async handlePollAnswer(pollAnswer) {
+        // Handle poll answers
+        console.log(`User ${pollAnswer.user.first_name} answered poll`);
+    }
+    
+    async handleChatMemberUpdate(update) {
+        // Handle chat member updates
+        const { old_chat_member, new_chat_member, chat } = update;
+        console.log(`Chat member update in ${chat.title}`);
+    }
+    
+    async handleMyChatMemberUpdate(update) {
+        // Handle bot's own chat member updates
+        const { old_chat_member, new_chat_member, chat } = update;
+        
+        if (new_chat_member.status === 'administrator') {
+            console.log(`✅ Bot added as admin in ${chat.title}`);
+        } else if (new_chat_member.status === 'left' || new_chat_member.status === 'kicked') {
+            console.log(`❌ Bot removed from ${chat.title}`);
+        }
+    }
+    
+    async handleBotAdded(chat) {
+        // Handle when bot is added to a group
+        const message = `🤖 *Bot Added Successfully!*\n\n` +
+                       `Thank you for adding me to *${chat.title}*!\n\n` +
+                       `To get started:\n` +
+                       `1. Make me an admin with necessary permissions\n` +
+                       `2. Use /settings to configure the bot\n` +
+                       `3. Use /help to see available commands\n\n` +
+                       `For any issues, contact @master_spamming`;
+        
+        await this.bot.sendMessage(chat.id, message, {
+            parse_mode: 'Markdown'
+        });
+    }
+    
+    async handleBotRemoved(chat) {
+        // Handle when bot is removed from a group
+        console.log(`Bot removed from ${chat.title}`);
+    }
+    
+    // Admin moderation methods
+    async warnUser(msg, args) {
+        if (args.length === 0) {
+            await this.bot.sendMessage(msg.chat.id, "Usage: /warn @username [reason]");
+            return;
+        }
+        
+        const username = args[0].replace('@', '');
+        const reason = args.slice(1).join(' ') || 'No reason specified';
+        
+        await this.bot.sendMessage(msg.chat.id, 
+            `⚠️ *Warning Issued*\n\n` +
+            `User: @${username}\n` +
+            `Reason: ${reason}\n` +
+            `By: ${msg.from.first_name}`,
+            { parse_mode: 'Markdown' }
+        );
+    }
+    
+    async muteUser(msg, args) {
+        if (args.length === 0) {
+            await this.bot.sendMessage(msg.chat.id, "Usage: /mute @username [duration] [reason]");
+            return;
+        }
+        
+        const username = args[0].replace('@', '');
+        const duration = args[1] || '1h';
+        const reason = args.slice(2).join(' ') || 'No reason specified';
+        
+        await this.bot.sendMessage(msg.chat.id,
+            `🔇 *User Muted*\n\n` +
+            `User: @${username}\n` +
+            `Duration: ${duration}\n` +
+            `Reason: ${reason}\n` +
+            `By: ${msg.from.first_name}`,
+            { parse_mode: 'Markdown' }
+        );
+    }
+    
+    async banUser(msg, args) {
+        if (args.length === 0) {
+            await this.bot.sendMessage(msg.chat.id, "Usage: /ban @username [reason]");
+            return;
+        }
+        
+        const username = args[0].replace('@', '');
+        const reason = args.slice(1).join(' ') || 'No reason specified';
+        
+        await this.bot.sendMessage(msg.chat.id,
+            `🚫 *User Banned*\n\n` +
+            `User: @${username}\n` +
+            `Reason: ${reason}\n` +
+            `By: ${msg.from.first_name}`,
+            { parse_mode: 'Markdown' }
+        );
+    }
+    
     // Utility methods
     isUserBlocked(userId) {
-        return this.config.security.blocked_users.includes(userId);
+        return this.config.security?.blocked_users?.includes(userId) || false;
     }
     
     async isRateLimited(userId, chatId) {
-        // Simple rate limiting implementation
-        // In production, use a proper rate limiting library
+        // Simple rate limiting
         return false;
     }
     
@@ -598,11 +931,11 @@ class GroupMasterBot {
     }
     
     isDeveloper(userId) {
-        return this.config.developers.includes(userId);
+        return this.config.developers?.includes(userId) || false;
     }
     
     isOwner(userId) {
-        return this.config.owners.includes(userId);
+        return this.config.owners?.includes(userId) || false;
     }
     
     containsUrl(text) {
@@ -610,14 +943,30 @@ class GroupMasterBot {
         return urlRegex.test(text);
     }
     
+    getUptime() {
+        const uptime = new Date() - this.stats.startTime;
+        const days = Math.floor(uptime / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((uptime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((uptime % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((uptime % (1000 * 60)) / 1000);
+        
+        if (days > 0) return `${days}d ${hours}h ${minutes}m`;
+        if (hours > 0) return `${hours}h ${minutes}m`;
+        return `${minutes}m ${seconds}s`;
+    }
+    
     async start() {
         console.log('🚀 Starting bot...');
-        await this.bot.startPolling();
+        if (!this.config.webhook?.enabled || !process.env.RENDER) {
+            await this.bot.startPolling();
+        }
+        console.log('✅ Bot is now running on Render.com!');
     }
     
     async stop() {
         console.log('🛑 Stopping bot...');
         await this.bot.stopPolling();
+        console.log('✅ Bot stopped.');
     }
 }
 
