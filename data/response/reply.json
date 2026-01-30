@@ -1,12 +1,12 @@
 {
   "hi|hello|hey|assalamualaikum|hy|হাই|হ্যালো|আসসালামুআলাইকুম": [
-    "<b>Hello!</b> 🤗",
+    "Hey Bbs <b>Hello!</b> 🤗",
     "<i>Hi there!</i> 👋", 
     "<b>Assalamualaikum!</b> 😊",
     "Hey! <b>How can I help you?</b> 🌟",
     "<u>Waalaikumussalam!</u> 🤲",
     "👋 <b>Hi! Nice to see you!</b>",
-    "😊 <b>Salam! Hope you're doing well!</b>",
+    "😊 <b>Assalamualaikum!</b> Hope you're doing well!</b>",
     "🌟 <b>Hello dear! What's up?</b>"
   ],
   
@@ -177,7 +177,7 @@
     "👨‍💻 <b>MAR-PD</b> - The genius behind me!",
     "🌟 <b>All credits to</b> @master_spamming",
     "💻 <b>Developed with love by MAR-PD!</b>",
-    "<i>Master Spamming</i> is my <b>dad!</b> 😄"
+    "<b>My boss </b> <a href=\"https://t.me/master_spamming\">MAR-PD</a>  😄"
   ],
   
   "master spamming|মাস্টার স্প্যামিং|মাস্টারস্প্যামিং|master_spamming": [
