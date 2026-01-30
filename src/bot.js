@@ -29,7 +29,8 @@ class GroupMasterBot {
         // Auto-reply cache
         this.autoReplyCache = {
             responses: null,
-            lastLoaded: null
+            lastLoaded: null,
+            patterns: new Map()
         };
         
         this.init();
@@ -168,15 +169,25 @@ class GroupMasterBot {
     
     loadAutoReplyCache() {
         try {
-            const responses = JSON.parse(
-                fs.readFileSync(path.join(__dirname, '..', 'data', 'responses', 'auto-reply.json'), 'utf8')
-            );
+            // নতুন ফাইল পথ
+            const responsePath = path.join(__dirname, '..', 'data', 'response', 'reply.json');
+            
+            const responses = JSON.parse(fs.readFileSync(responsePath, 'utf8'));
+            
+            // প্যাটার্ন প্রিপ্রোসেসিং
+            this.autoReplyCache.patterns.clear();
+            for (const [trigger, replyArray] of Object.entries(responses)) {
+                const patterns = trigger.toLowerCase().split('|').map(p => p.trim());
+                this.autoReplyCache.patterns.set(patterns, replyArray);
+            }
+            
             this.autoReplyCache.responses = responses;
             this.autoReplyCache.lastLoaded = new Date();
-            console.log('✅ Auto-reply cache loaded');
+            console.log(`✅ Auto-reply cache loaded: ${Object.keys(responses).length} patterns`);
         } catch (error) {
             console.error('❌ Failed to load auto-reply cache:', error.message);
             this.autoReplyCache.responses = {};
+            this.autoReplyCache.patterns.clear();
         }
     }
     
@@ -327,6 +338,19 @@ class GroupMasterBot {
                 await this.sendRandomJoke(msg);
                 break;
                 
+            case '/reload':
+                if (this.isDeveloper(msg.from.id) || this.isOwner(msg.from.id)) {
+                    this.loadAutoReplyCache();
+                    await this.bot.sendMessage(msg.chat.id, "✅ Auto-reply responses reloaded successfully!", {
+                        parse_mode: 'HTML'
+                    });
+                } else {
+                    await this.bot.sendMessage(msg.chat.id, "❌ Permission denied. Only developers can reload responses.", {
+                        parse_mode: 'HTML'
+                    });
+                }
+                break;
+                
             case '/broadcast':
                 // শুধু ডেভেলপারদের জন্য
                 if (this.isDeveloper(msg.from.id)) {
@@ -382,12 +406,11 @@ class GroupMasterBot {
             // খালি মেসেজ স্কিপ করো
             if (!message || message.length < 2) return;
             
-            // Find matching response
-            for (const [trigger, reply] of Object.entries(responses)) {
-                const triggers = trigger.split('|').map(t => t.trim().toLowerCase());
-                
-                for (const t of triggers) {
-                    if (message.includes(t)) {
+            // Find matching response from patterns
+            for (const [patterns, replyArray] of this.autoReplyCache.patterns) {
+                for (const pattern of patterns) {
+                    // Exact match বা contains চেক
+                    if (message === pattern || message.includes(pattern)) {
                         // Send typing action
                         await this.bot.sendChatAction(msg.chat.id, 'typing');
                         
@@ -395,24 +418,43 @@ class GroupMasterBot {
                         const delayTime = Math.floor(Math.random() * 1500) + 500;
                         await new Promise(resolve => setTimeout(resolve, delayTime));
                         
+                        // Random reply select from array
+                        const replyOptions = Array.isArray(replyArray) ? replyArray : [replyArray];
+                        const randomReply = replyOptions[Math.floor(Math.random() * replyOptions.length)];
+                        
                         // Format reply with placeholders
-                        let formattedReply = reply;
-                        if (reply.includes('{time}') || reply.includes('{date}')) {
+                        let formattedReply = randomReply;
+                        if (randomReply.includes('{time}') || randomReply.includes('{date}') || 
+                            randomReply.includes('{name}') || randomReply.includes('{username}')) {
+                            
                             const now = new Date();
+                            const userName = this.escapeHtml(msg.from.first_name);
+                            const userUsername = msg.from.username ? `@${msg.from.username}` : userName;
+                            
                             formattedReply = formattedReply
-                                .replace(/{time}/g, now.toLocaleTimeString())
-                                .replace(/{date}/g, now.toLocaleDateString());
+                                .replace(/{time}/g, this.escapeHtml(now.toLocaleTimeString()))
+                                .replace(/{date}/g, this.escapeHtml(now.toLocaleDateString()))
+                                .replace(/{name}/g, userName)
+                                .replace(/{username}/g, userUsername);
                         }
                         
-                        // Send reply
+                        // HTML special characters escape করো
+                        formattedReply = this.escapeHtml(formattedReply);
+                        
+                        // Send reply with HTML parse mode
                         await this.bot.sendMessage(msg.chat.id, formattedReply, {
-                            parse_mode: 'Markdown',
-                            reply_to_message_id: msg.message_id
+                            parse_mode: 'HTML',
+                            reply_to_message_id: msg.message_id,
+                            disable_web_page_preview: true
                         });
                         return;
                     }
                 }
             }
+            
+            // Fallback to old AI responses if no match found
+            await this.handleAIChat(msg);
+            
         } catch (error) {
             console.error('Error in auto-reply:', error);
         }
@@ -446,14 +488,14 @@ class GroupMasterBot {
     async sendStartMessage(msg) {
         const isPrivate = msg.chat.type === 'private';
         
-        let message = `🎉 *Welcome to Group Master Pro Bot* 👑\n\n`;
-        message += `*Version:* ${this.config.bot.version}\n`;
-        message += `*Developer:* MAR-PD\n`;
-        message += `*Contact:* @master_spamming\n\n`;
+        let message = `<b>🎉 Welcome to Group Master Pro Bot 👑</b>\n\n`;
+        message += `<b>Version:</b> ${this.config.bot.version}\n`;
+        message += `<b>Developer:</b> MAR-PD\n`;
+        message += `<b>Contact:</b> @master_spamming\n\n`;
         
         if (isPrivate) {
             message += `I'm your advanced group management assistant with AI features.\n\n`;
-            message += `✨ *Features:*\n`;
+            message += `<b>✨ Features:</b>\n`;
             message += `• Smart Auto Reply 🤖\n`;
             message += `• Welcome Image Generation 🎨\n`;
             message += `• Advanced Moderation 🛡️\n`;
@@ -480,7 +522,7 @@ class GroupMasterBot {
         }
         
         await this.bot.sendMessage(msg.chat.id, message, {
-            parse_mode: 'Markdown',
+            parse_mode: 'HTML',
             reply_markup: keyboard.length > 0 ? { inline_keyboard: keyboard } : undefined
         });
     }
@@ -489,74 +531,74 @@ class GroupMasterBot {
         const isPrivate = msg.chat.type === 'private';
         const isAdmin = await this.isAdmin(msg.from.id, msg.chat.id);
         
-        let message = `📚 *Group Master Pro Bot Help*\n\n`;
+        let message = `<b>📚 Group Master Pro Bot Help</b>\n\n`;
         
         if (isPrivate) {
-            message += `*Private Chat Commands:*\n`;
-            message += `/start - Start the bot\n`;
-            message += `/help - Show this message\n`;
-            message += `/about - About the bot\n`;
-            message += `/contact - Contact developer\n`;
-            message += `/stats - Bot statistics\n`;
-            message += `/settings - Configure bot\n`;
-            message += `/games - Fun games\n`;
-            message += `/quote - Random quote\n`;
-            message += `/joke - Random joke\n\n`;
+            message += `<b>Private Chat Commands:</b>\n`;
+            message += `<code>/start</code> - Start the bot\n`;
+            message += `<code>/help</code> - Show this message\n`;
+            message += `<code>/about</code> - About the bot\n`;
+            message += `<code>/contact</code> - Contact developer\n`;
+            message += `<code>/stats</code> - Bot statistics\n`;
+            message += `<code>/settings</code> - Configure bot\n`;
+            message += `<code>/games</code> - Fun games\n`;
+            message += `<code>/quote</code> - Random quote\n`;
+            message += `<code>/joke</code> - Random joke\n\n`;
             
-            message += `*AI Features:*\n`;
+            message += `<b>AI Features:</b>\n`;
             message += `Just chat with me normally! I'll reply automatically.\n\n`;
             
-            message += `*Group Management:*\n`;
+            message += `<b>Group Management:</b>\n`;
             message += `Add me to your group and make me admin for full features.`;
         } else {
-            message += `*Group Commands:*\n`;
-            message += `/help - Show this message\n`;
-            message += `/rules - Show group rules\n`;
-            message += `/report [reason] - Report a user\n`;
-            message += `/admin - Mention all admins\n`;
-            message += `/info - Group information\n`;
-            message += `/me - Your information\n`;
-            message += `/games - Fun games\n\n`;
+            message += `<b>Group Commands:</b>\n`;
+            message += `<code>/help</code> - Show this message\n`;
+            message += `<code>/rules</code> - Show group rules\n`;
+            message += `<code>/report</code> [reason] - Report a user\n`;
+            message += `<code>/admin</code> - Mention all admins\n`;
+            message += `<code>/info</code> - Group information\n`;
+            message += `<code>/me</code> - Your information\n`;
+            message += `<code>/games</code> - Fun games\n\n`;
             
             if (isAdmin) {
-                message += `*Admin Commands:*\n`;
-                message += `/warn @user - Warn a user\n`;
-                message += `/mute @user - Mute a user\n`;
-                message += `/ban @user - Ban a user\n`;
-                message += `/unban @user - Unban a user\n`;
-                message += `/promote @user - Make admin\n`;
-                message += `/demote @user - Remove admin\n`;
-                message += `/settings - Group settings\n`;
-                message += `/broadcast [msg] - Broadcast message\n`;
+                message += `<b>Admin Commands:</b>\n`;
+                message += `<code>/warn</code> @user - Warn a user\n`;
+                message += `<code>/mute</code> @user - Mute a user\n`;
+                message += `<code>/ban</code> @user - Ban a user\n`;
+                message += `<code>/unban</code> @user - Unban a user\n`;
+                message += `<code>/promote</code> @user - Make admin\n`;
+                message += `<code>/demote</code> @user - Remove admin\n`;
+                message += `<code>/settings</code> - Group settings\n`;
+                message += `<code>/broadcast</code> [msg] - Broadcast message\n`;
             }
         }
         
         await this.bot.sendMessage(msg.chat.id, message, {
-            parse_mode: 'Markdown',
+            parse_mode: 'HTML',
             disable_web_page_preview: true
         });
     }
     
     async sendAboutMessage(msg) {
-        const message = `🤖 *About Group Master Pro Bot*\n\n` +
-                       `*Version:* ${this.config.bot.version}\n` +
-                       `*Developer:* MAR-PD (@master_spamming)\n` +
-                       `*Framework:* Node.js\n` +
-                       `*Library:* node-telegram-bot-api\n` +
-                       `*Hosting:* Render.com\n\n` +
+        const message = `<b>🤖 About Group Master Pro Bot</b>\n\n` +
+                       `<b>Version:</b> ${this.config.bot.version}\n` +
+                       `<b>Developer:</b> MAR-PD (@master_spamming)\n` +
+                       `<b>Framework:</b> Node.js\n` +
+                       `<b>Library:</b> node-telegram-bot-api\n` +
+                       `<b>Hosting:</b> Render.com\n\n` +
                        `This bot is designed for advanced group management with AI capabilities.\n\n` +
-                       `✨ *Special Features:*\n` +
+                       `<b>✨ Special Features:</b>\n` +
                        `• Multi-language support\n` +
                        `• Smart moderation system\n` +
                        `• AI-powered responses\n` +
                        `• Custom welcome messages\n` +
                        `• Game system\n` +
                        `• Utility tools\n\n` +
-                       `*GitHub:* Coming Soon\n` +
-                       `*Support:* @master_spamming`;
+                       `<b>GitHub:</b> Coming Soon\n` +
+                       `<b>Support:</b> @master_spamming`;
         
         await this.bot.sendMessage(msg.chat.id, message, {
-            parse_mode: 'Markdown'
+            parse_mode: 'HTML'
         });
     }
     
@@ -569,38 +611,38 @@ class GroupMasterBot {
         const serverTime = new Date().toLocaleTimeString();
         
         await this.bot.editMessageText(
-            `🏓 *Pong!*\n\n` +
-            `*Bot Latency:* ${pingTime}ms\n` +
-            `*Server Time:* ${serverTime}\n` +
-            `*Uptime:* ${this.getUptime()}\n` +
-            `*Status:* ✅ Operational`,
+            `<b>🏓 Pong!</b>\n\n` +
+            `<b>Bot Latency:</b> ${pingTime}ms\n` +
+            `<b>Server Time:</b> ${serverTime}\n` +
+            `<b>Uptime:</b> ${this.getUptime()}\n` +
+            `<b>Status:</b> ✅ Operational`,
             {
                 chat_id: msg.chat.id,
                 message_id: pingMsg.message_id,
-                parse_mode: 'Markdown'
+                parse_mode: 'HTML'
             }
         );
     }
     
     async sendIdMessage(msg) {
-        let message = `🆔 *ID Information*\n\n`;
+        let message = `<b>🆔 ID Information</b>\n\n`;
         
         if (msg.chat.type === 'private') {
-            message += `*Your ID:* \`${msg.from.id}\`\n`;
-            message += `*First Name:* ${msg.from.first_name}\n`;
-            if (msg.from.last_name) message += `*Last Name:* ${msg.from.last_name}\n`;
-            if (msg.from.username) message += `*Username:* @${msg.from.username}\n`;
-            message += `*Language:* ${msg.from.language_code || 'Unknown'}\n`;
+            message += `<b>Your ID:</b> <code>${msg.from.id}</code>\n`;
+            message += `<b>First Name:</b> ${this.escapeHtml(msg.from.first_name)}\n`;
+            if (msg.from.last_name) message += `<b>Last Name:</b> ${this.escapeHtml(msg.from.last_name)}\n`;
+            if (msg.from.username) message += `<b>Username:</b> @${msg.from.username}\n`;
+            message += `<b>Language:</b> ${msg.from.language_code || 'Unknown'}\n`;
         } else {
-            message += `*Chat ID:* \`${msg.chat.id}\`\n`;
-            message += `*Chat Title:* ${msg.chat.title}\n`;
-            message += `*Chat Type:* ${msg.chat.type}\n\n`;
-            message += `*Your ID:* \`${msg.from.id}\`\n`;
-            message += `*Your Name:* ${msg.from.first_name}`;
+            message += `<b>Chat ID:</b> <code>${msg.chat.id}</code>\n`;
+            message += `<b>Chat Title:</b> ${this.escapeHtml(msg.chat.title)}\n`;
+            message += `<b>Chat Type:</b> ${msg.chat.type}\n\n`;
+            message += `<b>Your ID:</b> <code>${msg.from.id}</code>\n`;
+            message += `<b>Your Name:</b> ${this.escapeHtml(msg.from.first_name)}`;
         }
         
         await this.bot.sendMessage(msg.chat.id, message, {
-            parse_mode: 'Markdown'
+            parse_mode: 'HTML'
         });
     }
     
@@ -622,10 +664,13 @@ class GroupMasterBot {
             
             // Replace placeholders
             let message = template
-                .replace(/{name}/g, user.first_name)
-                .replace(/{username}/g, user.username ? `@${user.username}` : user.first_name)
-                .replace(/{group}/g, chat.title || 'the group')
+                .replace(/{name}/g, this.escapeHtml(user.first_name))
+                .replace(/{username}/g, user.username ? `@${user.username}` : this.escapeHtml(user.first_name))
+                .replace(/{group}/g, this.escapeHtml(chat.title || 'the group'))
                 .replace(/{id}/g, user.id);
+            
+            // HTML escape
+            message = this.escapeHtml(message);
             
             // Send typing action
             await this.bot.sendChatAction(chat.id, 'typing');
@@ -633,7 +678,7 @@ class GroupMasterBot {
             
             // Send welcome message
             await this.bot.sendMessage(chat.id, message, {
-                parse_mode: 'Markdown'
+                parse_mode: 'HTML'
             });
             
             // Auto-reaction if available
@@ -664,13 +709,16 @@ class GroupMasterBot {
             
             const template = templates[Math.floor(Math.random() * templates.length)];
             
-            const message = template
-                .replace(/{name}/g, user.first_name)
-                .replace(/{username}/g, user.username ? `@${user.username}` : user.first_name)
-                .replace(/{group}/g, chat.title || 'the group');
+            let message = template
+                .replace(/{name}/g, this.escapeHtml(user.first_name))
+                .replace(/{username}/g, user.username ? `@${user.username}` : this.escapeHtml(user.first_name))
+                .replace(/{group}/g, this.escapeHtml(chat.title || 'the group'));
+            
+            // HTML escape
+            message = this.escapeHtml(message);
             
             await this.bot.sendMessage(chat.id, message, {
-                parse_mode: 'Markdown'
+                parse_mode: 'HTML'
             });
         } catch (error) {
             console.error('Error sending goodbye message:', error);
@@ -692,12 +740,12 @@ class GroupMasterBot {
                     await this.bot.deleteMessage(msg.chat.id, msg.message_id);
                     
                     // Warn the user
-                    const warning = `⚠️ *Warning*\n\n` +
-                                  `Hey ${msg.from.first_name}, please avoid using inappropriate language!\n` +
+                    const warning = `<b>⚠️ Warning</b>\n\n` +
+                                  `Hey ${this.escapeHtml(msg.from.first_name)}, please avoid using inappropriate language!\n` +
                                   `Next violation will result in a mute.`;
                     
                     await this.bot.sendMessage(msg.chat.id, warning, {
-                        parse_mode: 'Markdown',
+                        parse_mode: 'HTML',
                         reply_to_message_id: msg.message_id
                     });
                     return;
@@ -709,12 +757,12 @@ class GroupMasterBot {
             if (!isAdmin && this.containsUrl(message)) {
                 await this.bot.deleteMessage(msg.chat.id, msg.message_id);
                 
-                const warning = `🔗 *Link Detected*\n\n` +
-                              `${msg.from.first_name}, only admins can post links in this group.\n` +
+                const warning = `<b>🔗 Link Detected</b>\n\n` +
+                              `${this.escapeHtml(msg.from.first_name)}, only admins can post links in this group.\n` +
                               `Please contact an admin if you need to share something important.`;
                 
                 await this.bot.sendMessage(msg.chat.id, warning, {
-                    parse_mode: 'Markdown'
+                    parse_mode: 'HTML'
                 });
             }
             
@@ -727,7 +775,7 @@ class GroupMasterBot {
         // Basic AI response system (এখন সব জায়গায় কাজ করবে)
         const message = (msg.text || msg.caption || '').toLowerCase();
         
-        // Simple pattern matching
+        // Simple pattern matching as fallback
         const responses = {
             'how are you': ["I'm doing great, thanks for asking! 😊", "Alhamdulillah, I'm good! How about you? 🌟"],
             'what can you do': ["I can help manage groups, answer questions, play games, and much more! ✨", "I'm a multi-purpose bot! Try /help to see all features."],
@@ -750,7 +798,8 @@ class GroupMasterBot {
                 await this.bot.sendChatAction(msg.chat.id, 'typing');
                 await new Promise(resolve => setTimeout(resolve, 800));
                 
-                await this.bot.sendMessage(msg.chat.id, reply, {
+                await this.bot.sendMessage(msg.chat.id, this.escapeHtml(reply), {
+                    parse_mode: 'HTML',
                     reply_to_message_id: msg.message_id
                 });
                 return;
@@ -763,23 +812,23 @@ class GroupMasterBot {
         const hours = Math.floor(uptime / (1000 * 60 * 60));
         const minutes = Math.floor((uptime % (1000 * 60 * 60)) / (1000 * 60));
         
-        let message = `📊 *Bot Statistics*\n\n`;
-        message += `*Uptime:* ${hours}h ${minutes}m\n`;
-        message += `*Messages Processed:* ${this.stats.messages}\n`;
-        message += `*Commands Executed:* ${this.stats.commands}\n`;
-        message += `*Errors:* ${this.stats.errors}\n`;
-        message += `*Version:* ${this.config.bot.version}\n`;
-        message += `*Developer:* @master_spamming\n`;
-        message += `*Hosting:* Render.com\n\n`;
+        let message = `<b>📊 Bot Statistics</b>\n\n`;
+        message += `<b>Uptime:</b> ${hours}h ${minutes}m\n`;
+        message += `<b>Messages Processed:</b> ${this.stats.messages}\n`;
+        message += `<b>Commands Executed:</b> ${this.stats.commands}\n`;
+        message += `<b>Errors:</b> ${this.stats.errors}\n`;
+        message += `<b>Version:</b> ${this.config.bot.version}\n`;
+        message += `<b>Developer:</b> @master_spamming\n`;
+        message += `<b>Hosting:</b> Render.com\n\n`;
         
         if (await this.isDeveloper(msg.from.id)) {
-            message += `*System Status:* ✅ Operational\n`;
-            message += `*Memory Usage:* ${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)}MB\n`;
-            message += `*Node Version:* ${process.version}`;
+            message += `<b>System Status:</b> ✅ Operational\n`;
+            message += `<b>Memory Usage:</b> ${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)}MB\n`;
+            message += `<b>Node Version:</b> ${process.version}`;
         }
         
         await this.bot.sendMessage(msg.chat.id, message, {
-            parse_mode: 'Markdown'
+            parse_mode: 'HTML'
         });
     }
     
@@ -825,7 +874,7 @@ class GroupMasterBot {
                 await this.bot.sendMessage(msg.chat.id, 
                     `❌ Unknown admin command.\n` +
                     `Use /help for admin commands list.`,
-                    { parse_mode: 'Markdown' }
+                    { parse_mode: 'HTML' }
                 );
         }
     }
@@ -854,25 +903,25 @@ class GroupMasterBot {
         // Command থেকে / remove করো
         const cmdWithoutSlash = command.replace('/', '');
         
-        let response = `❌ *Unknown Command:* \`${command}\`\n\n`;
-        response += `✅ *Available Commands:*\n`;
-        response += `• /start - Start bot\n`;
-        response += `• /help - All commands\n`;
-        response += `• /about - Bot info\n`;
-        response += `• /stats - Bot statistics\n`;
-        response += `• /ping - Check bot status\n`;
-        response += `• /id - Get user/chat ID\n`;
-        response += `• /games - Fun games\n\n`;
+        let response = `<b>❌ Unknown Command:</b> <code>${command}</code>\n\n`;
+        response += `<b>✅ Available Commands:</b>\n`;
+        response += `• <code>/start</code> - Start bot\n`;
+        response += `• <code>/help</code> - All commands\n`;
+        response += `• <code>/about</code> - Bot info\n`;
+        response += `• <code>/stats</code> - Bot statistics\n`;
+        response += `• <code>/ping</code> - Check bot status\n`;
+        response += `• <code>/id</code> - Get user/chat ID\n`;
+        response += `• <code>/games</code> - Fun games\n\n`;
         
         // Suggestion দাও
         if (suggestions[cmdWithoutSlash]) {
-            response += `💡 *Did you mean:* ${suggestions[cmdWithoutSlash]} ?`;
+            response += `<i>💡 Did you mean:</i> <code>${suggestions[cmdWithoutSlash]}</code> ?`;
         } else {
-            response += `📚 Use /help for complete command list`;
+            response += `<i>📚 Use</i> <code>/help</code> <i>for complete command list</i>`;
         }
         
         await this.bot.sendMessage(msg.chat.id, response, {
-            parse_mode: 'Markdown',
+            parse_mode: 'HTML',
             reply_to_message_id: msg.message_id
         });
     }
@@ -880,6 +929,7 @@ class GroupMasterBot {
     async handlePhoto(msg) {
         if (this.config.features.auto_reply) {
             await this.bot.sendMessage(msg.chat.id, "📸 Nice photo!", {
+                parse_mode: 'HTML',
                 reply_to_message_id: msg.message_id
             });
         }
@@ -888,6 +938,7 @@ class GroupMasterBot {
     async handleVideo(msg) {
         if (this.config.features.auto_reply) {
             await this.bot.sendMessage(msg.chat.id, "🎥 Great video!", {
+                parse_mode: 'HTML',
                 reply_to_message_id: msg.message_id
             });
         }
@@ -896,7 +947,8 @@ class GroupMasterBot {
     async handleDocument(msg) {
         if (this.config.features.auto_reply) {
             const fileName = msg.document.file_name;
-            await this.bot.sendMessage(msg.chat.id, `📄 Document: ${fileName}`, {
+            await this.bot.sendMessage(msg.chat.id, `📄 Document: ${this.escapeHtml(fileName)}`, {
+                parse_mode: 'HTML',
                 reply_to_message_id: msg.message_id
             });
         }
@@ -905,6 +957,7 @@ class GroupMasterBot {
     async handleVoice(msg) {
         if (this.config.features.auto_reply) {
             await this.bot.sendMessage(msg.chat.id, "🎤 Voice message received!", {
+                parse_mode: 'HTML',
                 reply_to_message_id: msg.message_id
             });
         }
@@ -913,6 +966,7 @@ class GroupMasterBot {
     async handleSticker(msg) {
         if (this.config.features.auto_reply) {
             await this.bot.sendMessage(msg.chat.id, "😄 Nice sticker!", {
+                parse_mode: 'HTML',
                 reply_to_message_id: msg.message_id
             });
         }
@@ -921,6 +975,7 @@ class GroupMasterBot {
     async handleAnimation(msg) {
         if (this.config.features.auto_reply) {
             await this.bot.sendMessage(msg.chat.id, "🎬 Cool animation!", {
+                parse_mode: 'HTML',
                 reply_to_message_id: msg.message_id
             });
         }
@@ -929,6 +984,7 @@ class GroupMasterBot {
     async handlePoll(msg) {
         if (this.config.features.auto_reply) {
             await this.bot.sendMessage(msg.chat.id, "📊 Interesting poll!", {
+                parse_mode: 'HTML',
                 reply_to_message_id: msg.message_id
             });
         }
@@ -945,7 +1001,9 @@ class GroupMasterBot {
         
         switch (data) {
             case 'help':
-                await this.bot.sendMessage(from.id, "Need help? Use /help command.");
+                await this.bot.sendMessage(from.id, "Need help? Use /help command.", {
+                    parse_mode: 'HTML'
+                });
                 break;
             default:
                 await this.bot.answerCallbackQuery(callbackQuery.id, {
@@ -964,8 +1022,8 @@ class GroupMasterBot {
                 id: '1',
                 title: 'Help Center',
                 input_message_content: {
-                    message_text: '📚 *Bot Help*\nUse /help for detailed information.',
-                    parse_mode: 'Markdown'
+                    message_text: '<b>📚 Bot Help</b>\nUse /help for detailed information.',
+                    parse_mode: 'HTML'
                 },
                 description: 'Get help with bot commands'
             });
@@ -996,16 +1054,16 @@ class GroupMasterBot {
     }
     
     async handleBotAdded(chat) {
-        const message = `🤖 *Bot Added Successfully!*\n\n` +
-                       `Thank you for adding me to *${chat.title}*!\n\n` +
-                       `To get started:\n` +
+        const message = `<b>🤖 Bot Added Successfully!</b>\n\n` +
+                       `Thank you for adding me to <b>${this.escapeHtml(chat.title)}</b>!\n\n` +
+                       `<b>To get started:</b>\n` +
                        `1. Make me an admin with necessary permissions\n` +
                        `2. Use /settings to configure the bot\n` +
                        `3. Use /help to see available commands\n\n` +
                        `For any issues, contact @master_spamming`;
         
         await this.bot.sendMessage(chat.id, message, {
-            parse_mode: 'Markdown'
+            parse_mode: 'HTML'
         });
     }
     
@@ -1016,7 +1074,9 @@ class GroupMasterBot {
     // Admin moderation methods
     async warnUser(msg, args) {
         if (args.length === 0) {
-            await this.bot.sendMessage(msg.chat.id, "Usage: /warn @username [reason]");
+            await this.bot.sendMessage(msg.chat.id, "Usage: /warn @username [reason]", {
+                parse_mode: 'HTML'
+            });
             return;
         }
         
@@ -1024,17 +1084,19 @@ class GroupMasterBot {
         const reason = args.slice(1).join(' ') || 'No reason specified';
         
         await this.bot.sendMessage(msg.chat.id, 
-            `⚠️ *Warning Issued*\n\n` +
-            `User: @${username}\n` +
-            `Reason: ${reason}\n` +
-            `By: ${msg.from.first_name}`,
-            { parse_mode: 'Markdown' }
+            `<b>⚠️ Warning Issued</b>\n\n` +
+            `<b>User:</b> @${username}\n` +
+            `<b>Reason:</b> ${this.escapeHtml(reason)}\n` +
+            `<b>By:</b> ${this.escapeHtml(msg.from.first_name)}`,
+            { parse_mode: 'HTML' }
         );
     }
     
     async muteUser(msg, args) {
         if (args.length === 0) {
-            await this.bot.sendMessage(msg.chat.id, "Usage: /mute @username [duration] [reason]");
+            await this.bot.sendMessage(msg.chat.id, "Usage: /mute @username [duration] [reason]", {
+                parse_mode: 'HTML'
+            });
             return;
         }
         
@@ -1043,18 +1105,20 @@ class GroupMasterBot {
         const reason = args.slice(2).join(' ') || 'No reason specified';
         
         await this.bot.sendMessage(msg.chat.id,
-            `🔇 *User Muted*\n\n` +
-            `User: @${username}\n` +
-            `Duration: ${duration}\n` +
-            `Reason: ${reason}\n` +
-            `By: ${msg.from.first_name}`,
-            { parse_mode: 'Markdown' }
+            `<b>🔇 User Muted</b>\n\n` +
+            `<b>User:</b> @${username}\n` +
+            `<b>Duration:</b> ${duration}\n` +
+            `<b>Reason:</b> ${this.escapeHtml(reason)}\n` +
+            `<b>By:</b> ${this.escapeHtml(msg.from.first_name)}`,
+            { parse_mode: 'HTML' }
         );
     }
     
     async banUser(msg, args) {
         if (args.length === 0) {
-            await this.bot.sendMessage(msg.chat.id, "Usage: /ban @username [reason]");
+            await this.bot.sendMessage(msg.chat.id, "Usage: /ban @username [reason]", {
+                parse_mode: 'HTML'
+            });
             return;
         }
         
@@ -1062,11 +1126,11 @@ class GroupMasterBot {
         const reason = args.slice(1).join(' ') || 'No reason specified';
         
         await this.bot.sendMessage(msg.chat.id,
-            `🚫 *User Banned*\n\n` +
-            `User: @${username}\n` +
-            `Reason: ${reason}\n` +
-            `By: ${msg.from.first_name}`,
-            { parse_mode: 'Markdown' }
+            `<b>🚫 User Banned</b>\n\n` +
+            `<b>User:</b> @${username}\n` +
+            `<b>Reason:</b> ${this.escapeHtml(reason)}\n` +
+            `<b>By:</b> ${this.escapeHtml(msg.from.first_name)}`,
+            { parse_mode: 'HTML' }
         );
     }
     
@@ -1081,6 +1145,17 @@ class GroupMasterBot {
         if (days > 0) return `${days}d ${hours}h ${minutes}m`;
         if (hours > 0) return `${hours}h ${minutes}m`;
         return `${minutes}m ${seconds}s`;
+    }
+    
+    // HTML escape function
+    escapeHtml(text) {
+        if (!text) return '';
+        return text.toString()
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
     }
     
     // Utility methods
@@ -1121,77 +1196,77 @@ class GroupMasterBot {
     
     // নতুন যোগ করা ফাংশন
     async sendRulesMessage(msg) {
-        const rules = `📜 *Group Rules*\n\n` +
+        const rules = `<b>📜 Group Rules</b>\n\n` +
                      `1. Be respectful to everyone\n` +
                      `2. No spam or self-promotion\n` +
                      `3. No NSFW content\n` +
                      `4. No political/religious debates\n` +
                      `5. Use appropriate language\n` +
                      `6. Follow admin instructions\n\n` +
-                     `⚠️ Violation may result in mute/ban`;
+                     `<i>⚠️ Violation may result in mute/ban</i>`;
         
         await this.bot.sendMessage(msg.chat.id, rules, {
-            parse_mode: 'Markdown'
+            parse_mode: 'HTML'
         });
     }
     
     async handleReportCommand(msg, args) {
         if (args.length === 0) {
             await this.bot.sendMessage(msg.chat.id, 
-                `⚠️ *Usage:* /report [reason]\n` +
-                `Example: /report @username spamming`,
-                { parse_mode: 'Markdown' }
+                `<b>⚠️ Usage:</b> /report [reason]\n` +
+                `<i>Example:</i> /report @username spamming`,
+                { parse_mode: 'HTML' }
             );
             return;
         }
         
         const reason = args.join(' ');
         await this.bot.sendMessage(msg.chat.id,
-            `✅ *Report Submitted*\n\n` +
+            `<b>✅ Report Submitted</b>\n\n` +
             `Your report has been sent to admins.\n` +
-            `Reason: ${reason}`,
-            { parse_mode: 'Markdown' }
+            `<b>Reason:</b> ${this.escapeHtml(reason)}`,
+            { parse_mode: 'HTML' }
         );
     }
     
     async mentionAdmins(msg) {
         try {
             const admins = await this.bot.getChatAdministrators(msg.chat.id);
-            let mentionText = `🚨 *Attention Admins!*\n\n`;
+            let mentionText = `<b>🚨 Attention Admins!</b>\n\n`;
         
             admins.forEach(admin => {
                 if (!admin.user.is_bot) {
-                    const username = admin.user.username ? `@${admin.user.username}` : admin.user.first_name;
+                    const username = admin.user.username ? `@${admin.user.username}` : this.escapeHtml(admin.user.first_name);
                     mentionText += `• ${username}\n`;
                 }
             });
         
-            mentionText += `\nUser ${msg.from.first_name} needs assistance!`;
+            mentionText += `\n<i>User ${this.escapeHtml(msg.from.first_name)} needs assistance!</i>`;
         
             await this.bot.sendMessage(msg.chat.id, mentionText, {
-                parse_mode: 'Markdown'
+                parse_mode: 'HTML'
             });
         } catch (error) {
             await this.bot.sendMessage(msg.chat.id, 
-                `❌ Could not fetch admins list.\n` +
-                `Make sure I'm admin in this group.`,
-                { parse_mode: 'Markdown' }
+                `<b>❌ Could not fetch admins list.</b>\n` +
+                `<i>Make sure I'm admin in this group.</i>`,
+                { parse_mode: 'HTML' }
             );
         }
     }
     
     async sendUserInfo(msg) {
         const user = msg.from;
-        const userInfo = `👤 *Your Information*\n\n` +
-                        `🆔 ID: \`${user.id}\`\n` +
-                        `👤 Name: ${user.first_name} ${user.last_name || ''}\n` +
-                        `📛 Username: ${user.username ? '@' + user.username : 'Not set'}\n` +
-                        `🌐 Language: ${user.language_code || 'Unknown'}\n` +
-                        `🤖 Is Bot: ${user.is_bot ? 'Yes' : 'No'}\n` +
-                        `📅 Joined: ${new Date().toLocaleDateString()}`;
+        const userInfo = `<b>👤 Your Information</b>\n\n` +
+                        `<b>🆔 ID:</b> <code>${user.id}</code>\n` +
+                        `<b>👤 Name:</b> ${this.escapeHtml(user.first_name)} ${this.escapeHtml(user.last_name || '')}\n` +
+                        `<b>📛 Username:</b> ${user.username ? '@' + user.username : 'Not set'}\n` +
+                        `<b>🌐 Language:</b> ${user.language_code || 'Unknown'}\n` +
+                        `<b>🤖 Is Bot:</b> ${user.is_bot ? 'Yes' : 'No'}\n` +
+                        `<b>📅 Joined:</b> ${new Date().toLocaleDateString()}`;
     
         await this.bot.sendMessage(msg.chat.id, userInfo, {
-            parse_mode: 'Markdown'
+            parse_mode: 'HTML'
         });
     }
     
@@ -1199,71 +1274,71 @@ class GroupMasterBot {
         if (msg.chat.type === 'private') {
             await this.bot.sendMessage(msg.chat.id, 
                 `This is a private chat. Use /me for your info.`,
-                { parse_mode: 'Markdown' }
+                { parse_mode: 'HTML' }
             );
             return;
         }
     
         try {
             const chat = await this.bot.getChat(msg.chat.id);
-            const chatInfo = `💬 *Chat Information*\n\n` +
-                            `🆔 ID: \`${chat.id}\`\n` +
-                            `📛 Title: ${chat.title}\n` +
-                            `📝 Type: ${chat.type}\n` +
-                            `👥 Members: ${chat.member_count || 'Unknown'}\n` +
-                            `📜 Description: ${chat.description || 'Not set'}\n` +
-                            `📌 Username: ${chat.username ? '@' + chat.username : 'Not set'}`;
+            const chatInfo = `<b>💬 Chat Information</b>\n\n` +
+                            `<b>🆔 ID:</b> <code>${chat.id}</code>\n` +
+                            `<b>📛 Title:</b> ${this.escapeHtml(chat.title)}\n` +
+                            `<b>📝 Type:</b> ${chat.type}\n` +
+                            `<b>👥 Members:</b> ${chat.member_count || 'Unknown'}\n` +
+                            `<b>📜 Description:</b> ${this.escapeHtml(chat.description || 'Not set')}\n` +
+                            `<b>📌 Username:</b> ${chat.username ? '@' + chat.username : 'Not set'}`;
         
             await this.bot.sendMessage(msg.chat.id, chatInfo, {
-                parse_mode: 'Markdown'
+                parse_mode: 'HTML'
             });
         } catch (error) {
             await this.bot.sendMessage(msg.chat.id,
-                `❌ Could not fetch chat info.\n` +
-                `Make sure I'm admin in this group.`,
-                { parse_mode: 'Markdown' }
+                `<b>❌ Could not fetch chat info.</b>\n` +
+                `<i>Make sure I'm admin in this group.</i>`,
+                { parse_mode: 'HTML' }
             );
         }
     }
     
     async sendContactMessage(msg) {
-        const contact = `📞 *Contact Developer*\n\n` +
-                       `*Name:* MAR-PD\n` +
-                       `*Telegram:* @master_spamming\n` +
-                       `*Email:* mar-pd@example.com\n\n` +
-                       `For bug reports, feature requests, or any assistance.`;
+        const contact = `<b>📞 Contact Developer</b>\n\n` +
+                       `<b>Name:</b> MAR-PD\n` +
+                       `<b>Telegram:</b> @master_spamming\n` +
+                       `<b>Email:</b> mar-pd@example.com\n\n` +
+                       `<i>For bug reports, feature requests, or any assistance.</i>`;
     
         await this.bot.sendMessage(msg.chat.id, contact, {
-            parse_mode: 'Markdown'
+            parse_mode: 'HTML'
         });
     }
     
     async sendSettingsMessage(msg) {
-        const settings = `⚙️ *Bot Settings*\n\n` +
-                        `*Welcome System:* ${this.config.features.welcome_system ? '✅ On' : '❌ Off'}\n` +
-                        `*Auto Reply:* ${this.config.features.auto_reply ? '✅ On' : '❌ Off'}\n` +
-                        `*Moderation:* ${this.config.features.moderation ? '✅ On' : '❌ Off'}\n` +
-                        `*AI Chat:* ${this.config.features.ai_chat ? '✅ On' : '❌ Off'}\n\n` +
-                        `Contact admin to change settings.`;
+        const settings = `<b>⚙️ Bot Settings</b>\n\n` +
+                        `<b>Welcome System:</b> ${this.config.features.welcome_system ? '✅ On' : '❌ Off'}\n` +
+                        `<b>Auto Reply:</b> ${this.config.features.auto_reply ? '✅ On' : '❌ Off'}\n` +
+                        `<b>Moderation:</b> ${this.config.features.moderation ? '✅ On' : '❌ Off'}\n` +
+                        `<b>AI Chat:</b> ${this.config.features.ai_chat ? '✅ On' : '❌ Off'}\n\n` +
+                        `<i>Contact admin to change settings.</i>`;
     
         await this.bot.sendMessage(msg.chat.id, settings, {
-            parse_mode: 'Markdown'
+            parse_mode: 'HTML'
         });
     }
     
     async sendGamesList(msg) {
-        const games = `🎮 *Available Games*\n\n` +
-                     `1. *Quiz Game* - Test your knowledge\n` +
-                     `2. *Word Game* - Find hidden words\n` +
-                     `3. *Math Game* - Solve math problems\n` +
-                     `4. *Trivia* - Random trivia questions\n\n` +
-                     `*Coming Soon:*\n` +
+        const games = `<b>🎮 Available Games</b>\n\n` +
+                     `<b>1. Quiz Game</b> - Test your knowledge\n` +
+                     `<b>2. Word Game</b> - Find hidden words\n` +
+                     `<b>3. Math Game</b> - Solve math problems\n` +
+                     `<b>4. Trivia</b> - Random trivia questions\n\n` +
+                     `<u>Coming Soon:</u>\n` +
                      `• Guess the number\n` +
                      `• Hangman\n` +
                      `• Tic Tac Toe`;
     
         await this.bot.sendMessage(msg.chat.id, games, {
-            parse_mode: 'Markdown'
+            parse_mode: 'HTML'
         });
     }
     
@@ -1279,8 +1354,8 @@ class GroupMasterBot {
         ];
     
         const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-        await this.bot.sendMessage(msg.chat.id, `💬 *Quote of the moment:*\n\n${randomQuote}`, {
-            parse_mode: 'Markdown'
+        await this.bot.sendMessage(msg.chat.id, `<b>💬 Quote of the moment:</b>\n\n${this.escapeHtml(randomQuote)}`, {
+            parse_mode: 'HTML'
         });
     }
     
@@ -1295,22 +1370,24 @@ class GroupMasterBot {
         ];
     
         const randomJoke = jokes[Math.floor(Math.random() * jokes.length)];
-        await this.bot.sendMessage(msg.chat.id, `😂 *Joke Time:*\n\n${randomJoke}`, {
-            parse_mode: 'Markdown'
+        await this.bot.sendMessage(msg.chat.id, `<b>😂 Joke Time:</b>\n\n${this.escapeHtml(randomJoke)}`, {
+            parse_mode: 'HTML'
         });
     }
     
     async handleBroadcastCommand(msg, args) {
         if (args.length === 0) {
-            await this.bot.sendMessage(msg.chat.id, "Usage: /broadcast [message]");
+            await this.bot.sendMessage(msg.chat.id, "Usage: /broadcast [message]", {
+                parse_mode: 'HTML'
+            });
             return;
         }
         
         const broadcastMessage = args.join(' ');
         await this.bot.sendMessage(msg.chat.id, 
-            `📢 *Broadcast Preview:*\n\n${broadcastMessage}\n\n` +
-            `*Note:* Broadcast feature is under development.`,
-            { parse_mode: 'Markdown' }
+            `<b>📢 Broadcast Preview:</b>\n\n${this.escapeHtml(broadcastMessage)}\n\n` +
+            `<i>Note: Broadcast feature is under development.</i>`,
+            { parse_mode: 'HTML' }
         );
     }
     
