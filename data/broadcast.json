@@ -1,0 +1,12 @@
+{
+    "messages": [
+        {
+            "version": "1.0.0",
+            "date": "2024-01-01",
+            "title": "🎉 New Update Available!",
+            "message": "Group Master Bot has been updated to v1.0.0\n\nNew Features:\n✅ Auto Welcome System\n✅ Spam Protection\n✅ HTML Formatting\n\nUpdate now by restarting the bot!",
+            "screenshots": []
+        }
+    ],
+    "last_broadcast": null
+}
