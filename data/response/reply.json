@@ -3,15 +3,15 @@
     "<b>Hello!</b> 🤗",
     "<i>Hi there!</i> 👋", 
     "<b>Assalamualaikum!</b> 😊",
-    "Hey! How can I help you? 🌟",
+    "Hey! <b>How can I help you?</b> 🌟",
     "<u>Waalaikumussalam!</u> 🤲"
   ],
   
   "how are you|how r u|কেমন আছ|কেমন আছেন|how are u": [
-    "I'm doing great, thanks for asking! 😊",
-    "<b>Alhamdulillah</b>, I'm good! How about you? 🌟",
+    "I'm doing great, <b>thanks for asking!</b> 😊",
+    "<b>Alhamdulillah</b>, I'm good! <i>How about you?</i> 🌟",
     "I'm fine, thank you! 😄",
-    "Allhamdulillah, I'm well! 😊"
+    "Allhamdulillah, <b>I'm well!</b> 😊"
   ],
   
   "what is your name|your name|তোমার নাম কি|নাম কি": [
@@ -23,38 +23,38 @@
   
   "who created you|তোমাকে কে বানাইছে|তোমার মালিক কে|তোমার ডেভেলপার কে": [
     "I was created by <b>MAR-PD</b>! 👨‍💻",
-    "My developer is MAR-PD. You can contact him @master_spamming",
+    "My developer is <b>MAR-PD</b>. You can contact him @master_spamming",
     "<u>MAR-PD</u> created me! 😊",
     "I'm developed by <code>MAR-PD</code>! 💻"
   ],
   
   "thank you|thanks|ধন্যবাদ|thankyou|thnx": [
-    "You're welcome! 😊",
-    "My pleasure! 🌟",
-    "Always happy to help! 🤗",
-    "No problem! 😄",
-    "Any time! 😊"
+    "You're <b>welcome!</b> 😊",
+    "My <i>pleasure!</i> 🌟",
+    "Always <b>happy to help!</b> 🤗",
+    "No <b>problem!</b> 😄",
+    "Any <i>time!</i> 😊"
   ],
   
   "good morning|সুপ্রভাত|goodmorning|gm": [
     "<b>Good morning!</b> 🌅",
     "Morning! ☀️",
     "<i>Sabah al-khair!</i> 🌟",
-    "Good morning! Have a great day! 😊"
+    "Good morning! <b>Have a great day!</b> 😊"
   ],
   
   "good night|শুভ রাত্রি|goodnight|gn": [
     "<b>Good night!</b> 🌙",
     "<i>Sweet dreams!</i> 💭",
-    "Sleep well! 😴",
-    "Good night! Take rest! 🌙"
+    "Sleep <b>well!</b> 😴",
+    "Good night! <i>Take rest!</i> 🌙"
   ],
   
   "bot|বট|robot": [
-    "Yes, I'm a bot! 🤖",
-    "That's me! 👋",
-    "How can I help you? 😊",
-    "I'm here to assist you! 🤖"
+    "Yes, I'm a <b>bot!</b> 🤖",
+    "That's <b>me!</b> 👋",
+    "How can I <b>help you?</b> 😊",
+    "I'm here to <i>assist you!</i> 🤖"
   ],
   
   "help|সাহায্য|help me": [
@@ -76,22 +76,22 @@
   ],
   
   "what can you do|তুমি কি করতে পারো|তোমার কাজ কি": [
-    "I can manage groups, auto-reply, moderation, games and more! ✨",
-    "I'm a multi-purpose bot! Try <code>/help</code> to see all features. 🤖",
-    "I help with group management, fun games, and answering questions! 😊"
+    "I can <b>manage groups</b>, auto-reply, moderation, games and more! ✨",
+    "I'm a <b>multi-purpose bot!</b> Try <code>/help</code> to see all features. 🤖",
+    "I help with <i>group management</i>, fun games, and answering questions! 😊"
   ],
   
   "love you|ভালোবাসি|i love you": [
-    "Aww, thank you! 😊",
-    "You're so sweet! ❤️",
-    "That's nice of you! 😊"
+    "Aww, <b>thank you!</b> 😊",
+    "You're so <i>sweet!</i> ❤️",
+    "That's <b>nice of you!</b> 😊"
   ],
   
   "haha|lol|funny|হাহা|হাসি": [
     "😂😂",
     "😄",
-    "Haha! 😊",
-    "Glad you're having fun! 😄"
+    "<b>Haha!</b> 😊",
+    "Glad you're <i>having fun!</i> 😄"
   ],
   
   "ok|okay|ঠিক আছে|okayy": [
@@ -102,51 +102,63 @@
   
   "bye|goodbye|বিদায়|see you": [
     "<b>Goodbye!</b> 👋",
-    "See you later! 😊",
-    "Take care! 🤗",
-    "Bye! Have a great day! 🌟"
+    "See you <i>later!</i> 😊",
+    "Take <b>care!</b> 🤗",
+    "Bye! <b>Have a great day!</b> 🌟"
   ],
   
   "mar-pd|mar pd|developer|ডেভেলপার": [
-    "That's my creator! 👨‍💻",
+    "That's my <b>creator!</b> 👨‍💻",
     "<b>MAR-PD</b> created me! 💻",
-    "Contact my developer @master_spamming",
+    "Contact my developer <code>@master_spamming</code>",
     "My developer is <code>MAR-PD</code>! 😊"
   ],
   
   "master spamming|মাস্টার স্প্যামিং": [
-    "That's my developer! @master_spamming 👨‍💻",
-    "You can contact my developer @master_spamming",
-    "<i>Master Spamming</i> is my creator! 😊"
+    "That's my <b>developer!</b> @master_spamming 👨‍💻",
+    "You can contact my developer <code>@master_spamming</code>",
+    "<i>Master Spamming</i> is my <b>creator!</b> 😊"
   ],
   
   "test|টেস্ট": [
-    "Test successful! ✅",
-    "I'm working perfectly! 😊",
-    "Bot is online and ready! 🤖"
+    "<b>Test successful!</b> ✅",
+    "I'm working <i>perfectly!</i> 😊",
+    "Bot is <b>online and ready!</b> 🤖"
   ],
   
   "ping|পিং": [
-    "Pong! 🏓",
-    "I'm alive! 😊",
-    "Bot is active! ✅"
+    "<b>Pong!</b> 🏓",
+    "I'm <b>alive!</b> 😊",
+    "Bot is <b>active!</b> ✅"
   ],
   
   "welcome|স্বাগতম": [
     "Thank you! 😊",
-    "Welcome to you too! 🤗",
+    "<b>Welcome to you too!</b> 🤗",
     "<b>Shagotom!</b> 😄"
   ],
   
   "nice|সুন্দর|awesome|অসাধারণ": [
     "Thank you! 😊",
-    "Glad you liked it! 🌟",
-    "You're too kind! 😄"
+    "Glad you <b>liked it!</b> 🌟",
+    "You're too <i>kind!</i> 😄"
   ],
   
-  "what|কি|what?" : [
+  "what|কি|what?": [
     "Yes? 😊",
-    "How can I help? 🤔",
-    "What can I do for you? 😄"
+    "How can I <b>help?</b> 🤔",
+    "What can I <i>do for you?</i> 😄"
+  ],
+  
+  "hi {name}|hello {name}": [
+    "Hello <b>{name}!</b> 👋",
+    "Hi there <b>{name}!</b> 😊",
+    "Assalamualaikum <b>{name}!</b> 🤲"
+  ],
+  
+  "help {name}|help me {name}": [
+    "Sure <b>{name}!</b> How can I help? 😊",
+    "I'm here for you <b>{name}!</b> 🌟",
+    "What do you need <b>{name}?</b> 🤔"
   ]
 }
