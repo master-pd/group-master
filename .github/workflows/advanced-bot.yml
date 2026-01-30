@@ -81,7 +81,7 @@ jobs:
         BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
       run: |
         echo "🤖 Starting Group Master Bot..."
-        timeout 10s node index.js || true
+        timeout 10s node setup.js || true
         echo "🔧 Initial test completed, starting main process..."
         node index.js &
         sleep 5
