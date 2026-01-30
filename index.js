@@ -1,90 +1,76 @@
-const TelegramBot = require('node-telegram-bot-api');
-const fs = require('fs');
-const path = require('path');
+#!/usr/bin/env node
 
-// লোড কনফিগারেশন
-const config = require('./config.json');
-const BOT_TOKEN = process.env.BOT_TOKEN || config.botToken;
+import { bot } from './src/bot.js';
+import { logger } from './src/utils.js';
 
-if (!BOT_TOKEN) {
-    console.error('❌ BOT_TOKEN missing!');
+console.log(`
+╔══════════════════════════════════════════════════════════╗
+║           🚀 Group Master Pro Bot 🚀                    ║
+║                 Version 3.0.0                            ║
+║          👑 Advanced Group Management                   ║
+║          👨‍💻 Developer: MAR-PD                          ║
+║          📞 Contact: @master_spamming                   ║
+╚══════════════════════════════════════════════════════════╝
+`);
+
+// Error handling
+process.on('uncaughtException', (error) => {
+    logger.error(`Uncaught Exception: ${error.message}`, { stack: error.stack });
+    console.error('❌ Uncaught Exception:', error);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    logger.error(`Unhandled Rejection at: ${promise}`, { reason });
+    console.error('❌ Unhandled Rejection:', reason);
+});
+
+// Graceful shutdown
+const signals = ['SIGINT', 'SIGTERM', 'SIGQUIT'];
+
+signals.forEach(signal => {
+    process.on(signal, async () => {
+        logger.info(`Received ${signal}, shutting down gracefully...`);
+        console.log(`\n🛑 Received ${signal}, shutting down...`);
+        
+        try {
+            // Stop bot
+            if (bot && bot.stopPolling) {
+                await bot.stopPolling();
+                console.log('✅ Bot polling stopped');
+            }
+            
+            logger.info('Bot shutdown completed');
+            console.log('👋 Goodbye!');
+            process.exit(0);
+        } catch (error) {
+            logger.error(`Error during shutdown: ${error.message}`);
+            console.error('❌ Error during shutdown:', error);
+            process.exit(1);
+        }
+    });
+});
+
+// Start bot
+try {
+    await bot.start();
+    console.log('\n✅ Bot started successfully!');
+    console.log('📱 Bot is now running and ready to receive messages');
+    console.log('🔄 Mode: Polling');
+    console.log('👑 Bot Name: Group Master Pro');
+    console.log('🔗 Username: @' + bot.username);
+    console.log('\n⚡ Features Enabled:');
+    console.log('   • Auto Welcome System');
+    console.log('   • Smart Auto Reply');
+    console.log('   • Advanced Moderation');
+    console.log('   • AI-Powered Responses');
+    console.log('   • Image Generation');
+    console.log('   • Broadcast System');
+    console.log('   • Games & Entertainment');
+    console.log('\n📊 Use /stats to check bot status');
+    console.log('🆘 Use /help for commands list');
+    console.log('\n💡 Press Ctrl+C to stop the bot\n');
+} catch (error) {
+    logger.error(`Failed to start bot: ${error.message}`, { stack: error.stack });
+    console.error('❌ Failed to start bot:', error);
     process.exit(1);
 }
-
-// বট ইনিশিয়ালাইজ
-const bot = new TelegramBot(BOT_TOKEN, {
-    polling: {
-        interval: 300,
-        autoStart: true
-    }
-});
-
-// লোড হ্যান্ডলার্স
-const messageHandler = require('./handlers/message');
-const commandHandler = require('./handlers/command');
-const welcomeHandler = require('./handlers/welcome');
-const moderationHandler = require('./handlers/moderation');
-
-// ইনিশিয়ালাইজ হ্যান্ডলার্স
-messageHandler.init(bot, config);
-commandHandler.init(bot, config);
-welcomeHandler.init(bot, config);
-moderationHandler.init(bot, config);
-
-// মেসেজ ইভেন্ট
-bot.on('message', async (msg) => {
-    // ইগনোর বট মেসেজ
-    if (msg.from.is_bot) return;
-    
-    // চেক স্পাম
-    if (moderationHandler.checkSpam(msg)) return;
-    
-    // চেক ব্যাড ওয়ার্ড
-    if (moderationHandler.checkBadWords(msg)) return;
-    
-    // চেক URL
-    if (moderationHandler.checkUrl(msg)) return;
-    
-    // হ্যান্ডল কমান্ড
-    if (msg.text && msg.text.startsWith('/')) {
-        await commandHandler.handle(msg);
-        return;
-    }
-    
-    // হ্যান্ডল নিউ মেম্বার
-    if (msg.new_chat_members) {
-        await welcomeHandler.handle(msg);
-        return;
-    }
-    
-    // হ্যান্ডল নরমাল মেসেজ
-    if (msg.text) {
-        await messageHandler.handle(msg);
-    }
-});
-
-// বট জয়েন মেসেজ
-bot.on('new_chat_members', async (msg) => {
-    const newMembers = msg.new_chat_members;
-    const botInfo = await bot.getMe();
-    
-    const isBotJoined = newMembers.some(member => 
-        member.is_bot && member.username === botInfo.username
-    );
-    
-    if (isBotJoined) {
-        await welcomeHandler.handleBotJoin(msg);
-    }
-});
-
-// এরর হ্যান্ডলিং
-bot.on('polling_error', (error) => {
-    console.error(`Polling error: ${error.code}`);
-});
-
-// বট স্টার্ট
-bot.getMe().then(botInfo => {
-    console.log(`✅ Bot started: @${botInfo.username}`);
-}).catch(error => {
-    console.error(`❌ Bot start failed: ${error.message}`);
-});
