@@ -1,0 +1,43 @@
+{
+  "history": [],
+  
+  "templates": [
+    {
+      "id": "welcome_update",
+      "name": "Welcome System Update",
+      "message": "🎉 *Welcome System Updated!*\n\nWe've improved our welcome system with new features:\n• Better image generation 🎨\n• More customization options ⚙️\n• Faster response times 🚀\n\nTry adding new members to see the changes!",
+      "type": "announcement"
+    },
+    
+    {
+      "id": "maintenance",
+      "name": "Maintenance Notice",
+      "message": "🔧 *Maintenance Notice*\n\nThe bot will be undergoing maintenance in 30 minutes.\nExpected downtime: 10 minutes\n\nWe apologize for any inconvenience. Thank you for your patience!",
+      "type": "warning"
+    },
+    
+    {
+      "id": "new_feature",
+      "name": "New Feature Announcement",
+      "message": "✨ *New Feature Alert!*\n\nWe've added a new game system to the bot!\n\nTry /games to see available games 🎮\n\nHave fun and let us know what you think!",
+      "type": "feature"
+    },
+    
+    {
+      "id": "rules_update",
+      "name": "Rules Update",
+      "message": "📜 *Rules Update*\n\nWe've updated the group rules. Please review:\n1. Be respectful to everyone\n2. No spam or flood\n3. No inappropriate content\n4. Follow admin instructions\n\nThank you for keeping our community safe!",
+      "type": "rules"
+    }
+  ],
+  
+  "scheduled": [],
+  
+  "stats": {
+    "total_broadcasts": 0,
+    "successful": 0,
+    "failed": 0,
+    "last_broadcast": null,
+    "total_recipients": 0
+  }
+}
