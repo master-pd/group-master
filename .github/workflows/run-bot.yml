@@ -45,4 +45,4 @@ jobs:
           EOF
           
       - name: Run Telegram Bot
-        run: node index.js
+        run: node setup.js
