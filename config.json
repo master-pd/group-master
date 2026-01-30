@@ -1,13 +1,121 @@
 {
-  "botToken": "YOUR_BOT_TOKEN_HERE",
-  "developerId": [6454347745],
-  "ownerId": 6454347745,
-  "botUsername": "group_master_bot",
-  "maxWelcomeMessages": 10,
-  "spamThreshold": 10,
-  "spamTimeWindow": 5000,
-  "muteDuration": 120,
-  "urlWhitelist": ["t.me", "telegram.org", "github.com"],
-  "typingDelay": 1000,
-  "replyDelay": 2000
+  "bot": {
+    "token": "YOUR_BOT_TOKEN_HERE",
+    "username": "group_master_pro_bot",
+    "name": "Group Master Pro",
+    "version": "3.0.0",
+    "mode": "polling",
+    "polling_timeout": 60
+  },
+  
+  "developers": [
+    6454347745
+  ],
+  
+  "owners": [
+    6454347745
+  ],
+  
+  "security": {
+    "allowed_users": [],
+    "blocked_users": [],
+    "allowed_groups": [],
+    "blocked_groups": [],
+    "max_message_length": 4096,
+    "max_caption_length": 1024
+  },
+  
+  "limits": {
+    "messages_per_second": 1,
+    "messages_per_minute": 30,
+    "welcome_messages_limit": 10,
+    "broadcast_limit_per_hour": 5,
+    "max_file_size_mb": 50
+  },
+  
+  "moderation": {
+    "spam_threshold": 5,
+    "spam_time_window": 3000,
+    "mute_duration_minutes": 120,
+    "ban_duration_days": 7,
+    "warn_limit": 3,
+    "auto_delete_bad_words": true,
+    "auto_delete_links": true,
+    "auto_delete_forwarded": false
+  },
+  
+  "features": {
+    "welcome_system": true,
+    "goodbye_system": true,
+    "auto_reply": true,
+    "ai_chat": true,
+    "moderation": true,
+    "broadcast": true,
+    "backup": true,
+    "statistics": true,
+    "games": true,
+    "stickers": true,
+    "image_generation": true,
+    "voice_notes": true
+  },
+  
+  "auto_reply": {
+    "typing_delay_ms": 1000,
+    "reply_delay_ms": 2000,
+    "min_confidence": 0.7,
+    "max_replies_per_conversation": 10
+  },
+  
+  "welcome": {
+    "image_enabled": true,
+    "image_width": 1200,
+    "image_height": 600,
+    "auto_delete_old_welcome": true,
+    "max_welcome_messages": 10,
+    "send_sticker": true,
+    "send_gif": false
+  },
+  
+  "broadcast": {
+    "max_groups_per_broadcast": 100,
+    "delay_between_groups_ms": 1000,
+    "allow_images": true,
+    "allow_documents": false
+  },
+  
+  "database": {
+    "enabled": false,
+    "type": "mongodb",
+    "uri": "mongodb://localhost:27017/group_master_bot",
+    "backup_interval_hours": 24
+  },
+  
+  "logging": {
+    "level": "info",
+    "file": "bot.log",
+    "max_size_mb": 10,
+    "max_files": 5
+  },
+  
+  "api": {
+    "openai_key": "",
+    "deepseek_key": "",
+    "unsplash_key": "",
+    "giphy_key": ""
+  },
+  
+  "cron": {
+    "cleanup_interval": "0 */6 * * *",
+    "backup_interval": "0 2 * * *",
+    "stats_interval": "0 * * * *",
+    "broadcast_interval": "0 12 * * *"
+  },
+  
+  "webhook": {
+    "enabled": false,
+    "url": "https://your-domain.com/webhook",
+    "port": 8443,
+    "key": "",
+    "cert": ""
+  }
 }
