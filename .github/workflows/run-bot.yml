@@ -1,1 +1,48 @@
+name: Run Telegram Bot 24/7
 
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '0 */6 * * *'
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Install dependencies
+        run: |
+          npm install
+          sudo apt-get update
+          sudo apt-get install -y build-essential libcairo2-dev libpango1.0-dev libjpeg-dev libgif-dev librsvg2-dev
+          
+      - name: Create config file with secrets
+        run: |
+          cat > config.json << EOF
+          {
+            "botToken": "${{ secrets.BOT_TOKEN }}",
+            "developerId": [${{ secrets.DEVELOPER_ID }}],
+            "botName": "Group Master 🤖",
+            "maxWelcomeMessages": 10,
+            "spamThreshold": {
+              "messages": 10,
+              "seconds": 5,
+              "muteDuration": 120
+            },
+            "contact": "https://t.me/master_spamming",
+            "watermark": "Group Master Bot"
+          }
+          EOF
+          
+      - name: Run Telegram Bot
+        run: node index.js
