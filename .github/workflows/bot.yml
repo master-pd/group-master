@@ -1,0 +1,367 @@
+name: Telegram Bot Runner
+
+on:
+  workflow_dispatch:  # ম্যানুয়ালি চালাতে
+  schedule:
+    # প্রতি ২৫ মিনিটে চালাবে (২৪/৭ এর জন্য)
+    - cron: '*/25 * * * *'
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 24  # ২৫ মিনিটের আগে শেষ হবে
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: |
+        echo "📦 Installing dependencies..."
+        npm ci
+        echo "✅ Dependencies installed"
+        
+    - name: Create bot file
+      run: |
+        echo "🤖 Creating bot.js file..."
+        
+        cat > bot.js << 'EOF'
+        const TelegramBot = require('node-telegram-bot-api');
+        
+        // Get bot token from environment
+        const token = process.env.BOT_TOKEN;
+        
+        if (!token) {
+          console.error('❌ ERROR: BOT_TOKEN is not set!');
+          console.error('Please add BOT_TOKEN to GitHub Secrets');
+          process.exit(1);
+        }
+        
+        // Create bot instance
+        const bot = new TelegramBot(token, {
+          polling: true,
+          request: {
+            timeout: 60000
+          }
+        });
+        
+        console.log('========================================');
+        console.log('🚀 GROUP MASTER BOT STARTED');
+        console.log('📱 Running on: GitHub Actions');
+        console.log('⏰ Started at: ' + new Date().toLocaleString());
+        console.log('========================================');
+        
+        // ================= BASIC COMMANDS =================
+        
+        // /start command
+        bot.onText(/\/start/, (msg) => {
+          const response = `
+🎉 *Welcome to Group Master Bot!* 👑
+
+*Status:* ✅ Running on GitHub Actions
+*Uptime:* 24/7 (Auto-restart every 25min)
+*Platform:* 🚀 GitHub Actions Runner
+*Version:* 3.0.0
+
+*Available Commands:*
+/start - Start the bot
+/help - Show help
+/ping - Check status
+/id - Get chat ID
+/time - Current time
+
+*Features:*
+• Auto Welcome Messages
+• Auto Reply System
+• Basic Moderation
+• 24/7 Uptime
+
+_Made with ❤️ by MAR-PD_
+          `;
+          
+          bot.sendMessage(msg.chat.id, response, { parse_mode: 'Markdown' });
+        });
+        
+        // /help command
+        bot.onText(/\/help/, (msg) => {
+          const helpText = `
+📚 *Group Master Bot Help* 🤖
+
+*Basic Commands:*
+/start - Start bot
+/help - Show this help
+/ping - Check bot status
+/status - Detailed status
+/id - Get chat/user ID
+/time - Current time
+
+*Group Commands:*
+/rules - Show group rules
+/admin - Mention all admins
+/report - Report a user
+
+*Features:*
+✅ Auto Welcome Messages
+✅ Auto Reply System
+✅ Basic Moderation
+✅ 24/7 Uptime
+
+*Note:* This bot runs on GitHub Actions
+Free tier: 2000 minutes/month
+          `;
+          
+          bot.sendMessage(msg.chat.id, helpText, { parse_mode: 'Markdown' });
+        });
+        
+        // /ping command
+        bot.onText(/\/ping/, (msg) => {
+          bot.sendMessage(msg.chat.id, '🏓 Pong! Bot is alive and running on GitHub Actions! ✅');
+        });
+        
+        // /status command
+        bot.onText(/\/status/, (msg) => {
+          const uptime = process.uptime();
+          const hours = Math.floor(uptime / 3600);
+          const minutes = Math.floor((uptime % 3600) / 60);
+          const seconds = Math.floor(uptime % 60);
+          
+          const memory = Math.round(process.memoryUsage().heapUsed / 1024 / 1024);
+          
+          const status = `
+📊 *Bot Status Report*
+
+*System Info:*
+• Platform: GitHub Actions 🚀
+• Node.js: ${process.version}
+• Uptime: ${hours}h ${minutes}m ${seconds}s
+• Memory: ${memory}MB used
+• Restart in: ${25 - minutes} minutes
+
+*Bot Info:*
+• Status: ✅ Running
+• Mode: Polling
+• Version: 3.0.0
+• Developer: MAR-PD
+
+*GitHub Actions:*
+• Runner: ubuntu-latest
+• Schedule: Every 25 minutes
+• Max Duration: 24 minutes
+• Free Minutes: 2000/month
+
+_Last update: ${new Date().toLocaleTimeString()}_
+          `;
+          
+          bot.sendMessage(msg.chat.id, status, { parse_mode: 'Markdown' });
+        });
+        
+        // /id command
+        bot.onText(/\/id/, (msg) => {
+          const idInfo = `
+🆔 *ID Information*
+
+*Your Info:*
+• User ID: \`${msg.from.id}\`
+• Name: ${msg.from.first_name} ${msg.from.last_name || ''}
+• Username: @${msg.from.username || 'Not set'}
+
+*Chat Info:*
+• Chat ID: \`${msg.chat.id}\`
+• Type: ${msg.chat.type}
+• Title: ${msg.chat.title || 'Private Chat'}
+          `;
+          
+          bot.sendMessage(msg.chat.id, idInfo, { parse_mode: 'Markdown' });
+        });
+        
+        // /time command
+        bot.onText(/\/time/, (msg) => {
+          const now = new Date();
+          const timeInfo = `
+🕐 *Current Time*
+
+*Local Time:*
+${now.toLocaleString()}
+
+*UTC Time:*
+${now.toUTCString()}
+
+*Timestamp:*
+${Math.floor(now.getTime() / 1000)} seconds
+${now.getTime()} milliseconds
+
+*Date:*
+${now.toDateString()}
+          `;
+          
+          bot.sendMessage(msg.chat.id, timeInfo, { parse_mode: 'Markdown' });
+        });
+        
+        // /rules command
+        bot.onText(/\/rules/, (msg) => {
+          const rules = `
+📜 *Group Rules*
+
+1. Be respectful to everyone
+2. No spam or flooding
+3. No inappropriate content
+4. No unauthorized links
+5. Follow admin instructions
+6. Use appropriate language
+7. No personal attacks
+8. Keep discussions civil
+
+✅ *These rules apply to everyone.*
+          `;
+          
+          bot.sendMessage(msg.chat.id, rules, { parse_mode: 'Markdown' });
+        });
+        
+        // ================= AUTO REPLY =================
+        
+        bot.on('message', (msg) => {
+          // Skip commands
+          if (msg.text && msg.text.startsWith('/')) return;
+          
+          const text = msg.text ? msg.text.toLowerCase() : '';
+          const name = msg.from.first_name;
+          
+          // Private chat auto-reply
+          if (msg.chat.type === 'private' && text) {
+            let reply = null;
+            
+            if (text.includes('hello') || text.includes('hi') || text.includes('hey')) {
+              reply = `Hello ${name}! 👋 How can I help you?`;
+            }
+            else if (text.includes('assalamualaikum') || text.includes('salam')) {
+              reply = `Waalaikumussalam ${name}! 🤲`;
+            }
+            else if (text.includes('how are you')) {
+              reply = `I'm fine ${name}, thank you! Running on GitHub Actions 😊`;
+            }
+            else if (text.includes('thank you') || text.includes('thanks')) {
+              reply = `You're welcome ${name}! 😊`;
+            }
+            else if (text.includes('bot')) {
+              reply = `Yes ${name}, I'm a Telegram bot running on GitHub Actions! 🤖`;
+            }
+            else if (text.includes('github')) {
+              reply = `I run on GitHub Actions free tier! 🚀\n2000 minutes/month, 24/7 uptime!`;
+            }
+            else if (text.includes('mar-pd')) {
+              reply = `I was created by MAR-PD! 👨‍💻\nTelegram: @master_spamming`;
+            }
+            
+            if (reply) {
+              bot.sendChatAction(msg.chat.id, 'typing');
+              setTimeout(() => {
+                bot.sendMessage(msg.chat.id, reply);
+              }, 1000);
+            }
+          }
+          
+          // Group chat - simple moderation
+          if (msg.chat.type !== 'private' && text) {
+            const badWords = ['badword', 'অপশব্দ', 'খারাপ'];
+            for (const word of badWords) {
+              if (text.includes(word)) {
+                bot.sendMessage(msg.chat.id, 
+                  `⚠️ ${name}, please avoid using inappropriate language!`
+                );
+                break;
+              }
+            }
+          }
+        });
+        
+        // ================= WELCOME SYSTEM =================
+        
+        bot.on('new_chat_members', (msg) => {
+          msg.new_chat_members.forEach((member) => {
+            if (member.is_bot && member.id === bot.id) {
+              // Bot added to group
+              bot.sendMessage(msg.chat.id,
+                `🤖 *Group Master Bot Added!* 🎉\n\n` +
+                `Thanks for adding me! I can help with:\n` +
+                `• Welcome messages\n` +
+                `• Basic moderation\n` +
+                `• Auto replies\n` +
+                `• Group management\n\n` +
+                `Use /help for commands\n` +
+                `Make me admin for full features!`,
+                { parse_mode: 'Markdown' }
+              );
+            }
+            else if (!member.is_bot) {
+              // Welcome regular users
+              const welcomes = [
+                `🎉 Welcome ${member.first_name} to the group! 🌟`,
+                `👋 Hello ${member.first_name}! Glad to have you! 😊`,
+                `🚀 Welcome aboard ${member.first_name}! 🎯`,
+                `✨ Assalamualaikum ${member.first_name}! Welcome! 🤲`
+              ];
+              
+              const welcomeMsg = welcomes[Math.floor(Math.random() * welcomes.length)];
+              bot.sendMessage(msg.chat.id, welcomeMsg);
+            }
+          });
+        });
+        
+        // ================= ERROR HANDLING =================
+        
+        bot.on('polling_error', (error) => {
+          console.error('🔴 Polling Error:', error.message);
+        });
+        
+        bot.on('error', (error) => {
+          console.error('🔴 Bot Error:', error.message);
+        });
+        
+        // ================= HEARTBEAT =================
+        
+        console.log('✅ Bot initialized successfully');
+        
+        // Show heartbeat every minute
+        setInterval(() => {
+          const uptime = process.uptime();
+          const min = Math.floor(uptime / 60);
+          console.log(`💓 Heartbeat: Running for ${min} minutes`);
+          
+          if (min >= 23) {
+            console.log('⚠️ Will auto-restart in 1 minute');
+          }
+        }, 60000);
+        
+        // ================= GRACEFUL SHUTDOWN =================
+        
+        process.on('SIGTERM', () => {
+          console.log('🛑 Shutting down gracefully...');
+          bot.stopPolling();
+          process.exit(0);
+        });
+        EOF
+        
+        echo "✅ bot.js file created"
+        
+    - name: Run Telegram Bot
+      env:
+        BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+      run: |
+        echo "🚀 Starting Telegram Bot..."
+        echo "⏰ Will run for 24 minutes"
+        echo "📅 Started at: $(date)"
+        echo ""
+        
+        # Run bot with timeout
+        timeout 24m node bot.js
+        
+        echo ""
+        echo "✅ Bot session completed successfully"
+        echo "⏰ Ended at: $(date)"
+        echo "🔄 Next run scheduled in 1 minute"
