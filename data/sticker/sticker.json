@@ -1,0 +1,217 @@
+{
+  "stickers": [
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "😊",
+      "response": "Nice smile! 😊",
+      "keywords": ["smile", "happy", "good", "nice"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "😂",
+      "response": "Hahaha! That's hilarious! 😂",
+      "keywords": ["laugh", "funny", "haha", "lol"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "😍",
+      "response": "Aww! So lovely! 😍",
+      "keywords": ["love", "lovely", "cute", "beautiful"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "😎",
+      "response": "Cool! Looking awesome! 😎",
+      "keywords": ["cool", "awesome", "great", "excellent"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "🤔",
+      "response": "Thinking deeply about something? 🤔",
+      "keywords": ["think", "thought", "question", "wonder"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "😢",
+      "response": "Don't be sad! Everything will be okay! 🤗",
+      "keywords": ["sad", "cry", "upset", "unhappy"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "🎉",
+      "response": "Yay! Celebration time! 🎊",
+      "keywords": ["celebrate", "party", "congratulations", "yay"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "❤️",
+      "response": "Love is in the air! ❤️",
+      "keywords": ["love", "heart", "affection", "care"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "👍",
+      "response": "Great! I agree! 👍",
+      "keywords": ["good", "agree", "approve", "yes"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "👋",
+      "response": "Hello there! Welcome! 👋",
+      "keywords": ["hello", "hi", "welcome", "greet"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "🙏",
+      "response": "Prayers and blessings! 🙏",
+      "keywords": ["pray", "bless", "thanks", "please"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "🎂",
+      "response": "Happy birthday! Many happy returns! 🎂",
+      "keywords": ["birthday", "cake", "celebrate", "anniversary"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "⚡",
+      "response": "Powerful! Fast as lightning! ⚡",
+      "keywords": ["fast", "power", "energy", "quick"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "🔥",
+      "response": "Hot! This is fire! 🔥",
+      "keywords": ["hot", "fire", "amazing", "great"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "🌟",
+      "response": "Shining like a star! 🌟",
+      "keywords": ["star", "shine", "bright", "excellent"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "🎮",
+      "response": "Game on! Let's play! 🎮",
+      "keywords": ["game", "play", "fun", "entertainment"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "📚",
+      "response": "Time to study! Knowledge is power! 📚",
+      "keywords": ["study", "book", "learn", "knowledge"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "☕",
+      "response": "Coffee time! Perfect for a break! ☕",
+      "keywords": ["coffee", "tea", "drink", "break"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "🌙",
+      "response": "Good night! Sweet dreams! 🌙",
+      "keywords": ["night", "sleep", "moon", "dream"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "☀️",
+      "response": "Good morning! Have a sunny day! ☀️",
+      "keywords": ["morning", "sun", "day", "bright"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "🌧️",
+      "response": "Rainy day! Perfect for staying cozy! 🌧️",
+      "keywords": ["rain", "weather", "cloudy", "umbrella"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "🎵",
+      "response": "Music to my ears! 🎵",
+      "keywords": ["music", "song", "melody", "tune"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "🎬",
+      "response": "Action! Camera! Perfect scene! 🎬",
+      "keywords": ["movie", "film", "action", "cinema"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "✈️",
+      "response": "Bon voyage! Safe travels! ✈️",
+      "keywords": ["travel", "plane", "flight", "journey"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "💰",
+      "response": "Money matters! Financial wisdom! 💰",
+      "keywords": ["money", "cash", "rich", "wealth"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "🏆",
+      "response": "Champion! You're a winner! 🏆",
+      "keywords": ["win", "champion", "trophy", "success"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "🤖",
+      "response": "Beep boop! Robot mode activated! 🤖",
+      "keywords": ["robot", "bot", "machine", "ai"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "👑",
+      "response": "Royalty has arrived! All hail! 👑",
+      "keywords": ["king", "queen", "royal", "crown"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "🦸",
+      "response": "Superhero to the rescue! 🦸",
+      "keywords": ["hero", "super", "save", "rescue"]
+    },
+    {
+      "file_id": "CAACAgUAAxkBAAIB...",
+      "emoji": "🧠",
+      "response": "Brain power! Intelligent thinking! 🧠",
+      "keywords": ["brain", "smart", "intelligent", "think"]
+    }
+  ],
+  
+  "categories": {
+    "emotions": ["😊", "😂", "😍", "😎", "🤔", "😢", "🥰", "😘", "🤩", "😜"],
+    "greetings": ["👋", "🙏", "🤝", "👋", "🎊", "🎉", "✨", "🌟"],
+    "objects": ["🎂", "☕", "📚", "🎮", "🎵", "🎬", "✈️", "💰"],
+    "nature": ["☀️", "🌙", "🌧️", "🌈", "🌸", "🌺", "🌴", "🍃"],
+    "symbols": ["❤️", "👍", "👑", "🏆", "⚡", "🔥", "💎", "🎯"],
+    "animals": ["🐱", "🐶", "🦁", "🐯", "🐼", "🦊", "🐰", "🐨"],
+    "food": ["🍕", "🍔", "🍦", "🍩", "🍎", "🍇", "🥑", "🥨"]
+  },
+  
+  "random_responses": [
+    "Great sticker! 😄",
+    "Love this one! ❤️",
+    "Perfect sticker for the moment! ⭐",
+    "This sticker says it all! 👌",
+    "Expressive choice! 🎭",
+    "Sticker game strong! 💪",
+    "This made me smile! 😊",
+    "Sticker on point! 🎯",
+    "Nice selection! 👍",
+    "That's a good one! 🌟",
+    "Sticker speaks volumes! 📢",
+    "Emotional sticker! 💭",
+    "This sticker is fire! 🔥",
+    "Cool sticker choice! 😎",
+    "Sticker perfection! 💯",
+    "This sticker is everything! ✨",
+    "Sticker mood! 🎨",
+    "What a sticker! 🤩",
+    "Sticker vibes! 🎶",
+    "Epic sticker! 🏆"
+  ]
+}
