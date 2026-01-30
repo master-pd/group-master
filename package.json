@@ -1,26 +1,59 @@
 {
-  "name": "telegram-group-master-bot",
-  "version": "1.0.0",
-  "description": "Advanced Telegram Group Management Bot",
+  "name": "group-master-pro-bot",
+  "version": "3.0.0",
+  "description": "Advanced Telegram Group Management Bot with AI Features",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "test": "echo \"No tests specified\" && exit 0",
+    "setup": "node setup.js",
+    "backup": "node scripts/backup.js",
+    "update": "git pull && npm install"
   },
+  "keywords": [
+    "telegram",
+    "bot",
+    "group",
+    "management",
+    "moderation",
+    "ai",
+    "automation"
+  ],
+  "author": "MAR-PD <https://t.me/master_spamming>",
+  "license": "MIT",
   "dependencies": {
     "node-telegram-bot-api": "^0.64.0",
     "canvas": "^2.11.2",
     "axios": "^1.6.0",
     "moment": "^2.29.4",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "chalk": "^4.1.2",
+    "winston": "^3.11.0",
+    "jsonwebtoken": "^9.0.2",
+    "crypto-js": "^4.2.0",
+    "node-cron": "^3.0.3",
+    "mongodb": "^6.3.0",
+    "sharp": "^0.33.2",
+    "gif-encoder-2": "^1.0.5",
+    "string-similarity": "^4.0.4",
+    "profanity-js": "^1.0.4",
+    "natural": "^6.3.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "eslint": "^8.56.0"
   },
-  "author": "MAR-PD",
-  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MAR-PD/telegram-group-master-bot"
-  }
+    "url": "https://github.com/MAR-PD/group-master-pro-bot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MAR-PD/group-master-pro-bot/issues"
+  },
+  "homepage": "https://github.com/MAR-PD/group-master-pro-bot#readme"
 }
