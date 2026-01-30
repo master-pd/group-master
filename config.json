@@ -1,12 +1,20 @@
 {
-  "botToken": "YOUR_BOT_TOKEN_HERE",
-  "developerId": [6454347745],
-  "adminCommands": ["broadcast", "stats"],
-  "maxWelcomeMessages": 10,
-  "spamThreshold": {
-    "messages": 10,
-    "seconds": 5,
-    "muteDuration": 120
-  },
-  "contact": "https://t.me/master_spamming"
+    "botToken": "YOUR_BOT_TOKEN_HERE",
+    "developerId": [6454347745],
+    "botName": "Group Master 🤖",
+    "maxWelcomeMessages": 10,
+    "spamThreshold": {
+        "messages": 10,
+        "seconds": 5,
+        "muteDuration": 120
+    },
+    "contact": "https://t.me/master_spamming",
+    "watermark": "Group Master Bot",
+    "features": {
+        "autoWelcome": true,
+        "autoReply": true,
+        "spamProtection": true,
+        "urlProtection": true,
+        "badWordFilter": true
+    }
 }
