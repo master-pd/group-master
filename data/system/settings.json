@@ -1,0 +1,127 @@
+{
+  "bot": {
+    "name": "Group Master Pro",
+    "version": "3.0.0",
+    "status": "online",
+    "maintenance": false,
+    "language": "en",
+    "timezone": "Asia/Dhaka"
+  },
+  
+  "features": {
+    "welcome": {
+      "enabled": true,
+      "send_image": true,
+      "send_sticker": true,
+      "auto_delete_old": true,
+      "max_messages": 10
+    },
+    
+    "moderation": {
+      "enabled": true,
+      "auto_delete_bad_words": true,
+      "auto_delete_links": true,
+      "auto_warn": true,
+      "auto_mute": true,
+      "auto_ban": false,
+      "warn_limit": 3,
+      "mute_duration": "2h",
+      "ban_duration": "7d"
+    },
+    
+    "auto_reply": {
+      "enabled": true,
+      "typing_delay": 1000,
+      "reply_delay": 2000,
+      "min_confidence": 0.7,
+      "private_only": false
+    },
+    
+    "broadcast": {
+      "enabled": true,
+      "max_groups": 100,
+      "delay": 1000,
+      "require_confirmation": true
+    },
+    
+    "games": {
+      "enabled": true,
+      "trivia": true,
+      "quiz": true,
+      "word_game": true,
+      "math_game": true
+    },
+    
+    "ai": {
+      "enabled": true,
+      "provider": "openai",
+      "model": "gpt-3.5-turbo",
+      "max_tokens": 500
+    }
+  },
+  
+  "security": {
+    "require_captcha": false,
+    "antiflood": true,
+    "antispam": true,
+    "max_messages_per_minute": 30,
+    "block_unknown_bots": true
+  },
+  
+  "notifications": {
+    "new_group": true,
+    "new_user": false,
+    "error": true,
+    "warning": true,
+    "broadcast": true
+  },
+  
+  "logging": {
+    "level": "info",
+    "save_to_file": true,
+    "file_path": "logs/bot.log",
+    "max_size": "10MB",
+    "backup_count": 5
+  },
+  
+  "backup": {
+    "enabled": true,
+    "interval": "24h",
+    "location": "backups/",
+    "max_backups": 30,
+    "compress": true
+  },
+  
+  "updates": {
+    "auto_update": false,
+    "check_interval": "24h",
+    "notify_users": true
+  },
+  
+  "customization": {
+    "theme": "dark",
+    "colors": {
+      "primary": "#667eea",
+      "secondary": "#764ba2",
+      "success": "#48bb78",
+      "warning": "#ed8936",
+      "error": "#f56565"
+    },
+    "emoji_set": "default"
+  },
+  
+  "limits": {
+    "max_group_size": 200000,
+    "max_message_length": 4096,
+    "max_caption_length": 1024,
+    "max_file_size": 50,
+    "max_users_per_command": 50
+  },
+  
+  "developer": {
+    "debug_mode": false,
+    "log_commands": true,
+    "log_errors": true,
+    "test_mode": false
+  }
+}
