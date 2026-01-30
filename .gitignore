@@ -1,83 +1,23 @@
 # Dependencies
 node_modules/
 npm-debug.log
-yarn-error.log
 
-# Environment variables
+# Environment
 .env
-.env.local
-.env.*.local
-
-# Configuration files with secrets
 config.json
-config.local.json
 
 # Logs
 *.log
 logs/
-bot.log
-error.log
 
-# Runtime data
-*.pid
-*.seed
-*.pid.lock
-
-# Coverage directory
-coverage/
-.nyc_output/
-
-# Build artifacts
-dist/
-build/
-out/
-
-# IDE files
+# IDE
 .vscode/
 .idea/
-*.swp
-*.swo
 
-# OS files
+# OS
 .DS_Store
 Thumbs.db
 
-# Backup files
-*.bak
-backup/
-
-# Database files
-*.db
-*.sqlite
-*.sqlite3
-
-# Temporary files
+# Temporary
 tmp/
 temp/
-
-# User data (if using JSON storage)
-data/users/
-data/groups/
-
-# Session files (if any)
-session-*
-
-# Certificate files
-*.pem
-*.crt
-*.key
-
-# Asset caches
-assets/cache/
-assets/generated/
-
-# Test output
-test-results/
-
-# Package locks
-package-lock.json
-yarn.lock
-
-# Local overrides
-local.json
-override.json
