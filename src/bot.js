@@ -172,6 +172,12 @@ class GroupMasterBot {
             // নতুন ফাইল পথ
             const responsePath = path.join(__dirname, '..', 'data', 'response', 'reply.json');
             
+            // ফাইল আছে কিনা চেক করো
+            if (!fs.existsSync(responsePath)) {
+                console.log('⚠️ reply.json file not found, creating default...');
+                this.createDefaultReplyFile(responsePath);
+            }
+            
             const responses = JSON.parse(fs.readFileSync(responsePath, 'utf8'));
             
             // প্যাটার্ন প্রিপ্রোসেসিং
@@ -189,6 +195,32 @@ class GroupMasterBot {
             this.autoReplyCache.responses = {};
             this.autoReplyCache.patterns.clear();
         }
+    }
+    
+    createDefaultReplyFile(filePath) {
+        const defaultResponses = {
+            "hi|hello|hey|assalamualaikum": [
+                "Hello! 👋",
+                "Hi there! 😊",
+                "Assalamualaikum! 🤲"
+            ],
+            "how are you": [
+                "I'm doing great! 😊",
+                "Alhamdulillah, I'm good! 🌟"
+            ],
+            "thank you|thanks": [
+                "You're welcome! 😊",
+                "My pleasure! 🌟"
+            ]
+        };
+        
+        const dirPath = path.dirname(filePath);
+        if (!fs.existsSync(dirPath)) {
+            fs.mkdirSync(dirPath, { recursive: true });
+        }
+        
+        fs.writeFileSync(filePath, JSON.stringify(defaultResponses, null, 2), 'utf8');
+        console.log('✅ Created default reply.json file');
     }
     
     setupEventListeners() {
@@ -395,10 +427,15 @@ class GroupMasterBot {
             // Cache থেকে responses নাও
             let responses = this.autoReplyCache.responses;
             
-            // Cache empty হলে reload করো
+            // Cache empty হলে reload করার চেষ্টা করো
             if (!responses || Object.keys(responses).length === 0) {
-                this.loadAutoReplyCache();
-                responses = this.autoReplyCache.responses;
+                try {
+                    this.loadAutoReplyCache();
+                    responses = this.autoReplyCache.responses;
+                } catch (loadError) {
+                    console.log('⚠️ Auto-reply cache load failed, using fallback');
+                    responses = null;
+                }
             }
             
             const message = (msg.text || msg.caption || '').toLowerCase().trim();
@@ -406,57 +443,101 @@ class GroupMasterBot {
             // খালি মেসেজ স্কিপ করো
             if (!message || message.length < 2) return;
             
-            // Find matching response from patterns
-            for (const [patterns, replyArray] of this.autoReplyCache.patterns) {
-                for (const pattern of patterns) {
-                    // Exact match বা contains চেক
-                    if (message === pattern || message.includes(pattern)) {
-                        // Send typing action
-                        await this.bot.sendChatAction(msg.chat.id, 'typing');
-                        
-                        // Random delay (0.5 to 2 seconds)
-                        const delayTime = Math.floor(Math.random() * 1500) + 500;
-                        await new Promise(resolve => setTimeout(resolve, delayTime));
-                        
-                        // Random reply select from array
-                        const replyOptions = Array.isArray(replyArray) ? replyArray : [replyArray];
-                        const randomReply = replyOptions[Math.floor(Math.random() * replyOptions.length)];
-                        
-                        // Format reply with placeholders
-                        let formattedReply = randomReply;
-                        if (randomReply.includes('{time}') || randomReply.includes('{date}') || 
-                            randomReply.includes('{name}') || randomReply.includes('{username}')) {
+            // First: Try to find matching response from reply.json
+            if (responses && Object.keys(responses).length > 0) {
+                for (const [patterns, replyArray] of this.autoReplyCache.patterns) {
+                    for (const pattern of patterns) {
+                        // Exact match বা contains চেক
+                        if (message === pattern || message.includes(pattern)) {
+                            // Send typing action
+                            await this.bot.sendChatAction(msg.chat.id, 'typing');
                             
-                            const now = new Date();
-                            const userName = this.escapeHtml(msg.from.first_name);
-                            const userUsername = msg.from.username ? `@${msg.from.username}` : userName;
+                            // Random delay (0.5 to 2 seconds)
+                            const delayTime = Math.floor(Math.random() * 1500) + 500;
+                            await new Promise(resolve => setTimeout(resolve, delayTime));
                             
-                            formattedReply = formattedReply
-                                .replace(/{time}/g, this.escapeHtml(now.toLocaleTimeString()))
-                                .replace(/{date}/g, this.escapeHtml(now.toLocaleDateString()))
-                                .replace(/{name}/g, userName)
-                                .replace(/{username}/g, userUsername);
+                            // Random reply select from array
+                            const replyOptions = Array.isArray(replyArray) ? replyArray : [replyArray];
+                            const randomReply = replyOptions[Math.floor(Math.random() * replyOptions.length)];
+                            
+                            // Format reply with placeholders
+                            let formattedReply = randomReply;
+                            if (randomReply.includes('{time}') || randomReply.includes('{date}') || 
+                                randomReply.includes('{name}') || randomReply.includes('{username}')) {
+                                
+                                const now = new Date();
+                                const userName = this.escapeHtml(msg.from.first_name);
+                                const userUsername = msg.from.username ? `@${msg.from.username}` : userName;
+                                
+                                formattedReply = formattedReply
+                                    .replace(/{time}/g, this.escapeHtml(now.toLocaleTimeString()))
+                                    .replace(/{date}/g, this.escapeHtml(now.toLocaleDateString()))
+                                    .replace(/{name}/g, userName)
+                                    .replace(/{username}/g, userUsername);
+                            }
+                            
+                            // HTML special characters escape করো
+                            formattedReply = this.escapeHtml(formattedReply);
+                            
+                            // Send reply with HTML parse mode
+                            await this.bot.sendMessage(msg.chat.id, formattedReply, {
+                                parse_mode: 'HTML',
+                                reply_to_message_id: msg.message_id,
+                                disable_web_page_preview: true
+                            });
+                            return; // ম্যাচ পেলে ফিরে যাও
                         }
-                        
-                        // HTML special characters escape করো
-                        formattedReply = this.escapeHtml(formattedReply);
-                        
-                        // Send reply with HTML parse mode
-                        await this.bot.sendMessage(msg.chat.id, formattedReply, {
-                            parse_mode: 'HTML',
-                            reply_to_message_id: msg.message_id,
-                            disable_web_page_preview: true
-                        });
-                        return;
                     }
                 }
             }
             
-            // Fallback to old AI responses if no match found
-            await this.handleAIChat(msg);
+            // Second: If no match found in reply.json or reply.json doesn't exist, use fallback responses
+            await this.handleFallbackAutoReply(msg);
             
         } catch (error) {
             console.error('Error in auto-reply:', error);
+            // Even if there's an error, try fallback
+            await this.handleFallbackAutoReply(msg);
+        }
+    }
+    
+    async handleFallbackAutoReply(msg) {
+        try {
+            const message = (msg.text || msg.caption || '').toLowerCase();
+            
+            // Fallback AI responses
+            const responses = {
+                'how are you': ["I'm doing great, thanks for asking! 😊", "Alhamdulillah, I'm good! How about you? 🌟"],
+                'what can you do': ["I can help manage groups, answer questions, play games, and much more! ✨", "I'm a multi-purpose bot! Try /help to see all features."],
+                'who created you': ["I was created by MAR-PD! 👨‍💻", "My developer is MAR-PD. You can contact him @master_spamming"],
+                'thank you': ["You're welcome! 😊", "My pleasure! 🌟", "Always happy to help! 🤗"],
+                'hello': ["Hello there! 👋", "Hi! How can I help you? 😊", "Assalamualaikum! 🤲"],
+                'assalamualaikum': ["Waalaikumussalam! 😊", "Waalaikumussalam warahmatullah! 🌟"],
+                'hi': ["Hi! 😊", "Hello! 👋", "Hey there! 🤗"],
+                'hey': ["Hey! 👋", "Hello! 😊", "Hi there! 🌟"],
+                'good morning': ["Good morning! 🌅", "Morning! ☀️", "Sabah al-khair! 🌟"],
+                'good night': ["Good night! 🌙", "Sweet dreams! 💭", "Sleep well! 😴"],
+                'bot': ["Yes, I'm a bot! 🤖", "That's me! 👋", "How can I help you? 😊"],
+                'mar-pd': ["That's my creator! 👨‍💻", "MAR-PD created me! 💻", "Contact my developer @master_spamming"]
+            };
+            
+            for (const [pattern, replyOptions] of Object.entries(responses)) {
+                if (message.includes(pattern)) {
+                    const reply = replyOptions[Math.floor(Math.random() * replyOptions.length)];
+                    
+                    await this.bot.sendChatAction(msg.chat.id, 'typing');
+                    await new Promise(resolve => setTimeout(resolve, 800));
+                    
+                    await this.bot.sendMessage(msg.chat.id, this.escapeHtml(reply), {
+                        parse_mode: 'HTML',
+                        reply_to_message_id: msg.message_id
+                    });
+                    return;
+                }
+            }
+            
+        } catch (error) {
+            console.error('Error in fallback auto-reply:', error);
         }
     }
     
