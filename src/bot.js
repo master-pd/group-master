@@ -477,8 +477,11 @@ class GroupMasterBot {
                             }
                             
                             // HTML special characters escape করো
-                            formattedReply = this.escapeHtml(formattedReply);
-                            
+                            //formattedReply = this.escapeHtml(formattedReply);
+                            formattedReply = formattedReply.replace(
+                               "{name}",
+                             this.escapeHtml(userName)
+                             );
                             // Send reply with HTML parse mode
                             await this.bot.sendMessage(msg.chat.id, formattedReply, {
                                 parse_mode: 'HTML',
