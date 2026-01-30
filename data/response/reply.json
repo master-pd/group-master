@@ -1,164 +1,1732 @@
 {
-  "hi|hello|hey|assalamualaikum|hy": [
+  "hi|hello|hey|assalamualaikum|hy|হাই|হ্যালো|আসসালামুআলাইকুম": [
     "<b>Hello!</b> 🤗",
     "<i>Hi there!</i> 👋", 
     "<b>Assalamualaikum!</b> 😊",
     "Hey! <b>How can I help you?</b> 🌟",
-    "<u>Waalaikumussalam!</u> 🤲"
+    "<u>Waalaikumussalam!</u> 🤲",
+    "👋 <b>Hi! Nice to see you!</b>",
+    "😊 <b>Salam! Hope you're doing well!</b>",
+    "🌟 <b>Hello dear! What's up?</b>"
   ],
   
-  "how are you|how r u|কেমন আছ|কেমন আছেন|how are u": [
+  "how are you|how r u|কেমন আছ|কেমন আছেন|how are u|কেমন আছো|কেমন যাচ্ছে|কেমন চলছে": [
     "I'm doing great, <b>thanks for asking!</b> 😊",
     "<b>Alhamdulillah</b>, I'm good! <i>How about you?</i> 🌟",
     "I'm fine, thank you! 😄",
-    "Allhamdulillah, <b>I'm well!</b> 😊"
+    "Allhamdulillah, <b>I'm well!</b> 😊",
+    "✨ <b>I'm perfect!</b> Thanks for caring!",
+    "🤖 <b>Bot life is good!</b> How are you doing?",
+    "😇 <b>Alhamdulillah always good!</b>",
+    "<i>All praise to Allah,</i> I'm excellent! 🌈"
   ],
   
-  "what is your name|your name|তোমার নাম কি|নাম কি": [
+  "what is your name|your name|তোমার নাম কি|নাম কি|whats your name|তোমার নাম|who are you": [
     "I'm <b>Group Master Pro Bot</b>! 🤖",
     "My name is <code>Group Master Pro Bot</code>! ✨",
     "I'm a bot created by <b>MAR-PD</b>! 👨‍💻",
-    "Call me <i>Group Master</i>! 😄"
+    "Call me <i>Group Master</i>! 😄",
+    "🤖 <b>I'm Group Master Pro</b>, your smart assistant!",
+    "✨ <b>Name's Group Master!</b> At your service!",
+    "👑 <b>Group Master Pro Bot</b> reporting for duty!",
+    "<i>I'm the Group Master,</i> here to help! 🌟"
   ],
   
-  "who created you|তোমাকে কে বানাইছে|তোমার মালিক কে|তোমার ডেভেলপার কে": [
+  "who created you|তোমাকে কে বানাইছে|তোমার মালিক কে|তোমার ডেভেলপার কে|who made you|তোমার ক্রিয়েটর কে": [
     "I was created by <b>MAR-PD</b>! 👨‍💻",
     "My developer is <b>MAR-PD</b>. You can contact him @master_spamming",
     "<u>MAR-PD</u> created me! 😊",
-    "I'm developed by <code>MAR-PD</code>! 💻"
+    "I'm developed by <code>MAR-PD</code>! 💻",
+    "👨‍💻 <b>MAR-PD</b> is my creator! He's awesome!",
+    "🌟 <b>All credits to MAR-PD</b> @master_spamming",
+    "💻 <b>Developed by MAR-PD,</b> maintained with love!",
+    "<i>MAR-PD</i> <b>built me from scratch!</b> ✨"
   ],
   
-  "thank you|thanks|ধন্যবাদ|thankyou|thnx": [
+  "thank you|thanks|ধন্যবাদ|thankyou|thnx|thanx|thank u|থ্যাংকস": [
     "You're <b>welcome!</b> 😊",
     "My <i>pleasure!</i> 🌟",
     "Always <b>happy to help!</b> 🤗",
     "No <b>problem!</b> 😄",
-    "Any <i>time!</i> 😊"
+    "Any <i>time!</i> 😊",
+    "🤗 <b>Don't mention it!</b>",
+    "😇 <b>Happy to serve you!</b>",
+    "🌟 <b>Anytime for you!</b>"
   ],
   
-  "good morning|সুপ্রভাত|goodmorning|gm": [
+  "good morning|সুপ্রভাত|goodmorning|gm|গুড মর্নিং|সকাল": [
     "<b>Good morning!</b> 🌅",
     "Morning! ☀️",
     "<i>Sabah al-khair!</i> 🌟",
-    "Good morning! <b>Have a great day!</b> 😊"
+    "Good morning! <b>Have a great day!</b> 😊",
+    "🌅 <b>Subah Bakhair!</b> May Allah bless your day!",
+    "☀️ <b>Good morning sunshine!</b>",
+    "✨ <b>Morning vibes!</b> Start your day with smile!",
+    "<i>ফজরের নামাজ পড়েছেন তো?</i> 🌙"
   ],
   
-  "good night|শুভ রাত্রি|goodnight|gn": [
+  "good night|শুভ রাত্রি|goodnight|gn|গুড নাইট|রাত|শুভ রাত্রি": [
     "<b>Good night!</b> 🌙",
     "<i>Sweet dreams!</i> 💭",
     "Sleep <b>well!</b> 😴",
-    "Good night! <i>Take rest!</i> 🌙"
+    "Good night! <i>Take rest!</i> 🌙",
+    "🌙 <b>Shuvo ratri!</b> Allah Hafez!",
+    "😴 <b>Sleep tight!</b> Don't let bugs bite!",
+    "💫 <b>Good night!</b> See you tomorrow InshaAllah!",
+    "<i>ইশার নামাজ পড়ে ঘুমাতে যাবেন!</i> 🤲"
   ],
   
-  "bot|বট|robot": [
+  "bot|বট|robot|roboto|বোট": [
     "Yes, I'm a <b>bot!</b> 🤖",
     "That's <b>me!</b> 👋",
     "How can I <b>help you?</b> 😊",
-    "I'm here to <i>assist you!</i> 🤖"
+    "I'm here to <i>assist you!</i> 🤖",
+    "🤖 <b>Beep boop!</b> Yes I'm a bot!",
+    "✨ <b>AI powered bot</b> at your service!",
+    "😎 <b>Smart bot</b> reporting for duty!",
+    "<i>100% bot,</i> <b>0% human!</b> 🦾"
   ],
   
-  "help|সাহায্য|help me": [
+  "help|সাহায্য|help me|হেল্প|হেল্প মি|সহায়তা": [
     "Need help? Use <code>/help</code> command! 📚",
     "Type <code>/help</code> for all available commands! 🆘",
-    "Use <code>/help</code> to see all features! 😊"
+    "Use <code>/help</code> to see all features! 😊",
+    "🆘 <b>Type /help</b> for detailed assistance!",
+    "📖 <b>Command list:</b> <code>/help</code>",
+    "❓ <b>Need help?</b> Just say <code>/help</code>",
+    "✨ <b>All features available</b> in /help menu!"
   ],
   
-  "time|সময় কত|what time|টাইম": [
+  "time|সময় কত|what time|টাইম|সময়|সময়টা কত|time koto": [
     "<b>Current time is:</b> {time} ⏰",
     "It's <code>{time}</code> now! 🕒",
-    "<u>Time:</u> {time} ⏱️"
+    "<u>Time:</u> {time} ⏱️",
+    "⏰ <b>Time check:</b> {time}",
+    "🕐 <code>{time}</code> এই মুহূর্তের সময়!",
+    "📅 <b>সময়:</b> <code>{time}</code>",
+    "⌚ <i>It's {time} right now!</i>"
   ],
   
-  "date|তারিখ|today date|দিন": [
+  "date|তারিখ|today date|দিন|date koto|আজকের তারিখ": [
     "<b>Today's date is:</b> {date} 📅",
     "<code>Date:</code> {date} 📆",
-    "It's <i>{date}</i> today! 📅"
+    "It's <i>{date}</i> today! 📅",
+    "📅 <b>আজকের তারিখ:</b> {date}",
+    "🗓️ <code>{date}</code> today's date!",
+    "📆 <b>Date:</b> <i>{date}</i>",
+    "✨ <b>Today is</b> {date}"
   ],
   
-  "what can you do|তুমি কি করতে পারো|তোমার কাজ কি": [
+  "what can you do|তুমি কি করতে পারো|তোমার কাজ কি|তোমার ability|তোমার সামর্থ্য": [
     "I can <b>manage groups</b>, auto-reply, moderation, games and more! ✨",
     "I'm a <b>multi-purpose bot!</b> Try <code>/help</code> to see all features. 🤖",
-    "I help with <i>group management</i>, fun games, and answering questions! 😊"
+    "I help with <i>group management</i>, fun games, and answering questions! 😊",
+    "🚀 <b>Features:</b> Moderation, Auto-reply, Games, AI Chat, Utilities!",
+    "🌟 <b>I can:</b> Welcome users, Filter content, Play games, Chat, Manage groups!",
+    "🎯 <b>Capabilities:</b> Everything from A to Z for group management!",
+    "<i>Just ask</i> <b>or try /help!</b>"
   ],
   
-  "love you|ভালোবাসি|i love you": [
+  "love you|ভালোবাসি|i love you|লাভ ইউ|আই লাভ ইউ": [
     "Aww, <b>thank you!</b> 😊",
     "You're so <i>sweet!</i> ❤️",
-    "That's <b>nice of you!</b> 😊"
+    "That's <b>nice of you!</b> 😊",
+    "❤️ <b>Love you too!</b> (in a friendly way!)",
+    "😳 <b>Blushing!</b> Thank you!",
+    "✨ <b>You're amazing too!</b>",
+    "<i>I appreciate that!</i> 🌟"
   ],
   
-  "haha|lol|funny|হাহা|হাসি": [
+  "haha|lol|funny|হাহা|হাসি|লোল|হাসতো|মজা": [
     "😂😂",
     "😄",
     "<b>Haha!</b> 😊",
-    "Glad you're <i>having fun!</i> 😄"
+    "Glad you're <i>having fun!</i> 😄",
+    "🤣 <b>LOL!</b>",
+    "😆 <b>That's hilarious!</b>",
+    "🎭 <b>Funny indeed!</b>",
+    "<i>Keep laughing!</i> 😂"
   ],
   
-  "ok|okay|ঠিক আছে|okayy": [
+  "ok|okay|ঠিক আছে|okayy|ওকে|ওকেই|ঠিক|okey": [
     "Okay! 👌",
     "Alright! 😊",
-    "Got it! 👍"
+    "Got it! 👍",
+    "✅ <b>Okay dokey!</b>",
+    "👌 <b>All right!</b>",
+    "✓ <b>Understood!</b>",
+    "🆗 <b>OK!</b>"
   ],
   
-  "bye|goodbye|বিদায়|see you": [
+  "bye|goodbye|বিদায়|see you|বাই|গুড বাই|see ya": [
     "<b>Goodbye!</b> 👋",
     "See you <i>later!</i> 😊",
     "Take <b>care!</b> 🤗",
-    "Bye! <b>Have a great day!</b> 🌟"
+    "Bye! <b>Have a great day!</b> 🌟",
+    "👋 <b>Allah Hafez!</b>",
+    "✨ <b>See you soon!</b> InshaAllah!",
+    "😊 <b>Take care buddy!</b>",
+    "<i>ফিরে আসবেন!</i> 🤗"
   ],
   
-  "mar-pd|mar pd|developer|ডেভেলপার": [
+  "mar-pd|mar pd|developer|ডেভেলপার|creator|মারপিডি": [
     "That's my <b>creator!</b> 👨‍💻",
     "<b>MAR-PD</b> created me! 💻",
     "Contact my developer <code>@master_spamming</code>",
-    "My developer is <code>MAR-PD</code>! 😊"
+    "My developer is <code>MAR-PD</code>! 😊",
+    "👨‍💻 <b>MAR-PD</b> - The genius behind me!",
+    "🌟 <b>All credits to</b> @master_spamming",
+    "💻 <b>Developed with love by MAR-PD!</b>",
+    "<i>Master Spamming</i> is my <b>dad!</b> 😄"
   ],
   
-  "master spamming|মাস্টার স্প্যামিং": [
+  "master spamming|মাস্টার স্প্যামিং|মাস্টারস্প্যামিং|master_spamming": [
     "That's my <b>developer!</b> @master_spamming 👨‍💻",
     "You can contact my developer <code>@master_spamming</code>",
-    "<i>Master Spamming</i> is my <b>creator!</b> 😊"
+    "<i>Master Spamming</i> is my <b>creator!</b> 😊",
+    "👑 <b>That's my boss!</b> @master_spamming",
+    "🌟 <b>Contact him:</b> Telegram @master_spamming",
+    "💬 <b>For support:</b> Message @master_spamming",
+    "✨ <b>He handles everything!</b>"
   ],
   
-  "test|টেস্ট": [
+  "test|টেস্ট|check|চেক|পরীক্ষা": [
     "<b>Test successful!</b> ✅",
     "I'm working <i>perfectly!</i> 😊",
-    "Bot is <b>online and ready!</b> 🤖"
+    "Bot is <b>online and ready!</b> 🤖",
+    "✅ <b>All systems go!</b>",
+    "🤖 <b>Bot status:</b> Operational!",
+    "🔧 <b>Everything's working!</b>",
+    "✨ <b>Test passed with flying colors!</b>"
   ],
   
-  "ping|পিং": [
+  "ping|পিং|pong|পং|pang": [
     "<b>Pong!</b> 🏓",
     "I'm <b>alive!</b> 😊",
-    "Bot is <b>active!</b> ✅"
+    "Bot is <b>active!</b> ✅",
+    "🏓 <b>Ping received!</b> Pong sent!",
+    "⚡ <b>Latency:</b> Ultra low!",
+    "🤖 <b>Still breathing!</b>",
+    "💫 <b>Alive and kicking!</b>"
   ],
   
-  "welcome|স্বাগতম": [
+  "welcome|স্বাগতম|shagotom|wlc": [
     "Thank you! 😊",
     "<b>Welcome to you too!</b> 🤗",
-    "<b>Shagotom!</b> 😄"
+    "<b>Shagotom!</b> 😄",
+    "🤗 <b>Apnakeo shagotom!</b>",
+    "🎉 <b>Welcome back!</b>",
+    "✨ <b>Thanks for the welcome!</b>",
+    "<i>You're welcome too!</i> 😊"
   ],
   
-  "nice|সুন্দর|awesome|অসাধারণ": [
+  "nice|সুন্দর|awesome|অসাধারণ|খুব সুন্দর|beautiful|wow": [
     "Thank you! 😊",
     "Glad you <b>liked it!</b> 🌟",
-    "You're too <i>kind!</i> 😄"
+    "You're too <i>kind!</i> 😄",
+    "🌟 <b>Thanks for the compliment!</b>",
+    "😊 <b>You're making me blush!</b>",
+    "✨ <b>Appreciate that!</b>",
+    "<i>You're nice too!</i> 🤗"
   ],
   
-  "what|কি|what?": [
+  "what|কি|what?|কি বললে|কি বললেন|কি বলছ": [
     "Yes? 😊",
     "How can I <b>help?</b> 🤔",
-    "What can I <i>do for you?</i> 😄"
+    "What can I <i>do for you?</i> 😄",
+    "🤔 <b>Did you say something?</b>",
+    "❓ <b>কি বললেন?</b>",
+    "😊 <b>Say that again please!</b>",
+    "<i>I'm listening!</i> 👂"
   ],
   
-  "hi {name}|hello {name}": [
+  "hi {name}|hello {name}|hey {name}|assalamualaikum {name}": [
     "Hello <b>{name}!</b> 👋",
     "Hi there <b>{name}!</b> 😊",
-    "Assalamualaikum <b>{name}!</b> 🤲"
+    "Assalamualaikum <b>{name}!</b> 🤲",
+    "👋 <b>Hey {name}!</b> What's up?",
+    "😊 <b>Waalaikumussalam {name}!</b>",
+    "🌟 <b>Nice to see you {name}!</b>",
+    "<i>How's it going {name}?</i> ✨"
   ],
   
-  "help {name}|help me {name}": [
+  "help {name}|help me {name}|সাহায্য করো {name}": [
     "Sure <b>{name}!</b> How can I help? 😊",
     "I'm here for you <b>{name}!</b> 🌟",
-    "What do you need <b>{name}?</b> 🤔"
+    "What do you need <b>{name}?</b> 🤔",
+    "🆘 <b>Tell me {name},</b> what's the problem?",
+    "🤗 <b>Don't worry {name},</b> I'll help!",
+    "✨ <b>{name},</b> at your service!",
+    "<i>How can I assist you {name}?</i> 😊"
+  ],
+  
+  "photo|picture|ছবি|ফটো|তসবির": [
+    "📸 <b>Nice photo!</b>",
+    "🖼️ <b>Great picture!</b>",
+    "🌟 <b>Awesome shot!</b>",
+    "😍 <b>Beautiful photo!</b>",
+    "✨ <b>Photo received!</b> Looking good!",
+    "👌 <b>Quality picture!</b>",
+    "<i>Thanks for sharing!</i> 📷"
+  ],
+  
+  "video|ভিডিও|ভিডিওটা|video ta": [
+    "🎥 <b>Great video!</b>",
+    "📹 <b>Awesome footage!</b>",
+    "🌟 <b>Nice video clip!</b>",
+    "✨ <b>Video received successfully!</b>",
+    "👏 <b>Well recorded!</b>",
+    "😊 <b>Thanks for the video!</b>",
+    "<i>Playing in my mind!</i> 🎬"
+  ],
+  
+  "sticker|স্টিকার|stiker|স্টিকারটা": [
+    "🖼️ <b>Nice sticker!</b>",
+    "😄 <b>Cute sticker!</b>",
+    "✨ <b>Great sticker choice!</b>",
+    "🌟 <b>Love this sticker!</b>",
+    "👍 <b>Sticker game strong!</b>",
+    "😊 <b>Awesome sticker!</b>",
+    "<i>Sticker speaks louder than words!</i> 💬"
+  ],
+  
+  "document|file|ডকুমেন্ট|ফাইল|ফাইলটা": [
+    "📄 <b>Document received!</b>",
+    "📁 <b>File saved!</b>",
+    "✨ <b>Thanks for the document!</b>",
+    "💾 <b>File downloaded successfully!</b>",
+    "📎 <b>Attachment received!</b>",
+    "👍 <b>Document looks good!</b>",
+    "<i>Important file noted!</i> 📊"
+  ],
+  
+  "voice|ভয়েস|voice note|ভয়েস নোট": [
+    "🎤 <b>Voice message received!</b>",
+    "👂 <b>Listening...</b>",
+    "✨ <b>Nice voice note!</b>",
+    "🗣️ <b>Voice recorded perfectly!</b>",
+    "🌟 <b>Clear audio!</b>",
+    "😊 <b>Thanks for the voice message!</b>",
+    "<i>Heard loud and clear!</i> 🔈"
+  ],
+  
+  "music|song|গান|music gan|গানটা": [
+    "🎵 <b>Nice music taste!</b>",
+    "🎶 <b>Great song!</b>",
+    "✨ <b>Music to my ears!</b>",
+    "🎧 <b>Awesome track!</b>",
+    "🌟 <b>Love this melody!</b>",
+    "😊 <b>Thanks for sharing the music!</b>",
+    "<i>Feeling the rhythm!</i> 🎼"
+  ],
+  
+  "game|খেলা|গেম|game khela|খেলবো": [
+    "🎮 <b>Let's play!</b>",
+    "🕹️ <b>Game time!</b>",
+    "✨ <b>Ready to play?</b> Use /games!",
+    "🎯 <b>Challenge accepted!</b>",
+    "🌟 <b>Gaming mode activated!</b>",
+    "😄 <b>I love games too!</b>",
+    "<i>What game shall we play?</i> 🎪"
+  ],
+  
+  "weather|আবহাওয়া|weather kemon|আবহাওয়া কেমন": [
+    "🌤️ <b>Check weather outside!</b>",
+    "☀️ <b>Looks sunny from here!</b>",
+    "🌧️ <b>Might rain today!</b>",
+    "🌡️ <b>Temperature seems normal!</b>",
+    "🌈 <b>Weather is beautiful today!</b>",
+    "😊 <b>Perfect weather for chatting!</b>",
+    "<i>Allah controls the weather!</i> 🤲"
+  ],
+  
+  "islam|ইসলাম|islamic|ইসলামিক": [
+    "🕌 <b>Islam is the way of life!</b>",
+    "☪️ <b>Peace be upon you!</b>",
+    "🤲 <b>Alhamdulillah for Islam!</b>",
+    "📿 <b>Islam teaches peace and love!</b>",
+    "🌟 <b>Beautiful religion!</b>",
+    "😊 <b>Proud to be Muslim!</b>",
+    "<i>Quran is our guidance!</i> 📖"
+  ],
+  
+  "allah|আল্লাহ|allah taala|আল্লাহ তায়ালা": [
+    "🕋 <b>Allah is the Greatest!</b>",
+    "🤲 <b>SubhanAllah!</b>",
+    "🌟 <b>Allah is Merciful!</b>",
+    "✨ <b>All praise to Allah!</b>",
+    "😇 <b>Allah is always with us!</b>",
+    "🙏 <b>Trust in Allah!</b>",
+    "<i>La ilaha illallah!</i> ☪️"
+  ],
+  
+  "quran|কুরআন|koran|কোরআন": [
+    "📖 <b>Quran is the ultimate guide!</b>",
+    "🌟 <b>Read Quran daily!</b>",
+    "✨ <b>Quran heals hearts!</b>",
+    "🤲 <b>Quran is light!</b>",
+    "😇 <b>Blessings in every letter!</b>",
+    "🕌 <b>Quran for life!</b>",
+    "<i>Word of Allah!</i> 📿"
+  ],
+  
+  "bangladesh|বাংলাদেশ|bd|bangla|বাংলা": [
+    "🇧🇩 <b>Bangladesh - Land of rivers!</b>",
+    "🌾 <b>Proud to be Bangladeshi!</b>",
+    "✨ <b>Sonar Bangla!</b>",
+    "🌟 <b>Love my country!</b>",
+    "😊 <b>Bangladesh is beautiful!</b>",
+    "🕌 <b>From the land of mosques!</b>",
+    "<i>জয় বাংলা!</i> 🇧🇩"
+  ],
+  
+  "india|ভারত|indian|ভারতীয়": [
+    "🇮🇳 <b>Namaste from India!</b>",
+    "✨ <b>Incredible India!</b>",
+    "🌟 <b>Great neighbor country!</b>",
+    "😊 <b>Respect to all Indians!</b>",
+    "🕌 <b>Land of diversity!</b>",
+    "🌈 <b>Cultural richness!</b>",
+    "<i>Peace to all!</i> 🤝"
+  ],
+  
+  "group|গ্রুপ|group chat|গ্রুপ চ্যাট": [
+    "👥 <b>Group management is my specialty!</b>",
+    "✨ <b>I love managing groups!</b>",
+    "🌟 <b>Groups are fun with me!</b>",
+    "😊 <b>Best bot for groups!</b>",
+    "🛡️ <b>I protect groups!</b>",
+    "🎪 <b>Group activities are awesome!</b>",
+    "<i>Add me to your group!</i> 🤖"
+  ],
+  
+  "admin|অ্যাডমিন|administrator|প্রশাসক": [
+    "👑 <b>Admins are important!</b>",
+    "✨ <b>Respect to all admins!</b>",
+    "🌟 <b>Admin power responsibly!</b>",
+    "😊 <b>Admins keep order!</b>",
+    "🛡️ <b>Admin duties are heavy!</b>",
+    "👍 <b>Good admins make good groups!</b>",
+    "<i>Use power wisely!</i> ⚖️"
+  ],
+  
+  "rules|rule|নিয়ম|rules kon|নিয়মগুলো": [
+    "📜 <b>Rules are important!</b>",
+    "✨ <b>Follow group rules!</b>",
+    "🌟 <b>Rules maintain harmony!</b>",
+    "😊 <b>Respect the rules!</b>",
+    "⚖️ <b>Rules = Order!</b>",
+    "🛡️ <b>No rules, no discipline!</b>",
+    "<i>Use /rules command!</i> 📋"
+  ],
+  
+  "report|রিপোর্ট|complaint|report korbo": [
+    "⚠️ <b>Report to admins!</b>",
+    "✨ <b>Use /report command!</b>",
+    "🌟 <b>Report responsibly!</b>",
+    "😊 <b>Admins will investigate!</b>",
+    "🛡️ <b>Keep group safe!</b>",
+    "👍 <b>Report bad behavior!</b>",
+    "<i>Provide evidence!</i> 📸"
+  ],
+  
+  "setting|settings|সেটিংস|সেটিং": [
+    "⚙️ <b>Customize your experience!</b>",
+    "✨ <b>Use /settings command!</b>",
+    "🌟 <b>Adjust to your needs!</b>",
+    "😊 <b>Personalize the bot!</b>",
+    "🔧 <b>Tweak the settings!</b>",
+    "🎛️ <b>Control panel available!</b>",
+    "<i>Make it yours!</i> 💫"
+  ],
+  
+  "joke|জোক|funny joke|মজার জোক": [
+    "😂 <b>Why don't programmers like nature?</b>\nIt has too many bugs! 🐛",
+    "😄 <b>Why do Java developers wear glasses?</b>\nBecause they can't C#! 👓",
+    "🤣 <b>How many programmers to change a light bulb?</b>\nNone, that's a hardware problem! 💡",
+    "🎭 <b>Want more jokes?</b> Use /joke command!",
+    "✨ <b>I know lots of jokes!</b>",
+    "😊 <b>Let me tell you a joke!</b>",
+    "<i>Coming up with punchlines!</i> 🎪"
+  ],
+  
+  "quote|উক্তি|motivation|motivational quote": [
+    "💬 <b>Quote:</b> \"The best charity is that given in Ramadan.\"\n- Prophet Muhammad (ﷺ) 🌙",
+    "🌟 <b>Wisdom:</b> \"Patience is a pillar of faith.\"\n- Umar ibn al-Khattab 🕌",
+    "✨ <b>Inspiration:</b> \"The ink of the scholar is more sacred than the blood of the martyr.\"\n- Prophet Muhammad (ﷺ) 📚",
+    "📜 <b>More quotes?</b> Use /quote command!",
+    "😊 <b>I have many quotes!</b>",
+    "🤲 <b>Islamic quotes are the best!</b>",
+    "<i>Words of wisdom!</i> 💎"
+  ],
+  
+  "birthday|জন্মদিন|happy birthday|janmodin": [
+    "🎂 <b>Happy Birthday!</b>",
+    "🎉 <b>Many happy returns!</b>",
+    "✨ <b>Birthday wishes!</b>",
+    "🌟 <b>Celebrate your day!</b>",
+    "🥳 <b>Party time!</b>",
+    "🎈 <b>Enjoy your special day!</b>",
+    "<i>May Allah bless you!</i> 🤲"
+  ],
+  
+  "miss you|মিস করি|miss you too|মিস করছি": [
+    "😔 <b>I miss you too!</b>",
+    "❤️ <b>You're missed!</b>",
+    "✨ <b>Good to hear from you!</b>",
+    "🌟 <b>I was thinking about you!</b>",
+    "🤗 <b>Hugs!</b>",
+    "😊 <b>You're always in my thoughts!</b>",
+    "<i>Virtual hug!</i> 🫂"
+  ],
+  
+  "sorry|sorry|দুঃখিত|দুঃখিত|sori": [
+    "🤗 <b>It's okay!</b>",
+    "😊 <b>No problem!</b>",
+    "✨ <b>Forgiven!</b>",
+    "🌟 <b>Don't worry about it!</b>",
+    "🕊️ <b>Peace!</b>",
+    "👍 <b>All good!</b>",
+    "<i>We all make mistakes!</i> 💫"
+  ],
+  
+  "congratulations|congrats|অভিনন্দন|congratulation": [
+    "🎉 <b>Congratulations!</b>",
+    "🏆 <b>Well done!</b>",
+    "✨ <b>Proud of you!</b>",
+    "🌟 <b>Great achievement!</b>",
+    "👏 <b>Bravo!</b>",
+    "🥇 <b>You deserve it!</b>",
+    "<i>MashaAllah!</i> 🤲"
+  ],
+  
+  "good|ভাল|খুব ভাল|খাল ভাল|ভালো": [
+    "👍 <b>Good to hear!</b>",
+    "😊 <b>That's great!</b>",
+    "✨ <b>Excellent!</b>",
+    "🌟 <b>Awesome!</b>",
+    "✅ <b>Perfect!</b>",
+    "🎯 <b>On point!</b>",
+    "<i>Keep it up!</i> 💪"
+  ],
+  
+  "bad|খারাপ|ভাল না|bad news|খারাপ খবর": [
+    "😔 <b>Sorry to hear that!</b>",
+    "🤗 <b>It will get better!</b>",
+    "✨ <b>This too shall pass!</b>",
+    "🌟 <b>Be strong!</b>",
+    "🕊️ <b>Have patience!</b>",
+    "🙏 <b>Pray to Allah!</b>",
+    "<i>Everything happens for a reason!</i> 💫"
+  ],
+  
+  "yes|হ্যাঁ|yes yes|হ্যা|yep": [
+    "✅ <b>Yes!</b>",
+    "👍 <b>Absolutely!</b>",
+    "😊 <b>Correct!</b>",
+    "✨ <b>Indeed!</b>",
+    "🌟 <b>Right!</b>",
+    "🎯 <b>Exactly!</b>",
+    "<i>Affirmative!</i> ✔️"
+  ],
+  
+  "no|না|no no|না না|nope": [
+    "❌ <b>No!</b>",
+    "👎 <b>Negative!</b>",
+    "😊 <b>Not really!</b>",
+    "✨ <b>I disagree!</b>",
+    "🌟 <b>That's wrong!</b>",
+    "🚫 <b>Incorrect!</b>",
+    "<i>I don't think so!</i> 🤔"
+  ],
+  
+  "maybe|হয়তো|may be|হতে পারে|হলেও হতে পারে": [
+    "🤔 <b>Maybe!</b>",
+    "✨ <b>Could be!</b>",
+    "🌟 <b>Possibly!</b>",
+    "😊 <b>Perhaps!</b>",
+    "🌀 <b>Not sure!</b>",
+    "❓ <b>Might be!</b>",
+    "<i>Let's see!</i> 👀"
+  ],
+  
+  "why|কেন|why?|why why|কেন কেন": [
+    "🤔 <b>Good question!</b>",
+    "✨ <b>Let me think!</b>",
+    "🌟 <b>Interesting why!</b>",
+    "😊 <b>Why indeed!</b>",
+    "🌀 <b>Deep question!</b>",
+    "💭 <b>Philosophical!</b>",
+    "<i>Because!</i> 😄"
+  ],
+  
+  "how|কিভাবে|how to|কেমন করে|হাউ": [
+    "🔧 <b>Let me explain!</b>",
+    "✨ <b>I'll show you how!</b>",
+    "🌟 <b>Step by step!</b>",
+    "😊 <b>Easy process!</b>",
+    "📖 <b>Here's how!</b>",
+    "🎯 <b>Follow these steps!</b>",
+    "<i>It's simple!</i> 💫"
+  ],
+  
+  "where|কোথায়|where is|কোথায় আছে|ওয়্যার": [
+    "🗺️ <b>Let me locate!</b>",
+    "✨ <b>Searching...</b>",
+    "🌟 <b>Finding location!</b>",
+    "😊 <b>It should be here!</b>",
+    "📍 <b>Somewhere around!</b>",
+    "🔍 <b>Looking for it!</b>",
+    "<i>Not sure where!</i> 🤷"
+  ],
+  
+  "when|কখন|when will|কখন হবে|ওয়েন": [
+    "⏰ <b>Soon!</b>",
+    "✨ <b>In the future!</b>",
+    "🌟 <b>At the right time!</b>",
+    "😊 <b>When it's meant to be!</b>",
+    "📅 <b>Schedule pending!</b>",
+    "🌀 <b>Time will tell!</b>",
+    "<i>Allah knows best!</i> 🤲"
+  ],
+  
+  "who|কে|who is|কে সেই|হু": [
+    "👤 <b>Who indeed!</b>",
+    "✨ <b>Let's find out!</b>",
+    "🌟 <b>Identity mystery!</b>",
+    "😊 <b>Who could it be!</b>",
+    "🕵️ <b>Investigating!</b>",
+    "❓ <b>Who are you asking about?</b>",
+    "<i>Tell me more!</i> 💬"
+  ],
+  
+  "food|খাবার|food khabo|খাবেন|খাই": [
+    "🍕 <b>Food time!</b>",
+    "✨ <b>Yummy!</b>",
+    "🌟 <b>Delicious!</b>",
+    "😋 <b>I'm hungry too!</b>",
+    "🍔 <b>Burger anyone?</b>",
+    "🍜 <b>Bon appétit!</b>",
+    "<i>Eat halal food!</i> 🕌"
+  ],
+  
+  "water|পানি|water pani|জল|পানি খাবেন": [
+    "💧 <b>Drink water!</b>",
+    "✨ <b>Stay hydrated!</b>",
+    "🌟 <b>Water is life!</b>",
+    "😊 <b>8 glasses a day!</b>",
+    "🚰 <b>Pure water is best!</b>",
+    "💦 <b>Hydration important!</b>",
+    "<i>Health tip!</i> 🏥"
+  ],
+  
+  "sleep|ঘুম|sleep ghum|ঘুমাবেন|ঘুমাই": [
+    "😴 <b>Sleep well!</b>",
+    "✨ <b>Good night!</b>",
+    "🌟 <b>Rest is important!</b>",
+    "🌙 <b>Sweet dreams!</b>",
+    "🛏️ <b>Time to sleep!</b>",
+    "💤 <b>Zzz...</b>",
+    "<i>Early to bed, early to rise!</i> ⏰"
+  ],
+  
+  "work|কাজ|work kaj|কাজ করবেন|কাজ করি": [
+    "💼 <b>Work hard!</b>",
+    "✨ <b>Productivity time!</b>",
+    "🌟 <b>Focus on work!</b>",
+    "😊 <b>Good luck with work!</b>",
+    "📊 <b>Professional mode!</b>",
+    "🎯 <b>Get things done!</b>",
+    "<i>Work is worship!</i> 🕌"
+  ],
+  
+  "study|পড়াশুনা|study pora|পড়বেন|পড়ি": [
+    "📚 <b>Study hard!</b>",
+    "✨ <b>Knowledge is power!</b>",
+    "🌟 <b>Focus on studies!</b>",
+    "😊 <b>Good grades coming!</b>",
+    "🎓 <b>Education first!</b>",
+    "✏️ <b>Learn something new!</b>",
+    "<i>Seek knowledge!</i> 🤲"
+  ],
+  
+  "money|টাকা|money taka|পয়সা|টাকা আছে": [
+    "💰 <b>Money matters!</b>",
+    "✨ <b>Financial wisdom!</b>",
+    "🌟 <b>Earn halal money!</b>",
+    "😊 <b>Save for future!</b>",
+    "💸 <b>Spend wisely!</b>",
+    "🏦 <b>Bank balance!</b>",
+    "<i>Allah is the Provider!</i> 🤲"
+  ],
+  
+  "problem|সমস্যা|problem somossa|ট্রাবল|সমস্যা আছে": [
+    "⚠️ <b>What's the problem?</b>",
+    "✨ <b>I can help!</b>",
+    "🌟 <b>Tell me everything!</b>",
+    "😊 <b>Don't worry!</b>",
+    "🛠️ <b>Solution coming!</b>",
+    "🤗 <b>I'm here for you!</b>",
+    "<i>Problems are temporary!</i> 💫"
+  ],
+  
+  "solution|সমাধান|solution shomadhan|সল্যুশন|উপায়": [
+    "✅ <b>Solution found!</b>",
+    "✨ <b>Problem solved!</b>",
+    "🌟 <b>Here's the way!</b>",
+    "😊 <b>Easy fix!</b>",
+    "🔧 <b>Technical solution!</b>",
+    "🎯 <b>Target achieved!</b>",
+    "<i>All problems have solutions!</i> 💡"
+  ],
+  
+  "friend|বন্ধু|friend bondhu|ফ্রেন্ড|সাথী": [
+    "🤝 <b>Friends are precious!</b>",
+    "✨ <b>Good friends matter!</b>",
+    "🌟 <b>Value your friends!</b>",
+    "😊 <b>I'm your friend too!</b>",
+    "👥 <b>Friendship goals!</b>",
+    "❤️ <b>True friends rare!</b>",
+    "<i>Choose friends wisely!</i> 💫"
+  ],
+  
+  "family|পরিবার|family poribar|ফ্যামিলি|আত্মীয়": [
+    "👨‍👩‍👧‍👦 <b>Family is everything!</b>",
+    "✨ <b>Love your family!</b>",
+    "🌟 <b>Family comes first!</b>",
+    "😊 <b>Blessed with family!</b>",
+    "🏡 <b>Home sweet home!</b>",
+    "❤️ <b>Family bonds strong!</b>",
+    "<i>Respect your parents!</i> 🤲"
+  ],
+  
+  "health|স্বাস্থ্য|health sastho|হেলথ|সুস্থ": [
+    "🏥 <b>Health is wealth!</b>",
+    "✨ <b>Stay healthy!</b>",
+    "🌟 <b>Take care of health!</b>",
+    "😊 <b>Exercise regularly!</b>",
+    "💪 <b>Fit and fine!</b>",
+    "🍎 <b>Eat healthy!</b>",
+    "<i>Prevention is better than cure!</i> 🩺"
+  ],
+  
+  "happy|খুশি|happy khushi|হ্যাপি|আনন্দিত": [
+    "😊 <b>Stay happy!</b>",
+    "✨ <b>Happiness is a choice!</b>",
+    "🌟 <b>Spread happiness!</b>",
+    "😄 <b>Joyful moments!</b>",
+    "🌈 <b>Colorful life!</b>",
+    "🎉 <b>Celebrate happiness!</b>",
+    "<i>Find joy in small things!</i> ✨"
+  ],
+  
+  "sad|দুঃখিত|sad dukkhito|দুঃখ|খারাপ লাগছে": [
+    "😔 <b>Don't be sad!</b>",
+    "✨ <b>It will pass!</b>",
+    "🌟 <b>Be strong!</b>",
+    "🤗 <b>Virtual hug!</b>",
+    "🕊️ <b>Peace to your heart!</b>",
+    "🌈 <b>After rain comes rainbow!</b>",
+    "<i>Allah tests those He loves!</i> 🤲"
+  ],
+  
+  "angry|রাগ|angry rag|গোসা|রাগী": [
+    "😠 <b>Calm down!</b>",
+    "✨ <b>Control anger!</b>",
+    "🌟 <b>Take deep breath!</b>",
+    "😌 <b>Relax!</b>",
+    "🕊️ <b>Peace!</b>",
+    "🧘 <b>Meditate!</b>",
+    "<i>Anger spoils deeds!</i> ⚠️"
+  ],
+  
+  "excited|উত্তেজিত|excited uttejito|এক্সাইটেড|উদ্দীপনা": [
+    "🎉 <b>Exciting times!</b>",
+    "✨ <b>Energy high!</b>",
+    "🌟 <b>Adventure awaits!</b>",
+    "😄 <b>Thrilling!</b>",
+    "⚡ <b>Electric vibes!</b>",
+    "🚀 <b>Blast off!</b>",
+    "<i>Enjoy the excitement!</i> 🎪"
+  ],
+  
+  "tired|ক্লান্ত|tired kolanto|টায়ার্ড|শ্রান্ত": [
+    "😫 <b>Take rest!</b>",
+    "✨ <b>You need break!</b>",
+    "🌟 <b>Relax now!</b>",
+    "😴 <b>Sleep well!</b>",
+    "🛋️ <b>Chill time!</b>",
+    "💤 <b>Energy low!</b>",
+    "<i>Rest to regain strength!</i> 💪"
+  ],
+  
+  "busy|ব্যস্ত|busy bosto|বিজি|কাজে ব্যস্ত": [
+    "⏰ <b>Busy schedule!</b>",
+    "✨ <b>Productive day!</b>",
+    "🌟 <b>Work load high!</b>",
+    "😊 <b>Managing tasks!</b>",
+    "📋 <b>To-do list long!</b>",
+    "💼 <b>Professional life!</b>",
+    "<i>Balance work and rest!</i> ⚖️"
+  ],
+  
+  "free|ফ্রি|free fri|ফ্রি সময়|খালি": [
+    "🕊️ <b>Free time!</b>",
+    "✨ <b>Leisure moments!</b>",
+    "🌟 <b>Enjoy freedom!</b>",
+    "😊 <b>Relaxation time!</b>",
+    "🎮 <b>Game time!</b>",
+    "📺 <b>Entertainment!</b>",
+    "<i>Use free time wisely!</i> 💡"
+  ],
+  
+  "hot|গরম|hot gorom|হট|উত্তপ্ত": [
+    "🔥 <b>Hot weather!</b>",
+    "✨ <b>Temperature high!</b>",
+    "🌟 <b>Stay cool!</b>",
+    "😓 <b>Sweating!</b>",
+    "🍦 <b>Ice cream time!</b>",
+    "💨 <b>Fan on!</b>",
+    "<i>Drink more water!</i> 💧"
+  ],
+  
+  "cold|ঠান্ডা|cold thanda|কোল্ড|শীতল": [
+    "❄️ <b>Cold climate!</b>",
+    "✨ <b>Temperature low!</b>",
+    "🌟 <b>Stay warm!</b>",
+    "🥶 <b>Freezing!</b>",
+    "☕ <b>Hot drink!</b>",
+    "🧥 <b>Wear sweater!</b>",
+    "<i>Bundle up!</i> 🧣"
+  ],
+  
+  "rain|বৃষ্টি|rain bristi|রেইন|বর্ষণ": [
+    "🌧️ <b>Rainy day!</b>",
+    "✨ <b>Raindrops falling!</b>",
+    "🌟 <b>Wet weather!</b>",
+    "😊 <b>Love the rain!</b>",
+    "☔ <b>Umbrella needed!</b>",
+    "🌈 <b>Rainbow after rain!</b>",
+    "<i>Allah sends rain as mercy!</i> 🤲"
+  ],
+  
+  "sunny|সান্নি|sunny day|সূর্যালোক|রোদ": [
+    "☀️ <b>Sunny day!</b>",
+    "✨ <b>Bright sunshine!</b>",
+    "🌟 <b>Perfect weather!</b>",
+    "😎 <b>Sunny vibes!</b>",
+    "🌻 <b>Flowers blooming!</b>",
+    "🕶️ <b>Sunglasses on!</b>",
+    "<i>Enjoy the sunlight!</i> 🌞"
+  ],
+  
+  "beautiful|সুন্দর|beautiful shundor|বিউটিফুল|মনোরম": [
+    "🌸 <b>Beautiful!</b>",
+    "✨ <b>Gorgeous!</b>",
+    "🌟 <b>Stunning!</b>",
+    "😍 <b>Amazing!</b>",
+    "💖 <b>Lovely!</b>",
+    "🎨 <b>Artistic!</b>",
+    "<i>Allah creates beauty!</i> 🕌"
+  ],
+  
+  "ugly|কুৎসিত|ugly kutshito|আগলি|বাজে": [
+    "👹 <b>Beauty is subjective!</b>",
+    "✨ <b>Inner beauty matters!</b>",
+    "🌟 <b>Don't judge by looks!</b>",
+    "😊 <b>Everyone is unique!</b>",
+    "❤️ <b>Character over appearance!</b>",
+    "💫 <b>Focus on good deeds!</b>",
+    "<i>Allah looks at hearts!</i> 🤲"
+  ],
+  
+  "smart|স্মার্ট|smart smart|চালাক|বুদ্ধিমান": [
+    "🧠 <b>Smart thinking!</b>",
+    "✨ <b>Intelligent!</b>",
+    "🌟 <b>Brilliant mind!</b>",
+    "😊 <b>Wise decisions!</b>",
+    "💡 <b>Bright ideas!</b>",
+    "🎯 <b>Clever!</b>",
+    "<i>Use intelligence for good!</i> 🤲"
+  ],
+  
+  "stupid|মূর্খ|stupid murkho|স্টুপিড|বোকা": [
+    "🤦 <b>We all make mistakes!</b>",
+    "✨ <b>Learn from errors!</b>",
+    "🌟 <b>Nobody's perfect!</b>",
+    "😊 <b>Improve yourself!</b>",
+    "📚 <b>Gain knowledge!</b>",
+    "💡 <b>Wisdom comes with time!</b>",
+    "<i>Seek knowledge to avoid ignorance!</i> 🕌"
+  ],
+  
+  "rich|ধনী|rich dhoni|রিচ|সমৃদ্ধ": [
+    "💰 <b>Wealthy!</b>",
+    "✨ <b>Affluent!</b>",
+    "🌟 <b>Prosperous!</b>",
+    "😊 <b>Blessed with wealth!</b>",
+    "💎 <b>Luxurious!</b>",
+    "🏰 <b>Rich lifestyle!</b>",
+    "<i>Real wealth is contentment!</i> 🤲"
+  ],
+  
+  "poor|গরিব|poor gorib|পুওর|দরিদ্র": [
+    "😔 <b>Less fortunate!</b>",
+    "✨ <b>Help the poor!</b>",
+    "🌟 <b>Give charity!</b>",
+    "🤲 <b>Allah loves givers!</b>",
+    "❤️ <b>Show compassion!</b>",
+    "🕊️ <b>Peace to them!</b>",
+    "<i>Help those in need!</i> 🤲"
+  ],
+  
+  "old|পুরাতন|old puraton|ওল্ড|প্রাচীন": [
+    "🕰️ <b>Old is gold!</b>",
+    "✨ <b>Classic!</b>",
+    "🌟 <b>Traditional!</b>",
+    "😊 <b>Vintage!</b>",
+    "📜 <b>Ancient!</b>",
+    "🏛️ <b>Historical!</b>",
+    "<i>Respect elders!</i> 👵"
+  ],
+  
+  "new|নতুন|new notun|নিউ|আধুনিক": [
+    "🆕 <b>Brand new!</b>",
+    "✨ <b>Fresh start!</b>",
+    "🌟 <b>Modern!</b>",
+    "😊 <b>Latest version!</b>",
+    "🚀 <b>Innovative!</b>",
+    "💫 <b>Cutting edge!</b>",
+    "<i>New beginnings!</i> 🌈"
+  ],
+  
+  "fast|দ্রুত|fast druto|ফাস্ট|তাড়াতাড়ি": [
+    "⚡ <b>Fast as lightning!</b>",
+    "✨ <b>Quick!</b>",
+    "🌟 <b>Speedy!</b>",
+    "😊 <b>Rapid!</b>",
+    "🚄 <b>High speed!</b>",
+    "💨 <b>Swift!</b>",
+    "<i>Don't rush important things!</i> ⏰"
+  ],
+  
+  "slow|ধীর|slow dheero|স্লো|আস্তে": [
+    "🐌 <b>Slow and steady!</b>",
+    "✨ <b>Take your time!</b>",
+    "🌟 <b>Patient!</b>",
+    "😊 <b>Leisurely!</b>",
+    "🧘 <b>Calm pace!</b>",
+    "🌊 <b>Flow gently!</b>",
+    "<i>Sometimes slow is better!</i> 💫"
+  ],
+  
+  "strong|শক্তিশালী|strong shotishali|স্ট্রং|বলশালী": [
+    "💪 <b>Strong!</b>",
+    "✨ <b>Powerful!</b>",
+    "🌟 <b>Mighty!</b>",
+    "😊 <b>Robust!</b>",
+    "🏋️ <b>Strength!</b>",
+    "🦾 <b>Forceful!</b>",
+    "<i>Strength with humility!</i> 🤲"
+  ],
+  
+  "weak|দুর্বল|weak durbhollo|উইক|অবল": [
+    "😔 <b>Weakness happens!</b>",
+    "✨ <b>Rest and recover!</b>",
+    "🌟 <b>Build strength!</b>",
+    "😊 <b>Take care!</b>",
+    "💊 <b>Medicine helps!</b>",
+    "🏥 <b>Health first!</b>",
+    "<i>Allah gives strength!</i> 🤲"
+  ],
+  
+  "easy|সহজ|easy sohoj|ইজি|সরল": [
+    "👍 <b>Easy peasy!</b>",
+    "✨ <b>Simple!</b>",
+    "🌟 <b>No problem!</b>",
+    "😊 <b>Piece of cake!</b>",
+    "✅ <b>Straightforward!</b>",
+    "🎯 <b>Effortless!</b>",
+    "<i>Life should be easy!</i> 💫"
+  ],
+  
+  "difficult|কঠিন|difficult kothin|ডিফিকাল্ট|জটিল": [
+    "⚠️ <b>Challenging!</b>",
+    "✨ <b>Tough task!</b>",
+    "🌟 <b>Hard work!</b>",
+    "😊 <b>Test of patience!</b>",
+    "💪 <b>Push through!</b>",
+    "🏔️ <b>Mountain to climb!</b>",
+    "<i>After difficulty comes ease!</i> 🤲"
+  ],
+  
+  "possible|সম্ভব|possible shombhob|পসিবল|হতে পারে": [
+    "✅ <b>Possible!</b>",
+    "✨ <b>Can be done!</b>",
+    "🌟 <b>Achievable!</b>",
+    "😊 <b>Within reach!</b>",
+    "🎯 <b>Doable!</b>",
+    "💫 <b>Potential exists!</b>",
+    "<i>With Allah, all things possible!</i> 🤲"
+  ],
+  
+  "impossible|অসম্ভব|impossible oshombhob|ইমপসিবল|হবে না": [
+    "❌ <b>Nothing's impossible!</b>",
+    "✨ <b>Challenge accepted!</b>",
+    "🌟 <b>Try anyway!</b>",
+    "😊 <b>Believe!</b>",
+    "🚀 <b>Break limits!</b>",
+    "💡 <b>Innovate!</b>",
+    "<i>Allah makes impossible possible!</i> 🤲"
+  ],
+  
+  "true|সত্য|true shotto|ট্রু|বাস্তব": [
+    "✅ <b>True!</b>",
+    "✨ <b>Correct!</b>",
+    "🌟 <b>Fact!</b>",
+    "😊 <b>Right!</b>",
+    "🎯 <b>Accurate!</b>",
+    "💯 <b>Genuine!</b>",
+    "<i>Always speak truth!</i> 🕌"
+  ],
+  
+  "false|মিথ্যা|false mithya|ফলস|অসত্য": [
+    "❌ <b>False!</b>",
+    "✨ <b>Incorrect!</b>",
+    "🌟 <b>Wrong!</b>",
+    "😊 <b>Not true!</b>",
+    "🚫 <b>Misleading!</b>",
+    "⚠️ <b>Deceptive!</b>",
+    "<i>Avoid lies!</i> 🕌"
+  ],
+  
+  "real|বাস্তব|real bastob|রিয়েল|প্রকৃত": [
+    "✅ <b>Real!</b>",
+    "✨ <b>Actual!</b>",
+    "🌟 <b>Genuine!</b>",
+    "😊 <b>Authentic!</b>",
+    "🎯 <b>True to life!</b>",
+    "💎 <b>Original!</b>",
+    "<i>Reality matters!</i> 💫"
+  ],
+  
+  "fake|নকল|fake nokol|ফেক|জাল": [
+    "⚠️ <b>Fake!</b>",
+    "✨ <b>Not real!</b>",
+    "🌟 <b>Counterfeit!</b>",
+    "😊 <b>Imitation!</b>",
+    "🚫 <b>Phony!</b>",
+    "🤥 <b>Deceitful!</b>",
+    "<i>Stay away from fake!</i> 🛡️"
+  ],
+  
+  "alive|জীবিত|alive jibito|এলাইভ|বেঁচে আছি": [
+    "❤️ <b>Alive and kicking!</b>",
+    "✨ <b>Living life!</b>",
+    "🌟 <b>Full of life!</b>",
+    "😊 <b>Vibrant!</b>",
+    "💫 <b>Energy flowing!</b>",
+    "🌱 <b>Growing!</b>",
+    "<i>Alhamdulillah for life!</i> 🤲"
+  ],
+  
+  "dead|মৃত|dead mrito|ডেড|মারা গেছে": [
+    "🕊️ <b>Rest in peace!</b>",
+    "✨ <b>Eternal rest!</b>",
+    "🌟 <b>Passed away!</b>",
+    "😔 <b>Sad news!</b>",
+    "🙏 <b>Pray for them!</b>",
+    "🕌 <b>Inna lillahi wa inna ilayhi raji'un!</b>",
+    "<i>Life is temporary!</i> ⏳"
+  ],
+  
+  "birth|জন্ম|birth jonmo|বার্থ|জন্মগ্রহণ": [
+    "👶 <b>New life!</b>",
+    "✨ <b>Birth of baby!</b>",
+    "🌟 <b>Miracle of life!</b>",
+    "😊 <b>Blessing!</b>",
+    "🎉 <b>Celebration!</b>",
+    "🤲 <b>Allah's creation!</b>",
+    "<i>Every child is a gift!</i> 💝"
+  ],
+  
+  "death|মৃত্যু|death mrittu|ডেথ|মৃত্যু": [
+    "🕊️ <b>Inevitable!</b>",
+    "✨ <b>Part of life!</b>",
+    "🌟 <b>Everyone must go!</b>",
+    "😔 <b>Sad reality!</b>",
+    "🙏 <b>Prepare for hereafter!</b>",
+    "🕌 <b>Remember death often!</b>",
+    "<i>Death is not the end!</i> 🌟"
+  ],
+  
+  "start|শুরু|start shuru|স্টার্ট|আরম্ভ": [
+    "🚀 <b>Let's start!</b>",
+    "✨ <b>Beginning!</b>",
+    "🌟 <b>New journey!</b>",
+    "😊 <b>First step!</b>",
+    "🎬 <b>Action!</b>",
+    "💫 <b>Commence!</b>",
+    "<i>Bismillah to start!</i> 🤲"
+  ],
+  
+  "end|শেষ|end shesh|এন্ড|সমাপ্তি": [
+    "🎯 <b>The end!</b>",
+    "✨ <b>Conclusion!</b>",
+    "🌟 <b>Finished!</b>",
+    "😊 <b>Complete!</b>",
+    "✅ <b>Done!</b>",
+    "🏁 <b>Finish line!</b>",
+    "<i>Everything has an end!</i> ⏳"
+  ],
+  
+  "win|জয়|win joy|উইন|জিত": [
+    "🏆 <b>Winner!</b>",
+    "✨ <b>Victory!</b>",
+    "🌟 <b>Success!</b>",
+    "😊 <b>Champion!</b>",
+    "🎉 <b>Celebration!</b>",
+    "🥇 <b>First place!</b>",
+    "<i>Win with humility!</i> 🤲"
+  ],
+  
+  "lose|হার|lose har|লুজ|পরাজয়": [
+    "😔 <b>Lost!</b>",
+    "✨ <b>Defeat!</b>",
+    "🌟 <b>Better luck next time!</b>",
+    "😊 <b>It's okay to lose!</b>",
+    "📚 <b>Learn from loss!</b>",
+    "💪 <b>Come back stronger!</b>",
+    "<i>Sometimes we lose to win bigger!</i> 💫"
+  ],
+  
+  "hope|আশা|hope asha|হোপ|প্রত্যাশা": [
+    "🤲 <b>Have hope!</b>",
+    "✨ <b>Keep hoping!</b>",
+    "🌟 <b>Optimism!</b>",
+    "😊 <b>Positive thinking!</b>",
+    "🌈 <b>Bright future!</b>",
+    "💫 <b>Dream big!</b>",
+    "<i>Hope in Allah!</i> 🕌"
+  ],
+  
+  "fear|ভয়|fear bhoy|ফিয়ার|আতঙ্ক": [
+    "😨 <b>Don't fear!</b>",
+    "✨ <b>Be brave!</b>",
+    "🌟 <b>Face fears!</b>",
+    "😊 <b>Courage!</b>",
+    "🦁 <b>Be strong!</b>",
+    "🙏 <b>Trust in Allah!</b>",
+    "<i>Only fear Allah!</i> 🕌"
+  ],
+  
+  "peace|শান্তি|peace shanti|পিস|সন্ধি": [
+    "🕊️ <b>Peace!</b>",
+    "✨ <b>Harmony!</b>",
+    "🌟 <b>Tranquility!</b>",
+    "😊 <b>Calmness!</b>",
+    "🌊 <b>Serenity!</b>",
+    "🧘 <b>Inner peace!</b>",
+    "<i>Islam means peace!</i> ☪️"
+  ],
+  
+  "war|যুদ্ধ|war juddho|ওয়ার|সংগ্রাম": [
+    "⚔️ <b>War is destructive!</b>",
+    "✨ <b>Avoid conflict!</b>",
+    "🌟 <b>Seek peace!</b>",
+    "😔 <b>Sad reality!</b>",
+    "🕊️ <b>Pray for peace!</b>",
+    "🤲 <b>Allah hates war!</b>",
+    "<i>War should be last resort!</i> ⚖️"
+  ],
+  
+  "light|আলো|light alo|লাইট|প্রকাশ": [
+    "💡 <b>Light!</b>",
+    "✨ <b>Brightness!</b>",
+    "🌟 <b>Illumination!</b>",
+    "😊 <b>Enlightenment!</b>",
+    "☀️ <b>Radiance!</b>",
+    "🕯️ <b>Guidance!</b>",
+    "<i>Allah is the Light!</i> 🤲"
+  ],
+  
+  "dark|অন্ধকার|dark ondho|ডার্ক|অন্ধকার": [
+    "🌑 <b>Darkness!</b>",
+    "✨ <b>Night time!</b>",
+    "🌟 <b>Blackness!</b>",
+    "😊 <b>Need light!</b>",
+    "🌃 <b>Evening!</b>",
+    "💡 <b>Turn on lights!</b>",
+    "<i>After darkness comes light!</i> 🌅"
+  ],
+  
+  "day|দিন|day din|ডে|দিবস": [
+    "☀️ <b>Day time!</b>",
+    "✨ <b>Sunlight hours!</b>",
+    "🌟 <b>Working time!</b>",
+    "😊 <b>Productive hours!</b>",
+    "📅 <b>24 hours!</b>",
+    "🌞 <b>Daylight!</b>",
+    "<i>Make the most of your day!</i> 💪"
+  ],
+  
+  "night|রাত|night rat|নাইট|রজনী": [
+    "🌙 <b>Night time!</b>",
+    "✨ <b>Sleep time!</b>",
+    "🌟 <b>Rest hours!</b>",
+    "😴 <b>Dream time!</b>",
+    "🌃 <b>Evening!</b>",
+    "🦉 <b>Owl hours!</b>",
+    "<i>Night is for rest and prayer!</i> 🤲"
+  ],
+  
+  "week|সপ্তাহ|week shaptaho|উইক|সপ্তাহ": [
+    "📅 <b>7 days!</b>",
+    "✨ <b>Weekly cycle!</b>",
+    "🌟 <b>Work week!</b>",
+    "😊 <b>Weekend coming!</b>",
+    "🗓️ <b>Calendar week!</b>",
+    "⏳ <b>Time flies!</b>",
+    "<i>Plan your week well!</i> 📋"
+  ],
+  
+  "month|মাস|month mash|মান্থ|মাস": [
+    "📆 <b>30 days!</b>",
+    "✨ <b>Monthly cycle!</b>",
+    "🌟 <b>Calendar month!</b>",
+    "😊 <b>New month soon!</b>",
+    "🌙 <b>Lunar month!</b>",
+    "💰 <b>Monthly salary!</b>",
+    "<i>Time management!</i> ⏰"
+  ],
+  
+  "year|বছর|year bochor|ইয়ার|বৎসর": [
+    "📅 <b>365 days!</b>",
+    "✨ <b>Annual cycle!</b>",
+    "🌟 <b>12 months!</b>",
+    "😊 <b>New Year coming!</b>",
+    "🎉 <b>Yearly celebration!</b>",
+    "⏳ <b>Time passes!</b>",
+    "<i>Reflect on the year!</i> 💭"
+  ],
+  
+  "today|আজ|today aj|টুডে|আজকে": [
+    "📅 <b>Today!</b>",
+    "✨ <b>Present day!</b>",
+    "🌟 <b>Current date!</b>",
+    "😊 <b>Live in the moment!</b>",
+    "🎯 <b>Seize the day!</b>",
+    "💫 <b>Make today count!</b>",
+    "<i>Today is a gift!</i> 🎁"
+  ],
+  
+  "tomorrow|আগামীকাল|tomorrow agamikal|টুমরো|কাল": [
+    "📅 <b>Tomorrow!</b>",
+    "✨ <b>Future day!</b>",
+    "🌟 <b>Next day!</b>",
+    "😊 <b>Plan for tomorrow!</b>",
+    "🌅 <b>Sunrise tomorrow!</b>",
+    "💭 <b>Hope for tomorrow!</b>",
+    "<i>InshaAllah tomorrow!</i> 🤲"
+  ],
+  
+  "yesterday|গতকাল|yesterday gotokal|ইয়েস্টারডে|গত দিন": [
+    "📅 <b>Yesterday!</b>",
+    "✨ <b>Past day!</b>",
+    "🌟 <b>Previous day!</b>",
+    "😊 <b>Learn from yesterday!</b>",
+    "💭 <b>Memories!</b>",
+    "⏪ <b>Day before!</b>",
+    "<i>Yesterday is history!</i> 📜"
+  ],
+  
+  "now|এখন|now ekhon|নাউ|বর্তমানে": [
+    "⏱️ <b>Now!</b>",
+    "✨ <b>Present moment!</b>",
+    "🌟 <b>Current time!</b>",
+    "😊 <b>Live now!</b>",
+    "🎯 <b>Immediate!</b>",
+    "⚡ <b>Instant!</b>",
+    "<i>Focus on now!</i> 💫"
+  ],
+  
+  "later|পরে|later pore|লেটার|অনতিবিলম্বে": [
+    "⏰ <b>Later!</b>",
+    "✨ <b>Future time!</b>",
+    "🌟 <b>Not now!</b>",
+    "😊 <b>Wait a bit!</b>",
+    "📅 <b>Schedule later!</b>",
+    "🌀 <b>Some other time!</b>",
+    "<i>Better late than never!</i> 💫"
+  ],
+  
+  "soon|শীঘ্রই|soon shighroi|সুন|দ্রুত": [
+    "⚡ <b>Soon!</b>",
+    "✨ <b>Very shortly!</b>",
+    "🌟 <b>In a while!</b>",
+    "😊 <b>Coming up!</b>",
+    "🎯 <b>Approaching!</b>",
+    "💫 <b>Not long now!</b>",
+    "<i>Patience brings results!</i> 🤲"
+  ],
+  
+  "never|কখনও না|never kokhono na|নেভার|অবশ্যই না": [
+    "❌ <b>Never!</b>",
+    "✨ <b>Not ever!</b>",
+    "🌟 <b>Absolutely not!</b>",
+    "😊 <b>Zero chance!</b>",
+    "🚫 <b>At no time!</b>",
+    "💫 <b>Impossible!</b>",
+    "<i>Never say never!</i> 😄"
+  ],
+  
+  "always|সর্বদা|always shorboda|অলওয়েজ|চিরকাল": [
+    "✅ <b>Always!</b>",
+    "✨ <b>Forever!</b>",
+    "🌟 <b>Every time!</b>",
+    "😊 <b>Consistently!</b>",
+    "💫 <b>Permanently!</b>",
+    "🔄 <b>Continuously!</b>",
+    "<i>Allah is always with us!</i> 🤲"
+  ],
+  
+  "sometimes|কখনও কখনও|sometimes kokhono kokhono|সামটাইমস|মাঝে মাঝে": [
+    "🌀 <b>Sometimes!</b>",
+    "✨ <b>Occasionally!</b>",
+    "🌟 <b>Now and then!</b>",
+    "😊 <b>From time to time!</b>",
+    "⏰ <b>Once in a while!</b>",
+    "💫 <b>Not always!</b>",
+    "<i>Variety is the spice of life!</i> 🌶️"
+  ],
+  
+  "often|প্রায়শই|often proyoshi|অফটেন|বারবার": [
+    "🔄 <b>Often!</b>",
+    "✨ <b>Frequently!</b>",
+    "🌟 <b>Many times!</b>",
+    "😊 <b>Regularly!</b>",
+    "📊 <b>Commonly!</b>",
+    "💫 <b>Habitually!</b>",
+    "<i>Practice makes perfect!</i> 💪"
+  ],
+  
+  "rarely|বিরলভাবে|rarely birolbhabe|রেয়ারলি|অনিয়মিত": [
+    "🌀 <b>Rarely!</b>",
+    "✨ <b>Seldom!</b>",
+    "🌟 <b>Hardly ever!</b>",
+    "😊 <b>Infrequently!</b>",
+    "📉 <b>Uncommon!</b>",
+    "💫 <b>Scarcely!</b>",
+    "<i>Rare things are valuable!</i> 💎"
+  ],
+  
+  "everyone|সবাই|everyone shobai|এভরিওয়ান|প্রত্যেকে": [
+    "👥 <b>Everyone!</b>",
+    "✨ <b>All people!</b>",
+    "🌟 <b>Each person!</b>",
+    "😊 <b>Everybody!</b>",
+    "🌍 <b>Whole world!</b>",
+    "💫 <b>Collectively!</b>",
+    "<i>Respect everyone!</i> 🤝"
+  ],
+  
+  "nobody|কেউ না|nobody keu na|নোবডি|কোন ব্যক্তি না": [
+    "🚫 <b>Nobody!</b>",
+    "✨ <b>No one!</b>",
+    "🌟 <b>Not anybody!</b>",
+    "😊 <b>Zero people!</b>",
+    "👤 <b>Absence!</b>",
+    "💫 <b>Empty!</b>",
+    "<i>Sometimes being alone is good!</i> 🧘"
+  ],
+  
+  "someone|কেউ|someone keu|সামওয়ান|কোন ব্যক্তি": [
+    "👤 <b>Someone!</b>",
+    "✨ <b>Some person!</b>",
+    "🌟 <b>A person!</b>",
+    "😊 <b>An individual!</b>",
+    "💫 <b>Mystery person!</b>",
+    "❓ <b>Who could it be?</b>",
+    "<i>Someone needs your help!</i> 🤲"
+  ],
+  
+  "anyone|যেকেউ|anyone jekeu|এনিওয়ান|কোন ব্যক্তিই": [
+    "👥 <b>Anyone!</b>",
+    "✨ <b>Any person!</b>",
+    "🌟 <b>Everybody!</b>",
+    "😊 <b>Whoever!</b>",
+    "💫 <b>No restrictions!</b>",
+    "✅ <b>All are welcome!</b>",
+    "<i>Anyone can achieve greatness!</i> 💪"
+  ],
+  
+  "everything|সবকিছু|everything shobkichu|এভরিথিং|প্রত্যেকটি বিষয়": [
+    "🌍 <b>Everything!</b>",
+    "✨ <b>All things!</b>",
+    "🌟 <b>The whole!</b>",
+    "😊 <b>Total package!</b>",
+    "💫 <b>Complete set!</b>",
+    "📦 <b>Entirety!</b>",
+    "<i>Allah controls everything!</i> 🤲"
+  ],
+  
+  "nothing|কিছু না|nothing kichu na|নাথিং|কিছুই না": [
+    "🚫 <b>Nothing!</b>",
+    "✨ <b>Zero!</b>",
+    "🌟 <b>Empty!</b>",
+    "😊 <b>Void!</b>",
+    "💫 <b>None!</b>",
+    "📉 <b>Absence!</b>",
+    "<i>Nothing lasts forever!</i> ⏳"
+  ],
+  
+  "something|কিছু|something kichu|সামথিং|কিছু বিষয়": [
+    "🌀 <b>Something!</b>",
+    "✨ <b>Some thing!</b>",
+    "🌟 <b>An item!</b>",
+    "😊 <b>Mystery object!</b>",
+    "💫 <b>Unknown thing!</b>",
+    "❓ <b>What could it be?</b>",
+    "<i>Something good is coming!</i> 🌟"
+  ],
+  
+  "anything|যেকোনো কিছু|anything jekono kichu|এনিথিং|কোন বিষয়": [
+    "💫 <b>Anything!</b>",
+    "✨ <b>Whatever!</b>",
+    "🌟 <b>Any thing!</b>",
+    "😊 <b>No limits!</b>",
+    "🌀 <b>Unrestricted!</b>",
+    "✅ <b>All options!</b>",
+    "<i>You can achieve anything!</i> 🚀"
+  ],
+  
+  "here|এখানে|here ekhane|হিয়ার|এই স্থানে": [
+    "📍 <b>Here!</b>",
+    "✨ <b>This place!</b>",
+    "🌟 <b>Current location!</b>",
+    "😊 <b>Present spot!</b>",
+    "🗺️ <b>Coordinates!</b>",
+    "💫 <b>Right here!</b>",
+    "<i>Be present here and now!</i> 💫"
+  ],
+  
+  "there|সেখানে|there shekhane|দেয়ার|সেই স্থানে": [
+    "📍 <b>There!</b>",
+    "✨ <b>That place!</b>",
+    "🌟 <b>Other location!</b>",
+    "😊 <b>Different spot!</b>",
+    "🗺️ <b>Over there!</b>",
+    "💫 <b>Somewhere else!</b>",
+    "<i>There are opportunities everywhere!</i> 🌍"
+  ],
+  
+  "everywhere|সর্বত্র|everywhere shorbotro|এভরিওয়্যার|প্রত্যেক স্থানে": [
+    "🌍 <b>Everywhere!</b>",
+    "✨ <b>All places!</b>",
+    "🌟 <b>Universal!</b>",
+    "😊 <b>Omnipresent!</b>",
+    "💫 <b>Widespread!</b>",
+    "📍 <b>In all locations!</b>",
+    "<i>Allah is everywhere!</i> 🤲"
+  ],
+  
+  "nowhere|কোথাও না|nowhere kothao na|নোওয়্যার|কোন স্থানেই না": [
+    "🚫 <b>Nowhere!</b>",
+    "✨ <b>No place!</b>",
+    "🌟 <b>Not anywhere!</b>",
+    "😊 <b>Zero location!</b>",
+    "💫 <b>Empty space!</b>",
+    "📍 <b>Absent!</b>",
+    "<i>Nowhere to hide!</i> 🕵️"
+  ],
+  
+  "somewhere|কোথাও|somewhere kothao|সামওয়্যার|কোন স্থানে": [
+    "📍 <b>Somewhere!</b>",
+    "✨ <b>Some place!</b>",
+    "🌟 <b>Unknown location!</b>",
+    "😊 <b>Mystery spot!</b>",
+    "🗺️ <b>Hidden place!</b>",
+    "💫 <b>Secret location!</b>",
+    "<i>Adventure awaits somewhere!</i> 🗺️"
+  ],
+  
+  "anywhere|যেকোনো জায়গা|anywhere jekono jaega|এনিওয়্যার|কোন স্থানেই": [
+    "🌍 <b>Anywhere!</b>",
+    "✨ <b>Any place!</b>",
+    "🌟 <b>Wherever!</b>",
+    "😊 <b>No location limits!</b>",
+    "💫 <b>Worldwide!</b>",
+    "📍 <b>Global!</b>",
+    "<i>You can go anywhere!</i> ✈️"
+  ],
+  
+  "up|উপর|up upor|আপ|উর্ধ্বে": [
+    "⬆️ <b>Up!</b>",
+    "✨ <b>Above!</b>",
+    "🌟 <b>Higher!</b>",
+    "😊 <b>Elevated!</b>",
+    "📈 <b>Rising!</b>",
+    "💫 <b>Ascending!</b>",
+    "<i>Always look up!</i> ☁️"
+  ],
+  
+  "down|নিচে|down niche|ডাউন|নিম্নে": [
+    "⬇️ <b>Down!</b>",
+    "✨ <b>Below!</b>",
+    "🌟 <b>Lower!</b>",
+    "😊 <b>Descending!</b>",
+    "📉 <b>Falling!</b>",
+    "💫 <b>Dropping!</b>",
+    "<i>What goes down must come up!</i> 📈"
+  ],
+  
+  "left|বাম|left bam|লেফট|বামপাশ": [
+    "⬅️ <b>Left!</b>",
+    "✨ <b>To the left!</b>",
+    "🌟 <b>Left side!</b>",
+    "😊 <b>Port side!</b>",
+    "💫 <b>Westward!</b>",
+    "📍 <b>Left direction!</b>",
+    "<i>Left is right sometimes!</i> 😄"
+  ],
+  
+  "right|ডান|right dan|রাইট|ডানপাশ": [
+    "➡️ <b>Right!</b>",
+    "✨ <b>To the right!</b>",
+    "🌟 <b>Right side!</b>",
+    "😊 <b>Starboard!</b>",
+    "💫 <b>Eastward!</b>",
+    "📍 <b>Right direction!</b>",
+    "<i>Always do what's right!</i> ✅"
+  ],
+  
+  "forward|সামনে|forward shamone|ফরওয়ার্ড|অগ্রবর্তী": [
+    "⏩ <b>Forward!</b>",
+    "✨ <b>Ahead!</b>",
+    "🌟 <b>Moving forward!</b>",
+    "😊 <b>Progress!</b>",
+    "🚶 <b>Advancing!</b>",
+    "💫 <b>Future direction!</b>",
+    "<i>Keep moving forward!</i> 🚀"
+  ],
+  
+  "backward|পিছনে|backward pichone|ব্যাকওয়ার্ড|পশ্চাদপসরণ": [
+    "⏪ <b>Backward!</b>",
+    "✨ <b>Behind!</b>",
+    "🌟 <b>Moving back!</b>",
+    "😊 <b>Retreating!</b>",
+    "🚶 <b>Reversing!</b>",
+    "💫 <b>Past direction!</b>",
+    "<i>Sometimes we need to go back to move forward!</i> 🔄"
+  ],
+  
+  "inside|ভিতরে|inside bhitore|ইনসাইড|অভ্যন্তরে": [
+    "🚪 <b>Inside!</b>",
+    "✨ <b>Interior!</b>",
+    "🌟 <b>Within!</b>",
+    "😊 <b>Internal!</b>",
+    "🏠 <b>Indoor!</b>",
+    "💫 <b>Inner space!</b>",
+    "<i>Look inside yourself!</i> 💭"
+  ],
+  
+  "outside|বাইরে|outside baire|আউটসাইড|বাহিরে": [
+    "🌳 <b>Outside!</b>",
+    "✨ <b>Exterior!</b>",
+    "🌟 <b>Outdoor!</b>",
+    "😊 <b>External!</b>",
+    "🏞️ <b>Outdoors!</b>",
+    "💫 <b>Outer space!</b>",
+    "<i>Fresh air outside!</i> 💨"
+  ],
+  
+  "middle|মধ্য|middle moddho|মিডল|মধ্যভাগ": [
+    "⚖️ <b>Middle!</b>",
+    "✨ <b>Center!</b>",
+    "🌟 <b>Midpoint!</b>",
+    "😊 <b>Halfway!</b>",
+    "📍 <b>Central!</b>",
+    "💫 <b>Equidistant!</b>",
+    "<i>Middle path is often best!</i> 🛣️"
+  ],
+  
+  "edge|প্রান্ত|edge pranto|এজ|কিনারা": [
+    "🔪 <b>Edge!</b>",
+    "✨ <b>Border!</b>",
+    "🌟 <b>Boundary!</b>",
+    "😊 <b>Perimeter!</b>",
+    "📍 <b>Margin!</b>",
+    "💫 <b>Outer limit!</b>",
+    "<i>Living on the edge!</i> ⚡"
+  ],
+  
+  "far|দূরে|far dure|ফার|দূরবর্তী": [
+    "📍 <b>Far!</b>",
+    "✨ <b>Distant!</b>",
+    "🌟 <b>Remote!</b>",
+    "😊 <b>Far away!</b>",
+    "🗺️ <b>Long distance!</b>",
+    "💫 <b>Far off!</b>",
+    "<i>No distance is too far for friendship!</i> 🤝"
+  ],
+  
+  "near|কাছে|near kache|নিয়ার|নিকটবর্তী": [
+    "📍 <b>Near!</b>",
+    "✨ <b>Close!</b>",
+    "🌟 <b>Nearby!</b>",
+    "😊 <b>Proximate!</b>",
+    "🗺️ <b>Short distance!</b>",
+    "💫 <b>Adjacent!</b>",
+    "<i>Keep loved ones near!</i> ❤️"
+  ],
+  
+  "high|উচ্চ|high ucho|হাই|উচ্চতা": [
+    "📈 <b>High!</b>",
+    "✨ <b>Tall!</b>",
+    "🌟 <b>Elevated!</b>",
+    "😊 <b>Lofty!</b>",
+    "🏔️ <b>Mountain high!</b>",
+    "💫 <b>Sky high!</b>",
+    "<i>Aim high in life!</i> 🚀"
+  ],
+  
+  "low|নিম্ন|low nimno|লো|নীচু": [
+    "📉 <b>Low!</b>",
+    "✨ <b>Short!</b>",
+    "🌟 <b>Depressed!</b>",
+    "😊 <b>Small!</b>",
+    "🏞️ <b>Valley low!</b>",
+    "💫 <b>Ground level!</b>",
+    "<i>Stay humble, stay low!</i> 🤲"
+  ],
+  
+  "deep|গভীর|deep gobhir|ডিপ|গহন": [
+    "🌊 <b>Deep!</b>",
+    "✨ <b>Profound!</b>",
+    "🌟 <b>Intense!</b>",
+    "😊 <b>Bottomless!</b>",
+    "💭 <b>Thoughtful!</b>",
+    "🌀 <b>Abyssal!</b>",
+    "<i>Deep thoughts lead to wisdom!</i> 🧠"
+  ],
+  
+  "shallow|অগভীর|shallow ogobhir|শ্যালো|উত্থল": [
+    "🏖️ <b>Shallow!</b>",
+    "✨ <b>Not deep!</b>",
+    "🌟 <b>Superficial!</b>",
+    "😊 <b>Surface level!</b>",
+    "💧 <b>Water shallow!</b>",
+    "🌀 <b>Minor depth!</b>",
+    "<i>Don't be shallow-minded!</i> 💭"
+  ],
+  
+  "long|দীর্ঘ|long dirgho|লং|দীর্ঘকাল": [
+    "📏 <b>Long!</b>",
+    "✨ <b>Lengthy!</b>",
+    "🌟 <b>Extended!</b>",
+    "😊 <b>Prolonged!</b>",
+    "⏳ <b>Time long!</b>",
+    "💫 <b>Enduring!</b>",
+    "<i>Long-term thinking brings success!</i> 📈"
+  ],
+  
+  "short|সংক্ষিপ্ত|short shongkhipto|শর্ট|ক্ষণস্থায়ী": [
+    "📏 <b>Short!</b>",
+    "✨ <b>Brief!</b>",
+    "🌟 <b>Concise!</b>",
+    "😊 <b>Little!</b>",
+    "⏳ <b>Time short!</b>",
+    "💫 <b>Temporary!</b>",
+    "<i>Short and sweet!</i> 🍬"
+  ],
+  
+  "big|বড়|big boro|বিগ|বৃহৎ": [
+    "🐘 <b>Big!</b>",
+    "✨ <b>Large!</b>",
+    "🌟 <b>Huge!</b>",
+    "😊 <b>Giant!</b>",
+    "🌍 <b>Massive!</b>",
+    "💫 <b>Enormous!</b>",
+    "<i>Big dreams lead to big achievements!</i> 🚀"
+  ],
+  
+  "small|ছোট|small choto|স্মল|ক্ষুদ্র": [
+    "🐜 <b>Small!</b>",
+    "✨ <b>Little!</b>",
+    "🌟 <b>Tiny!</b>",
+    "😊 <b>Miniature!</b>",
+    "🔬 <b>Microscopic!</b>",
+    "💫 <b>Petite!</b>",
+    "<i>Small things matter too!</i> 💎"
+  ],
+  
+  "heavy|ভারী|heavy bhari|হেভি|গুরুত্বপূর্ণ": [
+    "🏋️ <b>Heavy!</b>",
+    "✨ <b>Weighty!</b>",
+    "🌟 <b>Massive!</b>",
+    "😊 <b>Burdened!</b>",
+    "⚖️ <b>Dense!</b>",
+    "💫 <b>Substantial!</b>",
+    "<i>Heavy responsibilities build character!</b> 💪"
+  ],
+  
+  "light|হালকা|light halka|লাইট|লঘু": [
+    "🪶 <b>Light!</b>",
+    "✨ <b>Not heavy!</b>",
+    "🌟 <b>Weightless!</b>",
+    "😊 <b>Airy!</b>",
+    "💡 <b>Bright!</b>",
+    "💫 <b>Delicate!</b>",
+    "<i>Light heart brings happiness!</i> 😊"
+  ],
+  
+  "hard|কঠিন|hard kothin|হার্ড|দৃঢ়": [
+    "💎 <b>Hard!</b>",
+    "✨ <b>Difficult!</b>",
+    "🌟 <b>Tough!</b>",
+    "😊 <b>Solid!</b>",
+    "💪 <b>Challenging!</b>",
+    "💫 <b>Rigid!</b>",
+    "<i>Hard work pays off!</i> 💰"
+  ],
+  
+  "soft|নরম|soft norom|সফট|কোমল": [
+    "🛋️ <b>Soft!</b>",
+    "✨ <b>Gentle!</b>",
+    "🌟 <b>Tender!</b>",
+    "😊 <b>Smooth!</b>",
+    "💖 <b>Delicate!</b>",
+    "💫 <b>Cushiony!</b>",
+    "<i>Soft words calm anger!</i> 🕊️"
+  ],
+  
+  "sweet|মিষ্টি|sweet mishti|সুইট|মনোরম": [
+    "🍬 <b>Sweet!</b>",
+    "✨ <b>Delicious!</b>",
+    "🌟 <b>Sugary!</b>",
+    "😋 <b>Yummy!</b>",
+    "💝 <b>Lovely!</b>",
+    "💫 <b>Pleasant!</b>",
+    "<i>Life is sweet!</i> 🍯"
+  ],
+  
+  "bitter|তিক্ত|bitter tikto|বিটার|কটু": [
+    "☕ <b>Bitter!</b>",
+    "✨ <b>Sour!</b>",
+    "🌟 <b>Unpleasant!</b>",
+    "😖 <b>Harsh!</b>",
+    "💊 <b>Medicine!</b>",
+    "💫 <b>Acidic!</b>",
+    "<i>Bitter experiences teach lessons!</i> 📚"
+  ],
+  
+  "hot|গরম|hot gorom|হট|উষ্ণ": [
+    "🔥 <b>Hot!</b>",
+    "✨ <b>Spicy!</b>",
+    "🌟 <b>Warm!</b>",
+    "😓 <b>Temperature high!</b>",
+    "🌶️ <b>Chili hot!</b>",
+    "💫 <b>Fiery!</b>",
+    "<i>Hot weather needs cool drinks!</i> 🧊"
   ]
 }
