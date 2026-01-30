@@ -2,6 +2,10 @@ import TelegramBot from 'node-telegram-bot-api';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -9,9 +13,17 @@ const __dirname = path.dirname(__filename);
 // Load config
 const config = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'config.json'), 'utf8'));
 
+// Get bot token from environment variable
+const BOT_TOKEN = process.env.BOT_TOKEN || config.bot.token;
+
 class GroupMasterBot {
     constructor() {
         this.config = config;
+        // Override token from environment if available
+        if (process.env.BOT_TOKEN) {
+            this.config.bot.token = process.env.BOT_TOKEN;
+        }
+        
         this.bot = null;
         this.handlers = new Map();
         this.features = new Map();
