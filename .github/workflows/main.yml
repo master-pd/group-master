@@ -26,7 +26,7 @@ jobs:
     - name: 📦 Create Package Files
       run: |
         echo "Creating package.json..."
-        cat > package.json <<-EOF
+        cat > package.json <<-'EOF'
         {
           "name": "group-master-bot",
           "version": "1.0.0",
@@ -45,7 +45,7 @@ jobs:
         EOF
         
         echo "Creating package-lock.json..."
-        cat > package-lock.json <<-EOF
+        cat > package-lock.json <<-'EOF'
         {
           "name": "group-master-bot",
           "version": "1.0.0",
@@ -78,7 +78,7 @@ jobs:
     - name: 🤖 Create Bot File
       run: |
         echo "Creating bot.js..."
-        cat > bot.js <<-EOF
+        cat > bot.js <<-'EOF'
         const TelegramBot = require('node-telegram-bot-api');
         
         // টোকেন চেক
@@ -99,7 +99,7 @@ jobs:
         
         // ১. /start কমান্ড
         bot.onText(/\/start/, (msg) => {
-          const text = \`
+          const text = `
 🎉 *Welcome to Group Master Bot!*
 
 *Status:* ✅ Running on GitHub Actions
@@ -120,13 +120,13 @@ jobs:
 • 24/7 Uptime
 
 _Created by MAR-PD_
-          \`;
+          `;
           bot.sendMessage(msg.chat.id, text, { parse_mode: 'Markdown' });
         });
         
         // ২. /help কমান্ড
         bot.onText(/\/help/, (msg) => {
-          const text = \`
+          const text = `
 📚 *Available Commands*
 
 /start - Start the bot
@@ -144,7 +144,7 @@ _Created by MAR-PD_
 ✅ 24/7 uptime
 
 🤖 *Running on GitHub Actions*
-          \`;
+          `;
           bot.sendMessage(msg.chat.id, text, { parse_mode: 'Markdown' });
         });
         
@@ -155,27 +155,27 @@ _Created by MAR-PD_
         
         // ৪. /id কমান্ড
         bot.onText(/\/id/, (msg) => {
-          const text = \`
+          const text = `
 🆔 *ID Information*
 
-*User ID:* \\\`${msg.from.id}\\\`
-*Chat ID:* \\\`${msg.chat.id}\\\`
+*User ID:* \`${msg.from.id}\`
+*Chat ID:* \`${msg.chat.id}\`
 *Name:* ${msg.from.first_name}
 *Username:* ${msg.from.username ? '@' + msg.from.username : 'Not set'}
-          \`;
+          `;
           bot.sendMessage(msg.chat.id, text, { parse_mode: 'Markdown' });
         });
         
         // ৫. /time কমান্ড
         bot.onText(/\/time/, (msg) => {
           const now = new Date();
-          const text = \`
+          const text = `
 🕐 *Current Time*
 
 *Local:* ${now.toLocaleString()}
 *UTC:* ${now.toUTCString()}
 *Timestamp:* ${Math.floor(now.getTime() / 1000)}
-          \`;
+          `;
           bot.sendMessage(msg.chat.id, text, { parse_mode: 'Markdown' });
         });
         
@@ -185,7 +185,7 @@ _Created by MAR-PD_
           const min = Math.floor(uptime / 60);
           const mem = Math.round(process.memoryUsage().heapUsed / 1024 / 1024);
           
-          const text = \`
+          const text = `
 📊 *Bot Status*
 
 *Uptime:* ${min} minutes
@@ -194,13 +194,13 @@ _Created by MAR-PD_
 *Node.js:* ${process.version}
 *Restart in:* ${25 - min} minutes
 *Status:* ✅ Running
-          \`;
+          `;
           bot.sendMessage(msg.chat.id, text, { parse_mode: 'Markdown' });
         });
         
         // ৭. /rules কমান্ড
         bot.onText(/\/rules/, (msg) => {
-          const text = \`
+          const text = `
 📜 *Group Rules*
 
 1️⃣ Respect all members
@@ -211,7 +211,7 @@ _Created by MAR-PD_
 6️⃣ Keep discussions civil
 
 ✅ *Rules apply to everyone*
-          \`;
+          `;
           bot.sendMessage(msg.chat.id, text, { parse_mode: 'Markdown' });
         });
         
@@ -226,22 +226,22 @@ _Created by MAR-PD_
             let reply = null;
             
             if (text.includes('hello') || text.includes('hi') || text.includes('hey')) {
-              reply = \`Hello ${name}! 👋\`;
+              reply = `Hello ${name}! 👋`;
             }
             else if (text.includes('assalamualaikum') || text.includes('salam')) {
-              reply = \`Waalaikumussalam ${name}! 🤲\`;
+              reply = `Waalaikumussalam ${name}! 🤲`;
             }
             else if (text.includes('how are you')) {
-              reply = \`I'm fine ${name}, thank you! 😊\`;
+              reply = `I'm fine ${name}, thank you! 😊`;
             }
             else if (text.includes('thank you') || text.includes('thanks')) {
-              reply = \`You're welcome ${name}! 😊\`;
+              reply = `You're welcome ${name}! 😊`;
             }
             else if (text.includes('bot')) {
-              reply = \`Yes ${name}, I'm a Telegram bot! 🤖\`;
+              reply = `Yes ${name}, I'm a Telegram bot! 🤖`;
             }
             else if (text.includes('github')) {
-              reply = \`Running on GitHub Actions 🚀\`;
+              reply = `Running on GitHub Actions 🚀`;
             }
             
             if (reply) {
@@ -257,17 +257,17 @@ _Created by MAR-PD_
           msg.new_chat_members.forEach((member) => {
             if (member.is_bot && member.id === bot.id) {
               bot.sendMessage(msg.chat.id,
-                \`🤖 *Bot Added Successfully!*\n\n\` +
-                \`Thanks for adding me! Use /help for commands.\`,
+                `🤖 *Bot Added Successfully!*\n\n` +
+                `Thanks for adding me! Use /help for commands.`,
                 { parse_mode: 'Markdown' }
               );
             }
             else if (!member.is_bot) {
               const welcomes = [
-                \`🎉 Welcome ${member.first_name} to the group!\`,
-                \`👋 Hello ${member.first_name}! Glad to have you!\`,
-                \`🌟 Welcome ${member.first_name}! Enjoy your stay.\`,
-                \`🚀 ${member.first_name} joined the group! Welcome!\`
+                `🎉 Welcome ${member.first_name} to the group!`,
+                `👋 Hello ${member.first_name}! Glad to have you!`,
+                `🌟 Welcome ${member.first_name}! Enjoy your stay.`,
+                `🚀 ${member.first_name} joined the group! Welcome!`
               ];
               const welcome = welcomes[Math.floor(Math.random() * welcomes.length)];
               bot.sendMessage(msg.chat.id, welcome);
@@ -288,7 +288,7 @@ _Created by MAR-PD_
         console.log('✅ Bot ready to receive messages');
         setInterval(() => {
           const min = Math.floor(process.uptime() / 60);
-          console.log(\`💓 Running for ${min} minutes\`);
+          console.log(`💓 Running for ${min} minutes`);
         }, 60000);
         EOF
         
@@ -304,7 +304,7 @@ _Created by MAR-PD_
         echo "========================================"
         echo "Platform: GitHub Actions"
         echo "Timeout: 24 minutes"
-        echo "Start: \$(date)"
+        echo "Start: $(date)"
         echo "========================================"
         
         # ২৪ মিনিটের জন্য বট রান
@@ -312,7 +312,7 @@ _Created by MAR-PD_
         
         echo "========================================"
         echo "✅ BOT SESSION COMPLETED"
-        echo "End: \$(date)"
+        echo "End: $(date)"
         echo "Next run: In 1 minute"
         echo "========================================"
         
