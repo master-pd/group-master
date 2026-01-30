@@ -1,7 +1,7 @@
 {
   "name": "group-master-pro-bot",
   "version": "3.0.0",
-  "description": "Advanced Telegram Group Management Bot with AI Features",
+  "description": "Advanced Telegram Group Management Bot",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -9,7 +9,8 @@
     "test": "echo \"No tests specified\" && exit 0",
     "setup": "node setup.js",
     "backup": "node scripts/backup.js",
-    "update": "git pull && npm install"
+    "update": "git pull && npm install",
+    "clean": "rm -rf node_modules package-lock.json && npm install"
   },
   "keywords": [
     "telegram",
@@ -29,20 +30,10 @@
     "moment": "^2.29.4",
     "lodash": "^4.17.21",
     "chalk": "^4.1.2",
-    "winston": "^3.11.0",
-    "jsonwebtoken": "^9.0.2",
-    "crypto-js": "^4.2.0",
-    "node-cron": "^3.0.3",
-    "mongodb": "^6.3.0",
-    "sharp": "^0.33.2",
-    "gif-encoder-2": "^1.0.5",
-    "string-similarity": "^4.0.4",
-    "profanity-js": "^1.0.4",
-    "natural": "^6.3.0"
+    "winston": "^3.11.0"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1",
-    "eslint": "^8.56.0"
+    "nodemon": "^3.0.1"
   },
   "engines": {
     "node": ">=16.0.0",
@@ -51,9 +42,5 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/MAR-PD/group-master-pro-bot.git"
-  },
-  "bugs": {
-    "url": "https://github.com/MAR-PD/group-master-pro-bot/issues"
-  },
-  "homepage": "https://github.com/MAR-PD/group-master-pro-bot#readme"
+  }
 }
