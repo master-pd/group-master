@@ -1,0 +1,91 @@
+{
+  "bot": {
+    "start_time": "2026-01-31T00:00:00.000Z",
+    "uptime": 0,
+    "version": "3.0.0",
+    "total_restarts": 0,
+    "last_restart": "2026-02-01T00:00:00.000Z"
+  },
+  
+  "messages": {
+    "total": 0,
+    "today": 0,
+    "this_week": 0,
+    "this_month": 0,
+    "private": 0,
+    "group": 0,
+    "channel": 0
+  },
+  
+  "commands": {
+    "total": 0,
+    "most_used": {},
+    "today": {},
+    "by_type": {
+      "start": 0,
+      "help": 0,
+      "admin": 0,
+      "moderation": 0,
+      "games": 0,
+      "utility": 0
+    }
+  },
+  
+  "users": {
+    "total": 0,
+    "active_today": 0,
+    "active_this_week": 0,
+    "active_this_month": 0,
+    "new_today": 0,
+    "blocked": 0
+  },
+  
+  "groups": {
+    "total": 0,
+    "active_today": 0,
+    "active_this_week": 0,
+    "active_this_month": 0,
+    "new_today": 0,
+    "largest": {
+      "id": null,
+      "title": null,
+      "members": 0
+    }
+  },
+  
+  "moderation": {
+    "warnings": 0,
+    "mutes": 0,
+    "bans": 0,
+    "deleted_messages": 0,
+    "reports": 0,
+    "bad_words_detected": 0,
+    "links_blocked": 0
+  },
+  
+  "features": {
+    "welcome_messages_sent": 0,
+    "auto_replies_sent": 0,
+    "broadcasts_sent": 0,
+    "games_played": 0,
+    "images_generated": 0,
+    "stickers_sent": 0
+  },
+  
+  "performance": {
+    "average_response_time": 0,
+    "errors": 0,
+    "success_rate": 100,
+    "memory_usage": 0,
+    "cpu_usage": 0
+  },
+  
+  "ai": {
+    "requests": 0,
+    "tokens_used": 0,
+    "average_response_time": 0,
+    "success_rate": 100
+  },
+  
+  "last_updated": "2024-01-01T00:00:00.000Z"
+}
