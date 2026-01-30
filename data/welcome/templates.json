@@ -1,0 +1,71 @@
+{
+  "group": [
+    "🎉 Welcome {name} to {group}! 🌟\n\nWe're excited to have you here! Make sure to read the rules and enjoy your stay. 😊",
+    
+    "👋 Assalamualaikum {name}! Welcome to {group}! 🤗\n\nMay your time here be blessed and enjoyable. Feel free to introduce yourself!",
+    
+    "✨ Hello {name}! Glad to have you in {group}! 😊\n\nDon't hesitate to ask if you need anything. We're a friendly community!",
+    
+    "🚀 Welcome aboard {name}! You've joined {group}! 🎯\n\nGet ready for amazing conversations and a great community experience!",
+    
+    "💫 Hey {name}! Welcome to {group}! 🌈\n\nWe hope you'll enjoy your time here. Don't forget to check the pinned messages!",
+    
+    "👑 Welcome {name} to {group}! 🏰\n\nYou're now part of our royal family. Enjoy your stay and have fun!",
+    
+    "🌟 Salam {name}! Welcome to {group}! ✨\n\nMake yourself at home and enjoy the company of awesome people!",
+    
+    "🎊 Congratulations {name}! You've joined {group}! 🥳\n\nThis is the beginning of something great. Welcome to the family!",
+    
+    "🤝 Welcome {name} to {group}! 💖\n\nWe're thrilled to have you. Let's make this community even better together!",
+    
+    "🌻 Hello {name}! A warm welcome to {group}! ☀️\n\nHope you'll find this place as amazing as we do. Enjoy!",
+    
+    "⚡ {name} just joined {group}! Get ready for the awesomeness! 🚀",
+    
+    "🎯 New member alert! Welcome {name} to {group}! 🎯\n\nYour presence makes us stronger. Welcome aboard!",
+    
+    "💎 A gem has joined! Welcome {name} to {group}! ✨\n\nWe're lucky to have you. Make yourself comfortable!",
+    
+    "🌈 Welcome {name}! You've brightened {group}! ☀️\n\nLet's create wonderful memories together!",
+    
+    "🦄 A magical being has arrived! Welcome {name} to {group}! ✨\n\nGet ready for an enchanting experience!"
+  ],
+  
+  "private": [
+    "👋 Hello {name}! I'm Group Master Pro Bot! 🤖\n\nI'm your advanced group management assistant with AI features. How can I help you today? 🌟",
+    
+    "🌟 Welcome {name}! I'm Group Master Pro Bot! 🚀\n\nI can help manage groups, answer questions, and much more! Use /help to see all commands. 💫",
+    
+    "🎯 Hey {name}! Ready to manage your groups efficiently? 👑\n\nI'm here to help with moderation, welcome messages, and automation. Let's get started!",
+    
+    "✨ Assalamualaikum {name}! I'm Group Master Pro Bot! 🤲\n\nI'm designed to make group management easy and effective. How can I assist you? 😊",
+    
+    "💎 Welcome {name}! You're chatting with Group Master Pro Bot! 💻\n\nI'm packed with features to enhance your Telegram experience. Try me out! 🎮",
+    
+    "🚀 Greetings {name}! I'm your AI-powered group manager! 🤖\n\nFrom moderation to entertainment, I've got you covered. What would you like to do?",
+    
+    "🎨 Hello {name}! I'm a multi-purpose Telegram bot! 🌈\n\nI can generate images, play games, manage groups, and chat with you!",
+    
+    "🛡️ Welcome {name}! Your group management solution is here! ⚙️\n\nI help keep groups safe, active, and organized. Let's work together!",
+    
+    "🎭 Hey {name}! I'm more than just a bot - I'm your digital assistant! 💼\n\nReady to simplify your Telegram experience?",
+    
+    "🌠 Assalamualaikum {name}! Welcome to the future of group management! 🔮\n\nI'm here to make your groups better, smarter, and more fun!"
+  ],
+  
+  "supergroup": [
+    "👑 ROYAL WELCOME {name} to {group}! 🏰\n\nYou've joined an elite community. Enjoy your stay in this super group!",
+    
+    "🚀 SUPER WELCOME {name}! Welcome to {group}! 🌟\n\nYou're now part of something big and amazing!",
+    
+    "💎 PREMIUM WELCOME {name} to {group}! ✨\n\nSuper groups deserve super welcomes. Glad to have you!",
+    
+    "🎯 {name} has joined the super group {group}! 🎯\n\nGet ready for large-scale awesomeness!"
+  ],
+  
+  "channel": [
+    "📢 Welcome {name} to {group} channel! 🎯\n\nStay tuned for amazing content and updates!",
+    
+    "🔔 New subscriber alert! Welcome {name} to {group}! 📢\n\nThank you for joining our channel!"
+  ]
+}
